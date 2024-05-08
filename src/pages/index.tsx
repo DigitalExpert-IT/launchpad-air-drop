@@ -2,14 +2,21 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Box } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
+import Footer from "./components/Footer";
+import About from "./components/About";
+import Launchpad from "./components/Launcpad";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <Box fontSize={30}>
-      Launchpad air drop
+    <Box>
+      <Stack fontSize={30} gap={10}>
+        <Launchpad/>
+        <About />
+      </Stack>
+    <Footer />
     </Box>
   );
 }
