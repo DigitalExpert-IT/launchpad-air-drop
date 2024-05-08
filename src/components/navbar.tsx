@@ -4,6 +4,8 @@ import {
   Button,
   Center,
   Container,
+  Flex,
+  Heading,
   Link,
   Stack,
   Text,
@@ -11,6 +13,7 @@ import {
 import { INavigation } from "@/constants/navigation";
 import MenuDrawer from "./menuDrawer";
 import Image from "next/image";
+import "@fontsource/poppins";
 
 interface INavbar {
   data: INavigation[];
@@ -23,13 +26,12 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
         return (
           <Link key={idx} href={item.link} _hover={{ textDecoration: "none" }}>
             <Text
-              fontWeight="bold"
-              fontSize="xl"
+              fontSize="md"
               _hover={{
                 color: "yellow",
               }}
             >
-              {item.name}
+              {item.name.toUpperCase()}
             </Text>
           </Link>
         );
@@ -40,14 +42,29 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
 
 const NavbarButtons = () => {
   return (
-    <>
-      <Button type="submit" onClick={() => {}}>
+    <Flex gap={2}>
+      <Button
+        type="submit"
+        onClick={() => {}}
+        borderRadius={"50px"}
+        fontSize={"md"}
+        bg={"transparent"}
+        border={"1px solid #FFFFFF"}
+        fontWeight={"400"}
+      >
         Authorize
       </Button>
-      <Button type="submit" onClick={() => {}}>
+      <Button
+        type="submit"
+        onClick={() => {}}
+        background={"#9321DD"}
+        fontSize={"md"}
+        borderRadius={"50px"}
+        fontWeight={"400"}
+      >
         Connect Wallet
       </Button>
-    </>
+    </Flex>
   );
 };
 
@@ -55,9 +72,9 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
   return (
     <Center>
       <Stack
+        position={"fixed"}
         as={"nav"}
         w={"full"}
-        position={"absolute"}
         mt={12}
         top={"0"}
         justifyContent={"center"}
@@ -66,36 +83,42 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
           <Box display={"flex"} alignItems={"center"}>
             <Box
               display={"flex"}
-              justifyContent={{ base: "start", lg: "end" }}
-              flex={1}
+              justifyContent={{ base: "start", md: "space-between" }}
+              width={"100%"}
             >
+              <Heading
+                background={
+                  "linear-gradient(100.36deg, #FD92FD 2.4%, #9321DD 98.97%)"
+                }
+                fontFamily={"Rubik One"}
+                fontSize={"30px"}
+                bgClip="text"
+                flex={1}
+              >
+                ALITA AI
+              </Heading>
+              <Stack
+                flex={2}
+                justify={"space-around"}
+                align={"center"}
+                direction={"row"}
+                display={{ base: "none", lg: "flex" }}
+                fontFamily={"Poppins"}
+                fontWeight={"300"}
+              >
+                <MenuList data={data} />
+              </Stack>
               <Stack
                 flex={1}
-                justify={"start"}
+                justify={"end"}
                 align={"center"}
                 direction={"row"}
                 spacing={"4rem"}
                 display={{ base: "none", lg: "flex" }}
               >
-                <MenuList data={data} />
+                <NavbarButtons />
               </Stack>
-              <Image
-                src={"/alita-ai-logo.png"}
-                alt={"Alita AI Logo"}
-                width={223}
-                height={59}
-              />
             </Box>
-            <Stack
-              flex={1}
-              justify={"end"}
-              align={"center"}
-              direction={"row"}
-              spacing={"4rem"}
-              display={{ base: "none", lg: "flex" }}
-            >
-              <NavbarButtons />
-            </Stack>
             <MenuDrawer>
               <MenuList data={data} />
               <NavbarButtons />

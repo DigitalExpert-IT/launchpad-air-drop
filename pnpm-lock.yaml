@@ -29,6 +29,9 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.5
         version: 11.11.5(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)
+      '@fontsource/poppins':
+        specifier: ^5.0.14
+        version: 5.0.14
       '@fontsource/rubik-one':
         specifier: ^5.0.1
         version: 5.0.1
@@ -658,6 +661,9 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@fontsource/poppins@5.0.14':
+    resolution: {integrity: sha512-nmM1zpPo3Uh4JcGAVSQuWaZNYh2FbbwWhZ5t6hRaynmJaNTBW85d3nEh9zMmzI0HX7X5xqQVdRHeDatKpOGsnA==}
 
   '@fontsource/rubik-one@5.0.1':
     resolution: {integrity: sha512-jNQlz7U66f+GXkzdeBk2b7P7RKM3Q0b/9i+AxlSV+Bp/Xw8lIn86cFVyIvTe1m96WXTir6Ianzgpz9+a3cHQRg==}
@@ -3010,6 +3016,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@fontsource/poppins@5.0.14': {}
 
   '@fontsource/rubik-one@5.0.1': {}
 

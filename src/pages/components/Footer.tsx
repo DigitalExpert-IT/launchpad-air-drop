@@ -1,4 +1,5 @@
 import "@fontsource/rubik-one";
+import "@fontsource/poppins";
 import { Box, Flex, HStack, Heading, Icon, Text } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaTelegram, FaFacebook, FaTiktok, FaYoutube } from "react-icons/fa"
 
