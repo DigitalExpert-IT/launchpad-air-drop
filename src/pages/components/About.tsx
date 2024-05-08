@@ -6,7 +6,7 @@ export default function About() {
   return (
     <Stack align={"center"}>
     <Heading>ABOUT</Heading>
-    <VStack flexDir={{ lg: "row", base: "column" }} align={"center"} maxW={"80%"} m={10} gap={10} alignItems={{ lg: "", base: "center" }} bgColor={"rgba(0, 0, 0, 0.8)"} borderRadius={{ base: 20, lg: 50 }} mb={20}>
+    <VStack flexDir={{ lg: "row", base: "column" }} align={"center"} maxW={"80%"} m={10} gap={10} alignItems={{ lg: "", base: "center" }} bgColor={"rgba(0, 0, 0, 0.5)"} borderRadius={{ base: 20, lg: 50 }} mb={20}>
           <Stack ml={{ lg: 25 }} align={"center"}>
               <Image src={"https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/alita.png?updatedAt=1715060841922"} w={"85%"} alt="" mt={5} />
           </Stack>
