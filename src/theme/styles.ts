@@ -9,6 +9,7 @@ export const styles: Styles = {
       transitionDuration: "normal",
       lineHeight: "base",
       height: "100vh",
+      fontFamily: "Poppins, sans-serif"
     },
     "*::placeholder": {
       color: "chakra-placeholder-color",
