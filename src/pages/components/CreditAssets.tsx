@@ -1,6 +1,9 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 const CreditAssets = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       background={"black"}
@@ -9,7 +12,7 @@ const CreditAssets = () => {
       boxShadow={"2px 2px 25.8px 0px #9321dd4a"}
     >
       <Box display={"flex"} justifyContent={"space-between"} w={"400px"}>
-        <Text fontSize={"18px"}>Credit Assets</Text>
+        <Text fontSize={"18px"}>{t("creditAssets.title")}</Text>
         <Box display={"flex"} gap={3} alignItems={"center"}>
           <Image
             src="/assets/usdt-with-bg.png"
@@ -40,7 +43,7 @@ const CreditAssets = () => {
         <Text fontSize={"xl"}>USDT</Text>
       </Flex>
       <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8}>
-        Connect Wallet
+        {t("creditAssets.button")}
       </Button>
     </Box>
   );

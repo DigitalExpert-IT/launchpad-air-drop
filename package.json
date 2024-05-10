@@ -2,6 +2,7 @@
   "name": "launchpad-air-drop",
   "version": "0.1.0",
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,7 +20,9 @@
     "@fontsource/poppins": "^5.0.14",
     "@fontsource/rubik-one": "^5.0.1",
     "framer-motion": "^11.1.7",
+    "i18next": "^23.11.4",
     "next": "14.2.3",
+    "next-i18next": "^15.3.0",
     "react": "^18",
     "react-dom": "^18",
     "react-i18next": "^14.1.1",

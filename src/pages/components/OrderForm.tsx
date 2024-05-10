@@ -9,12 +9,15 @@ import {
   Box,
   Image,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 export default function OrderForm() {
+  const { t } = useTranslation();
+
   return (
     <Box bgGradient={"linear(#370144, #3D004B, #09000C)"}>
       <Stack align={"center"}>
-        <Heading mb={10}>ORDER FORM</Heading>
+        <Heading mb={10}>{t("orderForm.title")}</Heading>
         <HStack
           w={"80%"}
           justifyContent={"space-between"}
@@ -56,13 +59,13 @@ export default function OrderForm() {
             <VStack gap={6}>
               <HStack justifyContent={"space-between"} w={"100%"}>
                 <Text fontSize={"2xl"} color={"#A4A4BE"}>
-                  Valuation
+                  {t("orderForm.valuation")}
                 </Text>
                 <Text fontSize={"2xl"}>$0.0000</Text>
               </HStack>
               <HStack justifyContent={"space-between"} w={"100%"}>
                 <Text fontSize={"2xl"} color={"#A4A4BE"}>
-                  Position
+                  {t("orderForm.position")}
                 </Text>
                 <Text fontSize={"2xl"}>$0.0000</Text>
               </HStack>
@@ -76,17 +79,13 @@ export default function OrderForm() {
             maxW={"1077px"}
           >
             <Text fontSize={"3xl"} fontWeight={"600"}>
-              Investment Rules:
+              {t("orderForm.investmentRules.title")}
             </Text>
             <Text fontSize={"2xl"} textAlign={"justify"}>
-              Zero risk investment model: Leading the innovative investment
-              concept of “only earning without losing”, ensuring the safety of
-              user capital, regardless of market fluctuations.
+              {t("orderForm.investmentRules.firstDescription")}
             </Text>
             <Text fontSize={"2xl"} textAlign={"justify"}>
-              Users can make a one-time purchase through AI facial recognition,
-              authorizing them to hold 1000 USDT of spot goods, with 30% of the
-              closing profit and 20% of the closing profit for free.
+              {t("orderForm.investmentRules.secondDescription")}
             </Text>
           </Box>
         </HStack>

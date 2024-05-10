@@ -9,8 +9,11 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 export default function Launchpad() {
+  const { t } = useTranslation();
+
   return (
     <Stack align={"center"} gap={5}>
       <Heading mb={10}>LAUNCHPAD</Heading>
@@ -25,7 +28,7 @@ export default function Launchpad() {
         py={5}
       >
         <Stack>
-          <Text fontSize={22}>Wallet Address</Text>
+          <Text fontSize={22}>{t("launchpad.walletAddress")}</Text>
         </Stack>
         <Stack>
           <Text fontSize={22}>0x021931u2hedqwugd0182gduig3d1d1dvef2</Text>
@@ -43,7 +46,7 @@ export default function Launchpad() {
         <Stack gap={5}>
           <Box>
             <Text fontWeight={"700"} fontSize={24}>
-              Token Name
+              {t("launchpad.tokenDetails.name")}
             </Text>
             <Text fontSize={22} color={"#A4A4BE"}>
               BSCM
@@ -51,7 +54,7 @@ export default function Launchpad() {
           </Box>
           <Box>
             <Text fontWeight={"700"} fontSize={24}>
-              Contract Address
+              {t("launchpad.tokenDetails.contact")}
             </Text>
             <Text fontSize={22} color={"#A4A4BE"}>
               0x021931u2hedqwugd0182gduig3d1d1dvef2
@@ -59,7 +62,7 @@ export default function Launchpad() {
           </Box>
           <Box>
             <Text fontWeight={"700"} fontSize={24}>
-              Remaining Airdrops
+              {t("launchpad.tokenDetails.remainingAirdrops")}
             </Text>
             <Text fontSize={22} color={"#A4A4BE"}>
               70%
@@ -67,7 +70,7 @@ export default function Launchpad() {
           </Box>
           <Box>
             <Text fontWeight={"700"} fontSize={24}>
-              Sliding Points
+              {t("launchpad.tokenDetails.slidingPoints")}
             </Text>
             <Text fontSize={22} color={"#A4A4BE"}>
               72%
@@ -77,12 +80,12 @@ export default function Launchpad() {
         <Stack gap={5}>
           <Box>
             <Text fontWeight={"bold"} fontSize={32} color={"#FD92FD"}>
-              Token Allocation
+              {t("launchpad.tokenDetails.tokenAllocation")}
             </Text>
           </Box>
           <Box>
             <Text fontWeight={"700"} fontSize={24}>
-              Contract Address
+              {t("launchpad.tokenDetails.lpLiquidity")}
             </Text>
             <Text fontSize={22} color={"#A4A4BE"}>
               0x021931u2hedqwugd0182gduig3d1d1dvef2
@@ -90,7 +93,7 @@ export default function Launchpad() {
           </Box>
           <Box>
             <Text fontWeight={"700"} fontSize={24}>
-              Remaining Airdrops
+              {t("launchpad.tokenDetails.aiRecognition.airdrop")}
             </Text>
             <Text fontSize={22} color={"#A4A4BE"}>
               70%
@@ -98,7 +101,7 @@ export default function Launchpad() {
           </Box>
           <Box>
             <Text fontWeight={"700"} fontSize={24}>
-              Sliding Points
+              {t("launchpad.tokenDetails.aiRecognition.numberOfPeople")}
             </Text>
             <Text fontSize={22} color={"#A4A4BE"}>
               72%
@@ -115,17 +118,17 @@ export default function Launchpad() {
         <Box></Box>
         <Box>
           <Text fontSize={20} color={"#A4A4BE"}>
-            Airdrop Time: 4/5/2024, 6:00:00 PM
+            {t("launchpad.airdropTime")}: 4/5/2024, 6:00:00 PM
           </Text>
         </Box>
       </VStack>
       <VStack minW={"75%"} flexDir={"row"} justifyContent={"space-between"}>
         <Flex flexDir={{ lg: "row", base: "column" }} gap={5}>
           <Button bgColor="#9321DD" fontSize={24}>
-            Receive
+            {t("launchpad.receiveButton")}
           </Button>
           <Button bgColor="#9321DD" fontSize={24}>
-            AI Recognition Verification
+            {t("launchpad.aiRecognitionVerificationButton")}
           </Button>
         </Flex>
         <Box></Box>
@@ -141,21 +144,17 @@ export default function Launchpad() {
         <Stack gap={5}>
           <Box>
             <Text fontWeight={"700"} fontSize={32}>
-              Investment rules:
+              {t("launchpad.investmentRules.title")}
             </Text>
           </Box>
           <Box>
             <Text fontSize={24}>
-              Zero risk investment model: Leading the innovative investment
-              concept of “only earning without losing”, ensuring the safety of
-              user capital, regardless of market fluctuations.
+              {t("launchpad.investmentRules.firstDescription")}
             </Text>
           </Box>
           <Box>
             <Text fontSize={24}>
-              Users can make a one-time purchase through AI facial recognition,
-              authorizing them to hold 1000 USDT of spot goods, with 30% of the
-              closing profit and 20% of the closing profit for free.
+              {t("launchpad.investmentRules.secondDescription")}
             </Text>
           </Box>
         </Stack>
