@@ -44,8 +44,13 @@ export default function OrderForm() {
                 h={"85px"}
                 alt="usdt"
               />
-              <Text fontSize={"3xl"} color={"#F185F9"} fontWeight={"700"}>
-                ALITA/USDT
+              <Text
+                fontSize={"3xl"}
+                color={"#F185F9"}
+                fontWeight={"700"}
+                wordBreak={"break-word"}
+              >
+                ALITA / USDT
               </Text>
             </Flex>
             <HStack flexDir={{ base: "column", lg: "row" }} gap={6}>

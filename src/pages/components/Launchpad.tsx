@@ -123,7 +123,7 @@ export default function Launchpad() {
         </Box>
       </VStack>
       <VStack minW={"75%"} flexDir={"row"} justifyContent={"space-between"}>
-        <Flex flexDir={{ lg: "row", base: "column" }} gap={5}>
+        <Flex flexDir={{ base: "column", lg: "row" }} gap={5}>
           <Button bgColor="#9321DD" fontSize={24}>
             {t("launchpad.receiveButton")}
           </Button>
