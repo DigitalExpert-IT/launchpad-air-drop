@@ -3,7 +3,11 @@ import CreditAssets from "./CreditAssets";
 
 const Header = () => {
   return (
-    <Box backgroundImage={'assets/bg-header.png'} backgroundPosition={'center'} backgroundSize={'cover'}>
+    <Box
+      backgroundImage={"assets/bg-header.png"}
+      backgroundPosition={"center"}
+      backgroundSize={"cover"}
+    >
       <VStack
         bg={"linear-gradient(182.26deg, rgba(0, 0, 0, 0) 1.9%, #380145 98.18%)"}
         h={"100vh"}

@@ -12,11 +12,18 @@ import {
 } from "@chakra-ui/react";
 import { INavigation } from "@/constants/navigation";
 import MenuDrawer from "./menuDrawer";
-import Image from "next/image";
 import "@fontsource/poppins";
+import { useEffect, useState } from "react";
 
 interface INavbar {
   data: INavigation[];
+}
+
+function scrollFilter() {
+  const winScroll =
+    document.body.scrollTop || document.documentElement.scrollTop;
+
+  return winScroll ? 5 : 0;
 }
 
 const MenuList: React.FC<INavbar> = ({ data }) => {
@@ -69,16 +76,29 @@ const NavbarButtons = () => {
 };
 
 const Navbar: React.FC<INavbar> = ({ data }) => {
+  const [filter, setFilter] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setFilter(scrollFilter());
+    };
+
+    document.body.addEventListener("scroll", onScroll);
+
+    return function cleanup() {
+      document.body.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
-    <Center>
-      <Stack
-        position={"fixed"}
-        as={"nav"}
-        w={"full"}
-        mt={12}
-        top={"0"}
-        justifyContent={"center"}
-      >
+    <Center
+      style={{
+        backdropFilter: `blur(${filter}px)`,
+      }}
+      position={"fixed"}
+      w={"100%"}
+    >
+      <Stack as={"nav"} w={"full"} mt={12} top={"0"} justifyContent={"center"}>
         <Container maxW={"container.xl"}>
           <Box display={"flex"} alignItems={"center"}>
             <Box
