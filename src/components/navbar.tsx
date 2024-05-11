@@ -97,6 +97,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
       }}
       position={"fixed"}
       w={"100%"}
+      zIndex={"20"}
     >
       <Stack as={"nav"} w={"full"} mt={12} top={"0"} justifyContent={"center"}>
         <Container maxW={"container.xl"}>

@@ -1,7 +1,10 @@
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import CreditAssets from "./CreditAssets";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       backgroundImage={"assets/bg-header.png"}
@@ -20,11 +23,17 @@ const Header = () => {
           fontFamily={"Rubik One"}
           fontSize={"5xl"}
           bgClip="text"
+          textAlign={"center"}
         >
-          ALITA AI
+          {t("header.title")}
         </Heading>
-        <Text fontFamily={"Poppins"} fontSize={"22px"} mb={6}>
-          A worry free investment platform
+        <Text
+          fontFamily={"Poppins"}
+          fontSize={"22px"}
+          mb={6}
+          textAlign={"center"}
+        >
+          {t("header.subtitle")}
         </Text>
         <CreditAssets />
       </VStack>
