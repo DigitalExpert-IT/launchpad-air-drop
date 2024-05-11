@@ -1,22 +1,21 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import { Box, Stack } from "@chakra-ui/react";
+import Layout from "@/components/layout";
+import { Stack } from "@chakra-ui/react";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import Launchpad from "./components/Launcpad";
-
-const inter = Inter({ subsets: ["latin"] });
+import Launchpad from "./components/Launchpad";
+import Header from "./components/Header";
+import OrderForm from "./components/OrderForm";
 
 export default function Home() {
   return (
-    <Box>
-      <Stack fontSize={30} gap={10}>
-        <Launchpad/>
+    <Layout>
+      <Stack fontSize={30} gap={0}>
+        <Header />
+        <OrderForm />
+        <Launchpad />
         <About />
       </Stack>
-    <Footer />
-    </Box>
+      <Footer />
+    </Layout>
   );
 }
