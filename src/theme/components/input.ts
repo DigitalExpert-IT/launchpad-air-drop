@@ -86,7 +86,6 @@ const sizes = {
   }),
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getDefaults(props: Record<string, any>) {
   const { focusBorderColor: fc, errorBorderColor: ec } = props;
   return {

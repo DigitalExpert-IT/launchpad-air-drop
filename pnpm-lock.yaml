@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@chakra-ui/anatomy':
+        specifier: ^2.2.2
+        version: 2.2.2
       '@chakra-ui/icons':
         specifier: ^2.1.1
         version: 2.1.1(@chakra-ui/system@2.6.2(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -17,6 +20,9 @@ importers:
       '@chakra-ui/react':
         specifier: ^2.8.2
         version: 2.8.2(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(framer-motion@11.1.7(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@chakra-ui/shared-utils':
+        specifier: ^2.0.4
+        version: 2.0.4
       '@chakra-ui/styled-system':
         specifier: ^2.9.2
         version: 2.9.2
@@ -465,6 +471,9 @@ packages:
     peerDependencies:
       '@chakra-ui/system': '>=2.0.0'
       react: '>=18'
+
+  '@chakra-ui/shared-utils@2.0.4':
+    resolution: {integrity: sha512-JGWr+BBj3PXGZQ2gxbKSD1wYjESbYsZjkCeE2nevyVk4rN3amV1wQzCnBAhsuJktMaZD6KC/lteo9ou9QUDzpA==}
 
   '@chakra-ui/shared-utils@2.0.5':
     resolution: {integrity: sha512-4/Wur0FqDov7Y0nCXl7HbHzCg4aq86h+SXdoUeuCMD3dSj7dpsVnStLYhng1vxvlbUnLpdF4oz5Myt3i/a7N3Q==}
@@ -2732,6 +2741,8 @@ snapshots:
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.6.2(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1))(react@18.3.1)
       react: 18.3.1
+
+  '@chakra-ui/shared-utils@2.0.4': {}
 
   '@chakra-ui/shared-utils@2.0.5': {}
 

@@ -9,7 +9,7 @@ import type {
 import { Styles } from "@chakra-ui/theme-tools";
 
 type ColorMode = "light" | "dark";
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type Dict = Record<string, any>;
 
 type ColorModeOptions = {
@@ -61,7 +61,6 @@ export interface ThemeComponentProps<T extends ChakraTheme = ChakraTheme>
   extends Omit<ThemingProps, "styleConfig"> {
   colorMode: ColorMode;
   theme: T;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
 }
 
@@ -82,7 +81,6 @@ export interface ComponentSingleStyleConfig {
   baseStyle?: SystemStyleInterpolation;
   sizes?: Record<string, SystemStyleInterpolation>;
   variants?: Record<string, SystemStyleInterpolation>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultProps?: any;
 }
 
@@ -91,7 +89,6 @@ export interface ComponentMultiStyleConfig {
   baseStyle?: PartsStyleInterpolation;
   sizes?: Record<string, PartsStyleInterpolation>;
   variants?: Record<string, PartsStyleInterpolation>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultProps?: any;
 }
 
