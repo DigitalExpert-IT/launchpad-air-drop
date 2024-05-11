@@ -23,10 +23,16 @@ const Header = () => {
           fontFamily={"Rubik One"}
           fontSize={"5xl"}
           bgClip="text"
+          textAlign={"center"}
         >
           {t("header.title")}
         </Heading>
-        <Text fontFamily={"Poppins"} fontSize={"22px"} mb={6}>
+        <Text
+          fontFamily={"Poppins"}
+          fontSize={"22px"}
+          mb={6}
+          textAlign={"center"}
+        >
           {t("header.subtitle")}
         </Text>
         <CreditAssets />

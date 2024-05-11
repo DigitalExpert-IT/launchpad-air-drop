@@ -11,7 +11,11 @@ const CreditAssets = () => {
       p={5}
       boxShadow={"2px 2px 25.8px 0px #9321dd4a"}
     >
-      <Box display={"flex"} justifyContent={"space-between"} w={"400px"}>
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        w={{ base: "90%", sm: "400px" }}
+      >
         <Text fontSize={"18px"}>{t("creditAssets.title")}</Text>
         <Box display={"flex"} gap={3} alignItems={"center"}>
           <Image
