@@ -1,13 +1,19 @@
-import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { Badge, Box, Button, Center, FormLabel, Heading, Stack, Text, VStack } from "@chakra-ui/react";
 import CreditAssets from "./CreditAssets";
 import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+
+type FormType = {
+  referrer: string;
+};
 
 const Header = () => {
   const { t } = useTranslation();
+  const { control, setValue, handleSubmit } = useForm<FormType>();
 
   return (
     <Box
-      backgroundImage={"assets/bg-header.png"}
+      backgroundImage={"https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/pattern1.png?updatedAt=1715492611878"}
       backgroundPosition={"center"}
       backgroundSize={"cover"}
     >
@@ -37,6 +43,7 @@ const Header = () => {
         </Text>
         <CreditAssets />
       </VStack>
+      
     </Box>
   );
 };

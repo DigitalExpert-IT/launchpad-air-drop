@@ -8,7 +8,7 @@ export default function About() {
   return (
     <Box bgGradient={"linear(0deg, transparent 5%, #3D004B 70%)"}>
       <Box
-        backgroundImage={"assets/bg-about.png"}
+        backgroundImage={"https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/alitaTown.png?updatedAt=1715060801897"}
         backgroundPosition={"center"}
         backgroundSize={"cover"}
         position={"relative"}

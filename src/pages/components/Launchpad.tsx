@@ -16,7 +16,7 @@ export default function Launchpad() {
 
   return (
     <Box
-      backgroundImage={"assets/bg-launchpad.png"}
+      backgroundImage={"https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/pattern2.png?updatedAt=1715492798165"}
       backgroundPosition={"top"}
       backgroundSize={"cover"}
       position={"relative"}

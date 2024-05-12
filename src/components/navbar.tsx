@@ -116,7 +116,9 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 bgClip="text"
                 flex={1}
               >
+                <Link href="/">
                 ALITA AI
+                </Link>
               </Heading>
               <Stack
                 flex={2}
