@@ -53,7 +53,6 @@ const NavbarButtons = () => {
     <Flex gap={2}>
       <Button
         type="submit"
-        onClick={() => {}}
         borderRadius={"50px"}
         fontSize={"md"}
         bg={"transparent"}
@@ -61,7 +60,9 @@ const NavbarButtons = () => {
         fontWeight={"400"}
         alignSelf={"center"}
       >
-        Authorize
+        <Link href="/kyc">
+          Authorize
+        </Link>
       </Button>
       <WalletButton/>
     </Flex>

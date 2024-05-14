@@ -1,8 +1,11 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { useTranslation } from "react-i18next";
 
 const CreditAssets = () => {
   const { t } = useTranslation();
+  const openModal= useSetIsWalletModalOpen();
+  const address = useAddress();
 
   return (
     <Box
@@ -46,8 +49,8 @@ const CreditAssets = () => {
         />
         <Text fontSize={"xl"}>USDT</Text>
       </Flex>
-      <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8}>
-        {t("creditAssets.button")}
+      <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} onClick={() => openModal(true)}>
+        {address ? address : t("creditAssets.button")}
       </Button>
     </Box>
   );
