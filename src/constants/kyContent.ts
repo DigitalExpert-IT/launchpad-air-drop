@@ -1,13 +1,13 @@
 
 
-export type iKycCard = {
+export type IKycCard = {
     title: string;
     description: string;
     icon?: React.ReactNode;
     validity?: boolean;
 }
 
-export const kycContent: Array<iKycCard>  = [
+export const kycContent: Array<IKycCard>  = [
     {
         title: "kyc.email.title",
         description: "kyc.email.description",

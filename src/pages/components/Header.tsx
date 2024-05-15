@@ -2,6 +2,7 @@ import { Badge, Box, Button, Center, FormLabel, Heading, Stack, Text, VStack } f
 import CreditAssets from "./CreditAssets";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { backgroundImage } from "@/constants/backgroundImage";
 
 type FormType = {
   referrer: string;
@@ -13,7 +14,7 @@ const Header = () => {
 
   return (
     <Box
-      backgroundImage={"https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/pattern1.png?updatedAt=1715492611878"}
+      backgroundImage={backgroundImage[0].image}
       backgroundPosition={"center"}
       backgroundSize={"cover"}
     >
