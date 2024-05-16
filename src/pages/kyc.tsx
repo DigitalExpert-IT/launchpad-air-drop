@@ -12,11 +12,9 @@ import { EmailForm } from "@/components/emailForm";
 import { useState } from "react";
 import { PhoneForm } from "@/components/phoneForm";
 import { backgroundImage } from "@/constants/backgroundImage";
-import { kycForms } from "@/constants/kycForm";
 
 export default function Kyc() {
   const [kycProgres, setKycProgres] = useState<number>(0)
-  const activeForm = kycForms[kycProgres].component
   return (
     <Layout>
       <Stack fontSize={30} gap={0}>

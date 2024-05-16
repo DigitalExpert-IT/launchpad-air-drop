@@ -14,7 +14,7 @@ import { INavigation } from "@/constants/navigation";
 import MenuDrawer from "./menuDrawer";
 import "@fontsource/poppins";
 import { useEffect, useState } from "react";
-import { WalletButton } from "./WalletButton";
+import { WalletButton } from "@/components/walletButton"
 
 interface INavbar {
   data: INavigation[];
