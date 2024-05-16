@@ -12,9 +12,11 @@ import { EmailForm } from "@/components/emailForm";
 import { useState } from "react";
 import { PhoneForm } from "@/components/phoneForm";
 import { backgroundImage } from "@/constants/backgroundImage";
+import { kycForms } from "@/constants/kycForm";
 
 export default function Kyc() {
   const [kycProgres, setKycProgres] = useState<number>(0)
+  const activeForm = kycForms[kycProgres].component
   return (
     <Layout>
       <Stack fontSize={30} gap={0}>
@@ -26,7 +28,7 @@ export default function Kyc() {
     >
       <VStack
         bg={"linear-gradient(182.26deg, rgba(0, 0, 0, 0) 1.9%, #380145 98.18%)"}
-        h={{base: "120vh",lg: "100vh"}}
+        h={{base: "150vh",lg: "100vh"}}
         justifyContent={"space-evenly"}
         alignItems={"center"}
       >
@@ -42,7 +44,7 @@ export default function Kyc() {
             </Flex>
           ))}
         </Flex>
-        <EmailForm/>
+        <PhoneForm/>
       </VStack>
       </Box>
       </Stack>
