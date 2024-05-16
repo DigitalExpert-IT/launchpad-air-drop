@@ -1,0 +1,11 @@
+export const AIRDROP_ADDRESS = {
+    "0x61": "0x563aD4E9A5A07fd3Da25473d07A40B5F115d7aE7"
+}
+
+export const AI_ADDRESS = {
+    "0x61": "0x35ec364BfBdaB562B81ef34A3Aa435CB016BA277"
+}
+
+export const BNB_ADDRESS = {
+    "0x61": "0x4d5d87370b04BC7C3835c6642b6123038b43c18b"
+}

@@ -64,7 +64,7 @@ const NavbarButtons = () => {
           Authorize
         </Link>
       </Button>
-      <WalletButton/>
+      <WalletButton />
     </Flex>
   );
 };
