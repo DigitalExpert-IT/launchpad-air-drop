@@ -77,6 +77,12 @@ dependencies:
   react-icons:
     specifier: ^5.2.0
     version: 5.2.1(react@18.3.1)
+  react-international-phone:
+    specifier: ^4.2.9
+    version: 4.2.9(react@18.3.1)
+  react-webcam:
+    specifier: ^7.2.0
+    version: 7.2.0(react-dom@18.3.1)(react@18.3.1)
   thirdweb:
     specifier: ^5.21.0
     version: 5.21.0(@types/react-dom@18.3.0)(@types/react@18.3.1)(ethers@5.7.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.4.5)(zod@3.23.8)
@@ -9518,6 +9524,14 @@ packages:
       react: 18.3.1
     dev: false
 
+  /react-international-phone@4.2.9(react@18.3.1):
+    resolution: {integrity: sha512-UPY7dxAWraXQeE4pEptF64EDiq9h44E1QK8q6ZJ8B0wPoM+QCIJ++dhiw64DyGODf79/92Oefe6nEOWbz040ig==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.3.1
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -9590,6 +9604,16 @@ packages:
       invariant: 2.2.4
       react: 18.3.1
       tslib: 2.6.2
+    dev: false
+
+  /react-webcam@7.2.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-xkrzYPqa1ag2DP+2Q/kLKBmCIfEx49bVdgCCCcZf88oF+0NPEbkwYk3/s/C7Zy0mhM8k+hpdNkBLzxg8H0aWcg==}
+    peerDependencies:
+      react: '>=16.2.0'
+      react-dom: '>=16.2.0'
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /react@18.3.1:

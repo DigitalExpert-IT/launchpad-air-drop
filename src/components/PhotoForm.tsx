@@ -8,15 +8,15 @@ export const PhotoForm = () => {
     const webcamRef = useRef<Webcam>(null);
     const { t } = useTranslation()
     const [imgSrc, setImgSrc] = useState<string | null>(null)
-    const [imgFile, setImgFile] = useState([])
+    const [imgFile, setImgFile] = useState<string[]>([])
     const [camOpen, setCamOpen] = useState<boolean>(false)
-    // const capture = useCallback(() => {
-    //   if(webcamRef){
-    //     const imageSrc = webcamRef.current?.getScreenshot();
-    //     setImgSrc(imageSrc);
-    //     setImgFile([imageSrc]);
-    //   }
-    //   }, [webcamRef, setImgFile, setImgSrc]);
+    const capture = useCallback(() => {
+      if(webcamRef){
+        const imageSrc = webcamRef.current?.getScreenshot();
+        setImgSrc(imageSrc!);
+        setImgFile([imageSrc!]);
+      }
+      }, [webcamRef, setImgFile, setImgSrc]);
     
     // const videoConstraints = {
     //     width: 1280,
@@ -31,8 +31,8 @@ export const PhotoForm = () => {
           </CardHeader>
           <CardBody>
             <Stack>
-            {/* {imgSrc ? 
-              (<Image src={imgFile} alt=""/>) : (
+            {imgSrc ? 
+              (<Image src={imgFile[0]} alt=""/>) : (
               <Webcam
                 audio={false}
                 ref={webcamRef}
