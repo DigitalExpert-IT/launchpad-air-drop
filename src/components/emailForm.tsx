@@ -17,11 +17,8 @@ export const EmailForm = () => {
               <Input placeholder={"youremail@mail.com"} variant={"solid"} borderRadius={10} minW={"40vh"}/>
             </Stack>
           </CardBody>
-          <CardFooter>
-            <HStack>
-              <Button alignSelf={"center"} backgroundColor={"#3C014A"} minW={"20vh"} minH={"5vh"}>Send Link</Button>
-              <Button alignSelf={"center"} backgroundColor={"#9321DD"} minW={"20vh"} minH={"5vh"} isDisabled={true}>Next Step</Button>
-            </HStack>
+          <CardFooter justifyContent={"flex-end"}>
+              <Button alignSelf={"center"} backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={true} >Submit</Button>
           </CardFooter>
         </Card>
     )
