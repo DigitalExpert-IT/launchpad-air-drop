@@ -14,6 +14,7 @@ import { INavigation } from "@/constants/navigation";
 import MenuDrawer from "./menuDrawer";
 import "@fontsource/poppins";
 import { useEffect, useState } from "react";
+import { WalletButton } from "@/components/WalletButton"
 
 interface INavbar {
   data: INavigation[];
@@ -52,25 +53,18 @@ const NavbarButtons = () => {
     <Flex gap={2}>
       <Button
         type="submit"
-        onClick={() => {}}
         borderRadius={"50px"}
         fontSize={"md"}
         bg={"transparent"}
         border={"1px solid #FFFFFF"}
         fontWeight={"400"}
+        alignSelf={"center"}
       >
-        Authorize
+        <Link href="/kyc">
+          Authorize
+        </Link>
       </Button>
-      <Button
-        type="submit"
-        onClick={() => {}}
-        background={"#9321DD"}
-        fontSize={"md"}
-        borderRadius={"50px"}
-        fontWeight={"400"}
-      >
-        Connect Wallet
-      </Button>
+      <WalletButton/>
     </Flex>
   );
 };
@@ -115,6 +109,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 fontSize={"30px"}
                 bgClip="text"
                 flex={1}
+                alignSelf={"center"}
               >
                 <Link href="/">
                 ALITA AI

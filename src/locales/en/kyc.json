@@ -1,0 +1,14 @@
+{
+    "email": {
+        "title": "Verify Email",
+        "description": "Verify Your Email Address"
+    },
+    "phoneNumber": {
+        "title": "Verify Phone Number",
+        "description": "Verify Your Phone Number"
+    },
+    "face": {
+        "title": "Face Verification",
+        "description": "Require Face Verification"
+    }
+}
