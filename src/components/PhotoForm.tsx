@@ -10,19 +10,19 @@ export const PhotoForm = () => {
     const [imgSrc, setImgSrc] = useState<string | null>(null)
     const [imgFile, setImgFile] = useState([])
     const [camOpen, setCamOpen] = useState<boolean>(false)
-    const capture = useCallback(() => {
-      if(webcamRef){
-        const imageSrc = webcamRef.current?.getScreenshot();
-        setImgSrc(imageSrc);
-        setImgFile([imageSrc]);
-      }
-      }, [webcamRef, setImgFile, setImgSrc]);
+    // const capture = useCallback(() => {
+    //   if(webcamRef){
+    //     const imageSrc = webcamRef.current?.getScreenshot();
+    //     setImgSrc(imageSrc);
+    //     setImgFile([imageSrc]);
+    //   }
+    //   }, [webcamRef, setImgFile, setImgSrc]);
     
-    const videoConstraints = {
-        width: 1280,
-        height: 720,
-        facingMode: "user"
-      };
+    // const videoConstraints = {
+    //     width: 1280,
+    //     height: 720,
+    //     facingMode: "user"
+    //   };
 
     return (
         <Card backgroundColor={"black"} p={5} borderRadius={20} mx={8}>
@@ -31,7 +31,7 @@ export const PhotoForm = () => {
           </CardHeader>
           <CardBody>
             <Stack>
-            {imgSrc ? 
+            {/* {imgSrc ? 
               (<Image src={imgFile} alt=""/>) : (
               <Webcam
                 audio={false}
@@ -45,12 +45,12 @@ export const PhotoForm = () => {
             >
             </Webcam>)
             
-            }
+            } */}
             </Stack>
           </CardBody>
           <CardFooter>
             <HStack>
-                <Button onClick={capture} minH={"5vh"}>Capture</Button>
+                <Button minH={"5vh"}>Capture</Button>
                 <Button alignSelf={"center"} backgroundColor={"#9321DD"} minH={"5vh"} isDisabled={true}>Verify</Button>
             </HStack>
           </CardFooter>

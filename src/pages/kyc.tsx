@@ -8,9 +8,9 @@ import { t } from "i18next";
 import { KycCard } from "@/components/kycCard";
 import { kycContent } from "@/constants/kyContent";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { EmailForm } from "@/components/EmailForm";
+import { EmailForm } from "@/components/emailForm";
 import { useState } from "react";
-import { PhoneForm } from "@/components/PhoneForm";
+import { PhoneForm } from "@/components/phoneForm";
 import { backgroundImage } from "@/constants/backgroundImage";
 import { PhotoForm } from "@/components/PhotoForm";
 

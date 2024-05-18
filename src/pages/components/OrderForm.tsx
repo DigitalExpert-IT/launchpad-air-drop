@@ -103,7 +103,7 @@ export default function OrderForm() {
             <Text fontSize={"2xl"} textAlign={"justify"}>
               {t("orderForm.investmentRules.firstDescription")}
             </Text>
-            <Text fontSize={"2xl"} textAlign={"justify"}>
+            <Text fontSize={"2xl"} textAlign={"justify"} pt={10}>
               {t("orderForm.investmentRules.secondDescription")}
             </Text>
           </Box>
