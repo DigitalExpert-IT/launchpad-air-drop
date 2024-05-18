@@ -106,13 +106,13 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                   "linear-gradient(100.36deg, #FD92FD 2.4%, #9321DD 98.97%)"
                 }
                 fontFamily={"Rubik One"}
-                fontSize={"30px"}
+                fontSize={"25px"}
                 bgClip="text"
                 flex={1}
                 alignSelf={"center"}
               >
                 <Link href="/">
-                ALITA AI
+                SUPREME FINANCE
                 </Link>
               </Heading>
               <Stack

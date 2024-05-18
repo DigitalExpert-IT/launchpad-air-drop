@@ -35,9 +35,6 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.5
         version: 11.11.5(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)
-      '@faceio/fiojs':
-        specifier: ^1.1.0
-        version: 1.1.0
       '@fontsource/poppins':
         specifier: ^5.0.14
         version: 5.0.14
@@ -857,9 +854,6 @@ packages:
 
   '@ethersproject/wordlists@5.7.0':
     resolution: {integrity: sha512-S2TFNJNfHWVHNE6cNDjbVlZ6MgE17MIxMbMg2zv3wn+3XSJGosL1m9ZVv3GXCf/2ymSsQ+hRI5IzoMJTG6aoVA==}
-
-  '@faceio/fiojs@1.1.0':
-    resolution: {integrity: sha512-JCn1mDi7MYwpyj2OvmPofNJPcawVF4vuCeH2GTD49NcSITHkSSM2/MrSwqj3vvy1OX3LHJ3hvHUbKDPSg4iweQ==}
 
   '@fastify/ajv-compiler@3.5.0':
     resolution: {integrity: sha512-ebbEtlI7dxXF5ziNdr05mOY8NnDiPB1XvAlLHctRt/Rc+C3LCOVW5imUVX+mhvUhnNzmPBHewUkOFgGlCxgdAA==}
@@ -6481,8 +6475,6 @@ snapshots:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
-
-  '@faceio/fiojs@1.1.0': {}
 
   '@fastify/ajv-compiler@3.5.0':
     dependencies:
