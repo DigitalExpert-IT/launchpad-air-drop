@@ -7,11 +7,12 @@ import {
 
 interface BinanceTickerData {
   symbol: string;
-  lastPrice?: number;
   highPrice?: number;
   lowPrice?: number;
   weightedAvgPrice: number;
   priceChangePercent: number;
+  volume: number;
+  lastPrice: number;
 }
 
 const useCrypto = () => {
@@ -69,6 +70,8 @@ const useCrypto = () => {
 const usePair24h = (pair: string) => {
   const [pairData, setPairData] = useState({
     priceChangePercent: 0,
+    volume: 0,
+    lastPrice: 0,
   });
 
   const fetchData = useCallback(async (pair: string) => {
@@ -83,7 +86,12 @@ const usePair24h = (pair: string) => {
 
       const data: BinanceTickerData = await response.json();
 
-      setPairData({ ...data, priceChangePercent: data.priceChangePercent });
+      setPairData({
+        ...data,
+        priceChangePercent: data.priceChangePercent,
+        volume: data.volume,
+        lastPrice: data.lastPrice,
+      });
     } catch (error) {
       console.error(error);
     }

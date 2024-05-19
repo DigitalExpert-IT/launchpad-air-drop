@@ -12,12 +12,15 @@ import {
 import { useTranslation } from "react-i18next";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { usePair24h } from "@/hooks/useCrypto";
+import { formatPrice } from "@/utils/formatter";
 
 export default function OrderForm() {
   const { t } = useTranslation();
   const firstPair = "BNB";
   const secondPair = "USDT";
-  const { priceChangePercent } = usePair24h(firstPair.concat(secondPair));
+  const { priceChangePercent, volume, lastPrice } = usePair24h(
+    firstPair.concat(secondPair)
+  );
 
   return (
     <Box bgGradient={"linear(#370144, #3D004B, #000)"} mb={20}>
@@ -63,7 +66,7 @@ export default function OrderForm() {
             </Flex>
             <HStack flexDir={{ base: "column", sm: "row" }} gap={6}>
               <Text
-                color={`${priceChangePercent ? "#EA3943" : "#35D5A4"}`}
+                color={`${priceChangePercent < 0 ? "#EA3943" : "#35D5A4"}`}
                 fontSize={"5xl"}
               >
                 {priceChangePercent}%
@@ -81,9 +84,9 @@ export default function OrderForm() {
                 flexDir={{ base: "column", sm: "row" }}
               >
                 <Text fontSize={"2xl"} color={"#A4A4BE"}>
-                  {t("orderForm.valuation")}
+                  {t("orderForm.volume")}
                 </Text>
-                <Text fontSize={"2xl"}>$0.0000</Text>
+                <Text fontSize={"2xl"}>{formatPrice(volume)}</Text>
               </HStack>
               <HStack
                 justifyContent={"space-between"}
@@ -91,9 +94,9 @@ export default function OrderForm() {
                 flexDir={{ base: "column", sm: "row" }}
               >
                 <Text fontSize={"2xl"} color={"#A4A4BE"}>
-                  {t("orderForm.position")}
+                  {t("orderForm.lastPrice")}
                 </Text>
-                <Text fontSize={"2xl"}>$0.0000</Text>
+                <Text fontSize={"2xl"}>{formatPrice(lastPrice)}</Text>
               </HStack>
             </VStack>
           </Box>

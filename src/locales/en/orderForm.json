@@ -1,7 +1,7 @@
 {
   "title": "INVESTMENT RULES",
-  "valuation": "Valuation",
-  "position": "Position",
+  "volume": "Volume",
+  "lastPrice": "Last Price",
   "investmentRules": {
     "title": "Insider First :",
     "firstDescription": "having an access to certain knowledge or data before it becomes widely known to the general public or others. This could be due to various reasons such as insider information, advanced research, or being part of a select group privy to certain details. In essence, it implies having a competitive advantage or edge in possessing information that others don't have yet.",
