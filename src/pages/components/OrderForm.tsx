@@ -97,13 +97,13 @@ export default function OrderForm() {
             border={"1px solid #A4A4BE"}
             maxW={"1077px"}
           >
-            <Text fontSize={"3xl"} fontWeight={"600"}>
+            <Text fontSize={{lg: "3xl", base: "1xl"}} fontWeight={"600"}>
               {t("orderForm.investmentRules.title")}
             </Text>
-            <Text fontSize={"2xl"} textAlign={"justify"}>
+            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"}>
               {t("orderForm.investmentRules.firstDescription")}
             </Text>
-            <Text fontSize={"2xl"} textAlign={"justify"} pt={10}>
+            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"} pt={10}>
               {t("orderForm.investmentRules.secondDescription")}
             </Text>
           </Box>

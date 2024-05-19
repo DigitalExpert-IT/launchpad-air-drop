@@ -112,7 +112,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 alignSelf={"center"}
               >
                 <Link href="/">
-                SUPREME FINANCE
+                SLEEPLESS AI
                 </Link>
               </Heading>
               <Stack

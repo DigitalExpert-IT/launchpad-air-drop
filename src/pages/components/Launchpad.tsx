@@ -8,8 +8,11 @@ import {
   Flex,
   Box,
   Button,
+  ListItem,
+  UnorderedList,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import launchpad from "@/locales/en/launchpad.json"
 
 export default function Launchpad() {
   const { t } = useTranslation();
@@ -40,10 +43,10 @@ export default function Launchpad() {
           py={5}
         >
           <Stack>
-            <Text fontSize={22}>{t("launchpad.walletAddress")}</Text>
+            <Text fontSize={{lg: "1xl", base: "xl"}}>{t("launchpad.walletAddress")}</Text>
           </Stack>
           <Stack>
-            <Text fontSize={22}>0x021931u2hedqwugd0182gduig3d1d1dvef2</Text>
+            <Text fontSize={{lg: "xl", base: "lg"}}>0x021931u2hedqwugd0182gduig3d1d1dvef2</Text>
           </Stack>
         </HStack>
         <Stack
@@ -57,41 +60,41 @@ export default function Launchpad() {
         >
           <Stack gap={5}>
             <Box>
-              <Text fontWeight={"700"} fontSize={24}>
+              <Text fontWeight={"700"} fontSize={{lg: "2xl", base: "xl"}}>
                 {t("launchpad.tokenDetails.name")}
               </Text>
-              <Text fontSize={22} color={"#A4A4BE"}>
+              <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
                 BSCM
               </Text>
             </Box>
             <Box>
-              <Text fontWeight={"700"} fontSize={24}>
+              <Text fontWeight={"700"} fontSize={{lg: "2xl", base: "xl"}}>
                 {t("launchpad.tokenDetails.contact")}
               </Text>
-              <Text fontSize={22} color={"#A4A4BE"}>
+              <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
                 0x021931u2hedqwugd0182gduig3d1d1dvef2
               </Text>
             </Box>
             <Box>
-              <Text fontWeight={"700"} fontSize={24}>
+              <Text fontWeight={"700"} fontSize={{lg: "2xl", base: "xl"}}>
                 {t("launchpad.tokenDetails.remainingAirdrops")}
               </Text>
-              <Text fontSize={22} color={"#A4A4BE"}>
+              <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
                 70%
               </Text>
             </Box>
             <Box>
-              <Text fontWeight={"700"} fontSize={24}>
+              <Text fontWeight={"700"} fontSize={{lg: "2xl", base: "xl"}}>
                 {t("launchpad.tokenDetails.slidingPoints")}
               </Text>
-              <Text fontSize={22} color={"#A4A4BE"}>
+              <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
                 72%
               </Text>
             </Box>
           </Stack>
           <Stack gap={5}>
             <Box>
-              <Text fontWeight={"bold"} fontSize={32} color={"#FD92FD"}>
+              <Text fontWeight={"bold"} fontSize={{lg: "4xl", base: "1xl"}} color={"#FD92FD"}>
                 {t("launchpad.tokenDetails.tokenAllocation")}
               </Text>
             </Box>
@@ -150,7 +153,9 @@ export default function Launchpad() {
           <Box></Box>
         </VStack>
         <Stack
+        display={"flex"}
           maxW={"80%"}
+          flexWrap={"wrap"}
           alignItems={{ lg: "left", base: "center" }}
           bgColor={"black"}
           borderRadius={{ base: 10, lg: 20 }}
@@ -158,19 +163,31 @@ export default function Launchpad() {
         >
           <Stack gap={5}>
             <Box>
-              <Text fontWeight={"700"} fontSize={32}>
+              <Text fontWeight={"700"} fontSize={{lg: "3xl", base: "lg"}}>
                 {t("launchpad.investmentRules.title")}
               </Text>
             </Box>
             <Box>
-              <Text fontSize={24}>
+              <Text fontSize={{lg: "xl", base: "md"}}>
                 {t("launchpad.investmentRules.firstDescription")}
               </Text>
             </Box>
             <Box>
-              <Text fontSize={24}>
+              <Text fontSize={{lg: "xl", base: "md"}} style={{whiteSpace: "pre-line"}}>
                 {t("launchpad.investmentRules.secondDescription")}
               </Text>
+            </Box>
+            <Box>
+              <UnorderedList>
+                {launchpad.investmentRules.thirdDescription.map((item:string, idx) => {
+                  const value = item
+                  return(
+                  <ListItem fontSize={{lg: "xl", base: "md"}}  key={idx}>
+                    {t(value)}
+                  </ListItem>
+                  )
+                })}
+                </UnorderedList>
             </Box>
           </Stack>
         </Stack>

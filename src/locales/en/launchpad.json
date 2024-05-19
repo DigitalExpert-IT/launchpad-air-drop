@@ -17,7 +17,13 @@
   "receiveButton": "Receive",
   "aiRecognitionVerificationButton": "AI Recognition Verification Button",
   "investmentRules": {
-    "title": "Supreme HYPE Wallet:",
+    "title": "Our game is live Go and pick your ideal boyfriend and girlfriend here: ",
     "firstDescription": "We will offer an escrow service for decentralized project teams, institutions, and individuals alike. This will allow the possibility of creating more complex decentralized financial products like insurance products and CFDs. This will also allow for one escrow to function as a liquidity swap or sharing of liquidity across multiple block chains. And Users will be able to read up on or participate in multiple fair distribution projects during their farming phases. The community will be incentivized to participate in addressing FAQs and tickets created by other users",
-    "secondDescription": "" }
+    "secondDescription": "Web: https://www.sleeplessai.net/home \n Youtube : https://www.youtube.com/watch?v=GHfibpoIP54 \n \n Want to style your virtual boyfriend? \n Recharge your in-game tokens and purchase items to take your boyfriend to the next level and make him your ideal match!",
+    "thirdDescription": [
+      "Think of diamonds as the in-game currency, which can be obtained using fiat currency, stablecoins, BNB, or $AI. ",
+      "⁠You can purchase NFTs(Clothes, accessories, foods, etc), mystery box, Gotcha by dimonds",
+      " ⁠$AI token holders can vote on gameplay governance decisions, including prioritizing in-game item upgrades (e.g upgrade accessories from SR to SSR), or to decide future Accessories/New Boyfriend Types.",
+      "⁠Users who stake $AI to vote for their own boyfriends/girlfriends to compete, with the winner receiving more rewards."
+    ] }
 }
