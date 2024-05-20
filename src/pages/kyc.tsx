@@ -1,16 +1,13 @@
 import Layout from "@/components/layout";
-import { Heading, Stack, VStack, Text, HStack, CardHeader, Flex, CardFooter, Input, Button } from "@chakra-ui/react";
+import { Stack, VStack, Flex } from "@chakra-ui/react";
 import Footer from "./components/Footer";
-import RegisterForm from "./components/RegisterForm";
-import { Card, CardBody, Box, Image} from "@chakra-ui/react";
-import Header from "./components/Header";
-import { t } from "i18next";
+import { Box} from "@chakra-ui/react";
 import { KycCard } from "@/components/kycCard";
 import { kycContent } from "@/constants/kyContent";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { EmailForm } from "@/components/emailForm";
+import { EmailForm } from "@/components/EmailForm";
 import { useState } from "react";
-import { PhoneForm } from "@/components/phoneForm";
+import { PhoneForm } from "@/components/PhoneForm";
 import { backgroundImage } from "@/constants/backgroundImage";
 import { PhotoForm } from "@/components/PhotoForm";
 
