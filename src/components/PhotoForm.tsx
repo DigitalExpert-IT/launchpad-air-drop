@@ -18,11 +18,11 @@ export const PhotoForm = () => {
       }
       }, [webcamRef, setImgFile, setImgSrc]);
     
-    // const videoConstraints = {
-    //     width: 1280,
-    //     height: 720,
-    //     facingMode: "user"
-    //   };
+    const videoConstraints = {
+        width: 1280,
+        height: 720,
+        facingMode: "user"
+      };
 
     return (
         <Card backgroundColor={"black"} p={5} borderRadius={20} mx={8}>
@@ -45,7 +45,7 @@ export const PhotoForm = () => {
             >
             </Webcam>)
             
-            } */}
+            }
             </Stack>
           </CardBody>
           <CardFooter>
