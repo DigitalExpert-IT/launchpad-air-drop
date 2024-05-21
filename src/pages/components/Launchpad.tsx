@@ -128,29 +128,15 @@ export default function Launchpad() {
           minW={"75%"}
           flexDir={"row"}
           justifyContent={"space-between"}
-          mt={"-5"}
+          mb={5}
         >
-          <Box></Box>
           <Box>
-            <Text fontSize={{ base: "md", sm: "xl" }} color={"#A4A4BE"}>
-              {t("launchpad.airdropTime")}: 4/5/2024, 6:00:00 PM
-            </Text>
-          </Box>
-        </VStack>
-        <VStack minW={"75%"} flexDir={"row"} justifyContent={"space-between"}>
-          <Flex
-            flexDir={{ base: "column", lg: "row" }}
-            gap={5}
-            flexWrap={"wrap"}
-          >
-            <Button bgColor="#9321DD" fontSize={{ base: "md", sm: "2xl" }}>
-              {t("launchpad.receiveButton")}
-            </Button>
             <Button bgColor="#9321DD" fontSize={{ base: "md", sm: "2xl" }}>
               {t("launchpad.aiRecognitionVerificationButton")}
             </Button>
-          </Flex>
-          <Box></Box>
+          </Box>
+          <Box>
+          </Box>
         </VStack>
         <Stack
         display={"flex"}

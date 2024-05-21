@@ -8,6 +8,8 @@ import {
   Flex,
   Box,
   Image,
+  Button,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
@@ -88,6 +90,11 @@ export default function OrderForm() {
                 </Text>
                 <Text fontSize={"2xl"}>$0.0000</Text>
               </HStack>
+              <Tooltip label={"you will get it while the authorize"}>
+              <Button bgColor="#1E1E1EÍ" minW={"100%"} fontSize={{ base: "md", sm: "2xl" }} disabled={true}>
+                {t("launchpad.receiveButton")}
+              </Button>
+              </Tooltip>
             </VStack>
           </Box>
           <Box
@@ -103,7 +110,7 @@ export default function OrderForm() {
             <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"}>
               {t("orderForm.investmentRules.firstDescription")}
             </Text>
-            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"} pt={10}>
+            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"} pt={"12vh"}>
               {t("orderForm.investmentRules.secondDescription")}
             </Text>
           </Box>

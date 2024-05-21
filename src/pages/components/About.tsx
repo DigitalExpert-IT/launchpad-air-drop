@@ -27,7 +27,7 @@ export default function About() {
             m={10}
             gap={15}
             alignItems={{ lg: "", base: "center" }}
-            bgColor={"rgba(0, 0, 0, 0.5)"}
+            bgColor={"rgba(0, 0, 0, 0.7)"}
             borderRadius={{ base: 20, lg: 50 }}
           >
             <Box ml={{lg: 10, base: ""}} flex={{ base: "none", lg: "1" }}
@@ -39,7 +39,7 @@ export default function About() {
                   "https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/alita.png?updatedAt=1715060841922"
                 }
                 width={{ base: "100%", lg: "auto" }}
-            maxW={{ lg: "300px" }} // Adjust max width as needed
+            maxW={{ lg: "300px" }}
             height="auto"
             alt=""
             objectFit="contain"
