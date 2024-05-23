@@ -17,7 +17,7 @@ export interface IFooter {
 export const Navigation: Array<INavigation> = [
   {
     name: "Home",
-    link: "#",
+    link: "/",
   },
   {
     name: "Order Form",

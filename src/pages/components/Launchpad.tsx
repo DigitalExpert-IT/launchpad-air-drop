@@ -13,9 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import launchpad from "@/locales/en/launchpad.json"
+import { useAddress } from "@thirdweb-dev/react";
 
 export default function Launchpad() {
   const { t } = useTranslation();
+  const address = useAddress();
 
   return (
     <Box
@@ -46,7 +48,7 @@ export default function Launchpad() {
             <Text fontSize={{lg: "1xl", base: "xl"}}>{t("launchpad.walletAddress")}</Text>
           </Stack>
           <Stack>
-            <Text fontSize={{lg: "xl", base: "lg"}}>0x021931u2hedqwugd0182gduig3d1d1dvef2</Text>
+            <Text fontSize={{lg: "xl", base: "lg"}}>{address}</Text>
           </Stack>
         </HStack>
         <Stack
