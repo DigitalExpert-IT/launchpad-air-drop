@@ -10,15 +10,23 @@ import { useState } from "react";
 import { PhoneForm } from "@/components/PhoneForm";
 import { backgroundImage } from "@/constants/backgroundImage";
 import { PhotoForm } from "@/components/PhotoForm";
-
-const kycMenu = [
-  {component: <EmailForm/>},  
-  {component: <PhoneForm/>},
-  {component: <PhotoForm/>}
-]
+import React from "react";
 
 export default function Kyc() {
   const [kycProgres, setKycProgres] = useState<number>(0)
+
+  const handleNextStep = () => {
+    setKycProgres((prev) => (prev < kycMenu.length - 1 ? prev + 1 : prev));
+  };
+
+  
+  const kycMenu = [
+    {component: <EmailForm handleNextStep={handleNextStep}/>},  
+    {component: <PhoneForm handleNextStep={handleNextStep}/>},
+    {component: <PhotoForm />}
+  ]
+
+  
 
   return (
     <Layout>
@@ -38,7 +46,7 @@ export default function Kyc() {
         <Flex flexDir={{lg: "row", base: "column"}} gap={5}>
           {kycContent.map((item, idx) => (
             <Flex flexDirection={{lg: "row", base: "column"}} key={idx} gap={5}>
-                <KycCard title={item.title} description={item.description} validity={kycProgres === idx}/> 
+                <KycCard title={item.title} description={item.description} validity={kycProgres > idx}/> 
               { idx < 2 && 
                 (
                   <ArrowForwardIcon alignSelf={"center"} transform={{base: 'rotate(90deg)', lg: "rotate(0deg)"}} />
