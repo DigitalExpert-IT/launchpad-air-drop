@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 if (typeof window !== 'undefined') {
-  var faceioInstance = new faceIO("fioa2bd9")
+  const faceIOId = process.env.NEXT_PUBLIC_FACEIO || "";
+  var faceioInstance = new faceIO(faceIOId)
 }
 
 const UseKycAuth = () => {
