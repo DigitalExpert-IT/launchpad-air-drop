@@ -11,6 +11,7 @@ import { PhoneForm } from "@/components/PhoneForm";
 import { backgroundImage } from "@/constants/backgroundImage";
 import { PhotoForm } from "@/components/PhotoForm";
 import React from "react";
+import RegisterForm from "./components/RegisterForm";
 
 export default function Kyc() {
   const [kycProgres, setKycProgres] = useState<number>(0)
@@ -19,11 +20,15 @@ export default function Kyc() {
     setKycProgres((prev) => (prev < kycMenu.length - 1 ? prev + 1 : prev));
   };
 
+  const handleBackward = () => {
+    setKycProgres(kycProgres-1)
+  }
+
   
   const kycMenu = [
     {component: <EmailForm handleNextStep={handleNextStep}/>},  
     {component: <PhoneForm handleNextStep={handleNextStep}/>},
-    {component: <PhotoForm />}
+    {component: <PhotoForm handleErrorKyc={handleBackward}/>}
   ]
 
   
