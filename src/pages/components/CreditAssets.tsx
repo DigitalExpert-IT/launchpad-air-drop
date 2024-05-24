@@ -33,23 +33,33 @@ const CreditAssets = () => {
         display={"flex"}
         justifyContent={"space-between"}
         w={{ base: "90%", sm: "400px" }}
+        gap={2}
       >
-        <Text fontSize={"18px"} minW={52}>{t("creditAssets.title")}</Text>
-        <Box display={"flex"} gap={3} alignItems={"center"}>
+        <Text fontSize={{base: "14px", md: "18px"}} minW={{base: 40, md: 52}}>{t("creditAssets.title")}</Text>
+        <Box display={"flex"} gap={{base: 1, md: 3}} alignItems={"center"} minW="fit-content">
           <Image
             src="/assets/usdt-with-bg.png"
-            w={"29px"}
-            h={"29px"}
+            w={{base: "22px", md: "29px"}}
+            h={{base: "22px", md: "29px"}}
             alt="usdt"
           />
           {isLoadingUsdt ? <Spinner /> :
-            <Text fontSize={"20px"}> {fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}</Text>
+            <Text fontSize={{base: "16px", md: "20px"}}>
+              {fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
+            </Text>
           }
         </Box>
-        <Box display={"flex"} gap={3} alignItems={"center"}>
-          <Text fontSize={"20px"} background={"purple.400"} px={3} py={1} borderRadius={"full"}> AI </Text>
+        <Box display={"flex"} gap={{base: 1, md: 3}} alignItems={"center"}  minW="fit-content">
+          <Image
+            src="/assets/ai-token.png"
+            w={{base: "24px", md: "32px"}}
+            h={{base: "24px", md: "32px"}}
+            alt="usdt"
+          />
           {isLoadingAi ? <Spinner /> :
-            <Text fontSize={"20px"}> {fromBn(aiCreditbalance?? "0", AI_DECMIAL)}</Text>
+            <Text fontSize={{base: "16px", md: "20px"}}>
+              {fromBn(aiCreditbalance?? "0", AI_DECMIAL)}
+            </Text>
           }
         </Box>
       </Box>
@@ -65,7 +75,7 @@ const CreditAssets = () => {
         justifyContent={"center"}
       >
         <Image
-          src="/assets/usdt-with-bg.png"
+          src="/assets/ai-token.png"
           w={"43px"}
           h={"43px"}
           alt="usdt"

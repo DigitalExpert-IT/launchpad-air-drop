@@ -34,6 +34,7 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
         return (
           <Link key={idx} href={item.link} _hover={{ textDecoration: "none" }}>
             <Text
+              textAlign={{ base: "center", sm: "start" }}
               fontSize="md"
               _hover={{
                 color: "yellow",
@@ -50,8 +51,9 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
 
 const NavbarButtons = () => {
   return (
-    <Flex gap={2}>
+    <Flex flexDirection={{ base: "column", sm: "row" }} gap={{ base: 6, sm: 2 }} mt={{ base: 8, sm: "unset" }}>
       <Button
+        width={{ base: "full", sm: "fit-content" }}
         type="submit"
         borderRadius={"50px"}
         fontSize={"md"}
@@ -112,7 +114,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 alignSelf={"center"}
               >
                 <Link href="/">
-                SLEEPLESS AI
+                  SLEEPLESS AI
                 </Link>
               </Heading>
               <Stack
@@ -138,6 +140,18 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
               </Stack>
             </Box>
             <MenuDrawer>
+              <Heading
+                fontFamily={"Rubik One"}
+                fontSize={"25px"}
+                mb={2}
+                flex={1}
+                color={"white"}
+                textAlign={"center"}
+              >
+                <Link href="/">
+                  SLEEPLESS AI
+                </Link>
+              </Heading>
               <MenuList data={data} />
               <NavbarButtons />
             </MenuDrawer>
