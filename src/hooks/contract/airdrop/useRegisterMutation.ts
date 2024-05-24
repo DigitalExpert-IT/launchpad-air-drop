@@ -13,10 +13,10 @@ export const useRegisterMutation = () => {
   const { mutateAsync: mutateAsyncApprove } = useApproveMutation();
   const { mutateAsync: mutateAsyncRegister, ...rest } = useContractWrite(contract, "register");
 
-  const register = async (_referral: string, _uri: string) => {
+  const register = async (_referral: string, _uri: string, ) => {
     try {
-      // check balance and allowance BNB for registration fee 0,005BNB
-      // if (bnbBalance.data?.value.lt(toBn("5", 18).div(1000))) {
+      // // check balance and allowance BNB for registration fee 0,005BNB
+      // if (bnbBalance.data?.value.lt(toBn("500000"))) {
       //   throw {
       //     code: "notEnoughBnbBalance"
       //   };
@@ -28,11 +28,10 @@ export const useRegisterMutation = () => {
       //     args: [bnbContract?.getAddress(), toBn("1", 8)],
       //   });
       // }
-
-      const { receipt } = await mutateAsyncRegister({
-        args: [_referral, _uri],
-        overrides: { value: toBn("5", BNB_DECIMAL).div(1000) }
-      })
+        const { receipt } = await mutateAsyncRegister({
+          args: [_referral, _uri],
+          overrides: {value: toBn("0.005", 18)}
+        })
 
       return receipt;
     } catch (error) {
