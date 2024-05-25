@@ -1,7 +1,7 @@
 {
   "title": "INVESTMENT RULES",
-  "valuation": "Valuation",
-  "position": "Position",
+  "volume": "Volume",
+  "lastPrice": "Last Price",
   "investmentRules": {
     "title": "Insider First :",
     "firstDescription": "We now have the skills for advanced research, data analysis, and gaining trustworthy insider info. To turn these into real benefits, we need everyone's active participation. Together, we can convert our collective efforts into real, measurable success",

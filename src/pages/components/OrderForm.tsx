@@ -13,9 +13,16 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { usePair24h } from "@/hooks/useCrypto";
+import { formatPrice } from "@/utils/formatter";
 
 export default function OrderForm() {
   const { t } = useTranslation();
+  const firstPair = "AI";
+  const secondPair = "USDT";
+  const { priceChangePercent, volume, lastPrice } = usePair24h(
+    firstPair.concat(secondPair), 8000
+  );
 
   return (
     <Box bgGradient={"linear(#370144, #3D004B, #000)"} mb={20}>
@@ -56,18 +63,21 @@ export default function OrderForm() {
                 wordBreak={"break-word"}
                 textAlign={{ base: "center", md: "start" }}
               >
-                ALITA / USDT
+                {firstPair} / {secondPair}
               </Text>
             </Flex>
             <HStack flexDir={{ base: "column", sm: "row" }} gap={6}>
-              <TriangleUpIcon color={"#35D5A4"} fontSize={"5xl"} />
-              <Text color={"#35D5A4"} fontSize={"5xl"}>
-                65.9%
+              <Text
+                color={`${priceChangePercent < 0 ? "#EA3943" : "#35D5A4"}`}
+                fontSize={"5xl"}
+              >
+                {priceChangePercent}%
               </Text>
-              <TriangleDownIcon color={"#EA3943"} fontSize={"3xl"} />
-              <Text color={"#EA3943"} fontSize={"3xl"}>
-                3.79%
-              </Text>
+              {priceChangePercent < 0 ? (
+                <TriangleDownIcon color={"#EA3943"} fontSize={"3xl"} />
+              ) : (
+                <TriangleUpIcon color={"#35D5A4"} fontSize={"5xl"} />
+              )}
             </HStack>
             <VStack gap={6}>
               <HStack
@@ -76,9 +86,9 @@ export default function OrderForm() {
                 flexDir={{ base: "column", sm: "row" }}
               >
                 <Text fontSize={"2xl"} color={"#A4A4BE"}>
-                  {t("orderForm.valuation")}
+                  {t("orderForm.volume")}
                 </Text>
-                <Text fontSize={"2xl"}>$0.0000</Text>
+                <Text fontSize={"2xl"}>{formatPrice(volume)}</Text>
               </HStack>
               <HStack
                 justifyContent={"space-between"}
@@ -86,9 +96,9 @@ export default function OrderForm() {
                 flexDir={{ base: "column", sm: "row" }}
               >
                 <Text fontSize={"2xl"} color={"#A4A4BE"}>
-                  {t("orderForm.position")}
+                  {t("orderForm.lastPrice")}
                 </Text>
-                <Text fontSize={"2xl"}>$0.0000</Text>
+                <Text fontSize={"2xl"}>{formatPrice(lastPrice)}</Text>
               </HStack>
               <Tooltip label={"you will get it while the authorize"}>
               <Button bgColor="#1E1E1EÍ" minW={"100%"} fontSize={{ base: "md", sm: "2xl" }} disabled={true}>
