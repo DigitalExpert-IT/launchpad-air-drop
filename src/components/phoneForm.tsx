@@ -24,7 +24,7 @@ import {
   parseCountry,
   usePhoneInput,
 } from 'react-international-phone';
-import { IFormComponent } from "./EmailForm";
+import { IFormComponent } from "./emailForm";
 
 
 
