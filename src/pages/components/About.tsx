@@ -17,32 +17,37 @@ export default function About() {
         alignItems={"center"}
         justifyContent={"center"}
       >
-        <Stack align={"center"}>
+        <Stack align={"center"} mt={10}>
           <Heading>{t("about.title")}</Heading>
           <VStack
             flexDir={{ lg: "row", base: "column" }}
             align={"center"}
             maxW={"80%"}
+            px={5}
             m={10}
-            gap={10}
+            gap={15}
             alignItems={{ lg: "", base: "center" }}
-            bgColor={"rgba(0, 0, 0, 0.5)"}
+            bgColor={"rgba(0, 0, 0, 0.7)"}
             borderRadius={{ base: 20, lg: 50 }}
-            mb={20}
           >
-            <Stack ml={{ lg: 25 }} align={"center"}>
+            <Box ml={{lg: 10, base: ""}} flex={{ base: "none", lg: "1" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  display="flex"
+                  justifyContent="center">
               <Image
                 src={
                   "https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/alita.png?updatedAt=1715060841922"
                 }
-                w={"85%"}
-                alt=""
-                mt={5}
+                width={{ base: "100%", lg: "auto" }}
+            maxW={{ lg: "300px" }}
+            height="auto"
+            alt=""
+            objectFit="contain"
               />
-            </Stack>
-            <Stack mx={10} mb={{ base: 10, lg: 0 }}>
+            </Box>
+            <Stack py={10} mb={{ base: 10, lg: 0 }}>
               <Heading
-                fontSize={48}
+                fontSize={{lg: "5xl", base: "md"}}
                 fontFamily={"Rubik One, sans-serif"}
                 bgGradient={"linear(to-r, #F488FA, #9E2DE1)"}
                 bgClip={"text"}
@@ -53,6 +58,7 @@ export default function About() {
                 fontFamily={"Poppins, sans-serif"}
                 fontSize={20}
                 maxW={{ base: "90%", sm: "80%" }}
+                style={{whiteSpace: "pre-line"}}
               >
                 {t("about.card.description")}
               </Text>

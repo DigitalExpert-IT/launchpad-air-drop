@@ -1,11 +1,26 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { AI_DECMIAL, USDT_DECIMAL } from "@/constants/tokenDecimals";
+import { useAiCreditBalance, useUsdtCreditBalance } from "@/hooks/contract/airdrop";
+import { useClaimAiMutation } from "@/hooks/contract/airdrop/useClaimAiMutation";
+import { useAsyncCall } from "@/hooks/useAsyncCall";
+import { Box, Button, Flex, Image, Text, Spinner } from "@chakra-ui/react";
 import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
+import { fromBn } from "evm-bn";
 import { useTranslation } from "react-i18next";
 
 const CreditAssets = () => {
   const { t } = useTranslation();
-  const openModal= useSetIsWalletModalOpen();
+  const openModal = useSetIsWalletModalOpen();
   const address = useAddress();
+  const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
+  const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
+  const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
+
+  const claimAi = async () => {
+    await claim(100);
+  };
+
+  const { exec: execClaimAi } = useAsyncCall(claimAi,
+    t("succes.claimAi"));
 
   return (
     <Box
@@ -18,16 +33,34 @@ const CreditAssets = () => {
         display={"flex"}
         justifyContent={"space-between"}
         w={{ base: "90%", sm: "400px" }}
+        gap={2}
       >
-        <Text fontSize={"18px"}>{t("creditAssets.title")}</Text>
-        <Box display={"flex"} gap={3} alignItems={"center"}>
+        <Text fontSize={{base: "14px", md: "18px"}} minW={{base: 40, md: 52}}>{t("creditAssets.title")}</Text>
+        <Box display={"flex"} gap={{base: 1, md: 3}} alignItems={"center"} minW="fit-content">
           <Image
             src="/assets/usdt-with-bg.png"
-            w={"29px"}
-            h={"29px"}
+            w={{base: "22px", md: "29px"}}
+            h={{base: "22px", md: "29px"}}
             alt="usdt"
           />
-          <Text fontSize={"20px"}>0.00</Text>
+          {isLoadingUsdt ? <Spinner /> :
+            <Text fontSize={{base: "16px", md: "20px"}}>
+              {fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
+            </Text>
+          }
+        </Box>
+        <Box display={"flex"} gap={{base: 1, md: 3}} alignItems={"center"}  minW="fit-content">
+          <Image
+            src="/assets/ai-token.png"
+            w={{base: "24px", md: "32px"}}
+            h={{base: "24px", md: "32px"}}
+            alt="usdt"
+          />
+          {isLoadingAi ? <Spinner /> :
+            <Text fontSize={{base: "16px", md: "20px"}}>
+              {fromBn(aiCreditbalance?? "0", AI_DECMIAL)}
+            </Text>
+          }
         </Box>
       </Box>
       <Flex
@@ -42,15 +75,15 @@ const CreditAssets = () => {
         justifyContent={"center"}
       >
         <Image
-          src="/assets/usdt-with-bg.png"
+          src="/assets/ai-token.png"
           w={"43px"}
           h={"43px"}
           alt="usdt"
         />
-        <Text fontSize={"xl"}>USDT</Text>
+        <Text fontSize={"xl"}>AI</Text>
       </Flex>
-      <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} onClick={() => openModal(true)}>
-        {address ? address : t("creditAssets.button")}
+      <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? execClaimAi() : openModal(true)}>
+        {address ? t("creditAssets.button") : t("common.connectWallet")}
       </Button>
     </Box>
   );

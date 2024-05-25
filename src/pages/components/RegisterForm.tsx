@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Center, FormLabel, Heading, Stack, Text, VStack } from "@chakra-ui/react";
+import { Badge, Box, Button, Center, FormLabel, Heading, Stack, Text, VStack, useToast } from "@chakra-ui/react";
 import CreditAssets from "./CreditAssets";
 import { useTranslation } from "react-i18next";
 import register from "../register";
@@ -7,6 +7,7 @@ import { ButtonConnectWrapper } from "../../lib/ButtonConnectWrapper";
 import { useForm } from "react-hook-form";
 import { useAddress } from "@thirdweb-dev/react";
 import { shortenAddress } from "../../lib/address";
+import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
 
 type FormType = {
   referrer: string;
@@ -14,11 +15,25 @@ type FormType = {
 
 const RegisterForm = () => {
   const { t } = useTranslation();
+  const toast = useToast()
   const address = useAddress() ?? "0x0000000000000000000000000000000000000000";
-  const { control, setValue, handleSubmit } = useForm<FormType>();
+  const { control, getValues, setValue, handleSubmit } = useForm<FormType>();
+  const {register, ...rest} = useRegisterMutation()
+
+  const handleRegister = (data: FormType) => {
+    const registerPromise = new Promise((resolve, reject) => {
+      resolve(register(data.referrer, `user-${address}`))
+    })
+
+    toast.promise(registerPromise, {
+          success: { title: 'Registration Success', description: 'Your Registration Success' },
+          error: { title: 'Registration Rejected', description: 'Something wrong' },
+          loading: { title: 'Registration Loading', description: 'Please wait' },
+    })
+  }
 
   return (
-      <Stack spacing="2" as="form">
+      <Stack spacing="2" as="form" onSubmit={handleSubmit(handleRegister)}>
       <Box pos={"absolute"} top={{ base: "6", lg: "14" }} left={"-2"}>
         <Badge
           bg={"#9321DD"}
@@ -46,6 +61,7 @@ const RegisterForm = () => {
       <FormInput
         control={control}
         name="referrer"
+        isRequired
         px={"0"}
         fontSize={{ base: "sm", sm: "medium" }}
         color={"black"}
@@ -69,12 +85,12 @@ const RegisterForm = () => {
       <Text fontSize={{ base: "sm", sm: "md" }} color={"black"}>
         {t("form.helperText.referrer")}
       </Text>
-      <Center pt={"10"}>
+      <Center>
         <ButtonConnectWrapper type="submit" border={"1px"} px={"16"}>
           <Button
             type="submit"
             border={"1px"}
-            px={"16"}
+            px={"32"}
             color={"black"}
             borderRadius={25}
             borderColor={"#682EFD"}

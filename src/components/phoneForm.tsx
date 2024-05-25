@@ -13,7 +13,7 @@ import {
   InputLeftAddon, 
   InputRightElement, 
   Select } from "@chakra-ui/react"
-import React from "react";
+import React, { useState } from "react";
 import { IKycCard } from "@/constants/kyContent";
 import {NotAllowedIcon, CheckCircleIcon, CheckIcon} from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
@@ -24,22 +24,40 @@ import {
   parseCountry,
   usePhoneInput,
 } from 'react-international-phone';
+import { IFormComponent } from "./emailForm";
 
-interface IPhoneForm {
-  value?: string
-}
 
-export const PhoneForm = ({value}: IPhoneForm) => {
+
+export const PhoneForm = ({handleNextStep}: IFormComponent) => {
+  const [phone, setPhone] = useState("")
+  const [error, setError] = useState(true)
   const { inputValue, handlePhoneValueChange, inputRef, country, setCountry } =
     usePhoneInput({
       defaultCountry: 'id',
-      value,
       countries: defaultCountries,
       onChange: (data) => {
         data.phone;
       },
     });
     const { t } = useTranslation()
+
+    const handleOnChange = (e: any) => {
+      const currentValue = country.dialCode+e
+      if(currentValue.length >= 4 && currentValue.length <= 13){
+        setPhone(currentValue)
+        setError(false)
+      } else {
+        setPhone("")
+        setError(true)
+      }
+    }
+
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault()
+      localStorage.setItem("local", country.dialCode)
+      localStorage.setItem("phone", phone)
+      handleNextStep()
+    }
 
     return (
       <Card backgroundColor={"black"} p={5} borderRadius={20} mx={8}>
@@ -51,7 +69,7 @@ export const PhoneForm = ({value}: IPhoneForm) => {
               <Text fontSize={"xs"}>Enter Your Phone Number</Text>
               <InputGroup>
                 <InputLeftAddon w={"40%"}>
-                  <Select variant={"unstyle"} backgroundColor={"rgba(0,0,0,0.0)"} fontSize={{base: "1.5vh", lg: "2vh"}}>
+                  <Select variant={"unstyle"} backgroundColor={"rgba(0,0,0,0.0)"} fontSize={{base: "1.5vh", lg: "2vh"}} onChange={(e) => setCountry(e.target.value)}>
                     {defaultCountries.map((item, idx) => {
                       const countries = parseCountry(item);
                       return (
@@ -63,12 +81,12 @@ export const PhoneForm = ({value}: IPhoneForm) => {
                     })}
                   </Select>
                 </InputLeftAddon>
-                <Input type='tel' placeholder='phone number' backgroundColor={"#1E1E1E"}/>
+                <Input type='tel' placeholder='phone number' backgroundColor={"#1E1E1E"} onChange={(e) => handleOnChange(e.target.value)}/>
               </InputGroup>
             </Stack>
           </CardBody>
           <CardFooter justifyContent={"flex-end"}>
-            <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={true}>Submit</Button>
+            <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={error ? true : false} onClick={handleSubmit}>Submit</Button>
           </CardFooter>
         </Card>
     )

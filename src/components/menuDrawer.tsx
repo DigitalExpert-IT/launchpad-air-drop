@@ -25,7 +25,7 @@ const MenuDrawer: React.FC<IDrawer> = ({ children }) => {
       </Button>
       <Drawer isOpen={isOpen} placement={"right"} size={"md"} onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg={"#af43b5"} maxW={"80vw"}>
           <DrawerHeader>
             <DrawerCloseButton />
           </DrawerHeader>

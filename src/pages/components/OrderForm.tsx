@@ -8,6 +8,8 @@ import {
   Flex,
   Box,
   Image,
+  Button,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
@@ -98,6 +100,11 @@ export default function OrderForm() {
                 </Text>
                 <Text fontSize={"2xl"}>{formatPrice(lastPrice)}</Text>
               </HStack>
+              <Tooltip label={"you will get it while the authorize"}>
+              <Button bgColor="#1E1E1EÍ" minW={"100%"} fontSize={{ base: "md", sm: "2xl" }} disabled={true}>
+                {t("launchpad.receiveButton")}
+              </Button>
+              </Tooltip>
             </VStack>
           </Box>
           <Box
@@ -107,13 +114,13 @@ export default function OrderForm() {
             border={"1px solid #A4A4BE"}
             maxW={"1077px"}
           >
-            <Text fontSize={"3xl"} fontWeight={"600"}>
+            <Text fontSize={{lg: "3xl", base: "1xl"}} fontWeight={"600"}>
               {t("orderForm.investmentRules.title")}
             </Text>
-            <Text fontSize={"2xl"} textAlign={"justify"}>
+            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"}>
               {t("orderForm.investmentRules.firstDescription")}
             </Text>
-            <Text fontSize={"2xl"} textAlign={"justify"} pt={10}>
+            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"} pt={"12vh"}>
               {t("orderForm.investmentRules.secondDescription")}
             </Text>
           </Box>
