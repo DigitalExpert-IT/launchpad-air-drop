@@ -51,7 +51,7 @@ export default function OrderForm() {
               flexDir={{ base: "column", sm: "row" }}
             >
               <Image
-                src="/assets/usdt-with-bg.png"
+                src="/assets/ai-token.png"
                 w={"85px"}
                 h={"85px"}
                 alt="usdt"
