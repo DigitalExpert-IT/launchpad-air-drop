@@ -18,10 +18,10 @@ import { formatPrice } from "@/utils/formatter";
 
 export default function OrderForm() {
   const { t } = useTranslation();
-  const firstPair = "BNB";
+  const firstPair = "AI";
   const secondPair = "USDT";
   const { priceChangePercent, volume, lastPrice } = usePair24h(
-    firstPair.concat(secondPair)
+    firstPair.concat(secondPair), 8000
   );
 
   return (

@@ -67,39 +67,43 @@ const useCrypto = () => {
   return cryptocurrencies;
 };
 
-const usePair24h = (pair: string) => {
+const usePair24h = (pair: string, interval: number = 10000) => {
   const [pairData, setPairData] = useState({
     priceChangePercent: 0,
     volume: 0,
     lastPrice: 0,
   });
 
-  const fetchData = useCallback(async (pair: string) => {
-    try {
-      const response = await fetch(
-        `https://api.binance.com/api/v3/ticker/24hr?symbol=${pair}`
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data: BinanceTickerData = await response.json();
-
-      setPairData({
-        ...data,
-        priceChangePercent: data.priceChangePercent,
-        volume: data.volume,
-        lastPrice: data.lastPrice,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchData(pair);
-  }, [pair, fetchData]);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://api.binance.com/api/v3/ticker/24hr?symbol=${pair}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: BinanceTickerData = await response.json();
+
+        setPairData({
+          ...data,
+          priceChangePercent: data.priceChangePercent,
+          volume: data.volume,
+          lastPrice: data.lastPrice,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+
+    setInterval(() => {
+      fetchData();
+    }, interval);
+  }, [pair, interval]);
 
   return pairData;
 };
