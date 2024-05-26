@@ -12,6 +12,7 @@ import {
   ModalFooter,
   useDisclosure,
   FormLabel,
+  Text
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { FormInput } from '@/lib/FormInput';
@@ -56,27 +57,26 @@ export const FabModal = () => {
       <Modal isOpen={isOpen} onClose={onClose} size={{lg: "lg", md: "2xl"}} >
         <ModalOverlay />
         <ModalContent mt={"20%"} borderRadius={20} backgroundColor={"#9321DD"} as="form" onSubmit={handleSubmit(handleSave)}>
-          <ModalCloseButton />
           <ModalBody>
           <FormLabel
-                pb={8}
-                mt={10}
-                textAlign={"center"}
-                fontWeight={"bold"}
-                fontSize={{ base: "xl", sm: "3xl" }}
-                color={"black"}
+            mt={5}
+            textAlign={"left"}
+            fontWeight={"bold"}
+            fontSize={{ base: "3xl", sm: "3xl" }}
+            color={"white"}
             >
-        {t("form.label.referrer")}*
+        {t("form.label.referrer")}
       </FormLabel>
+      <Text pb={5}>{t("form.helperText.referrer")}</Text>
       <FormInput
         control={control}
         name="referrer"
         isRequired
         px={3}
+        py={8}
         fontSize={{ base: "sm", sm: "medium" }}
         color={"black"}
         placeholder={"   "+t("form.placeholder.referrer") ?? ""}
-        helpertext={t("form.helperText.referrer")}
         _placeholder={{ color: "black", opacity: "0.5" }}
         borderRadius={15}
         borderBottom={"1px"}
@@ -94,8 +94,9 @@ export const FabModal = () => {
       />
           </ModalBody>
 
-          <ModalFooter>
-            <Button variant="solid" backgroundColor={"black"} type='submit'>Submit</Button>
+          <ModalFooter gap={5} alignSelf={"center"} w={"100%"}>
+            <Button variant="solid" backgroundColor={"#3C014A"} type='submit' size={"lg"} onClick={onClose} minW={"45%"}>Close</Button>
+            <Button variant="solid" backgroundColor={"black"} type='submit' size={"lg"} minW={"50%"}>Submit</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

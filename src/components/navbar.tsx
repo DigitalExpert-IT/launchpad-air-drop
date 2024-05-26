@@ -15,6 +15,7 @@ import MenuDrawer from "./menuDrawer";
 import "@fontsource/poppins";
 import { useEffect, useState } from "react";
 import WalletButton from "@/components/WalletButton"
+import { useValidUser } from "@/hooks/contract/airdrop";
 
 interface INavbar {
   data: INavigation[];
@@ -50,8 +51,10 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
 };
 
 const NavbarButtons = () => {
+  const {data} = useValidUser()
   return (
     <Flex flexDirection={{ base: "column", sm: "row" }} gap={{ base: 6, sm: 2 }} mt={{ base: 8, sm: "unset" }}>
+      { !data && 
       <Button
         width={{ base: "full", sm: "fit-content" }}
         type="submit"
@@ -65,7 +68,7 @@ const NavbarButtons = () => {
         <Link href="/kyc">
           Authorize
         </Link>
-      </Button>
+      </Button> }
       <WalletButton />
     </Flex>
   );
@@ -140,18 +143,23 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
               </Stack>
             </Box>
             <MenuDrawer>
+              <Box bgColor={"black"} minW={"100%"} borderRadius={20}>
               <Heading
+                background={
+                  "linear-gradient(100.36deg, #FD92FD 2.4%, #9321DD 98.97%)"
+                }
                 fontFamily={"Rubik One"}
                 fontSize={"25px"}
                 mb={2}
                 flex={1}
-                color={"white"}
+                bgClip={"text"}
                 textAlign={"center"}
               >
                 <Link href="/">
                   SLEEPLESS AI
                 </Link>
               </Heading>
+              </Box>
               <MenuList data={data} />
               <NavbarButtons />
             </MenuDrawer>
