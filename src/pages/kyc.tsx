@@ -66,9 +66,6 @@ export default function Kyc() {
         {kycMenu[kycProgres].component}
       </VStack>
       </Box>
-      { !referrer &&
-        <FabModal/>
-      }
       </Stack>
       <Footer />
     </Layout>

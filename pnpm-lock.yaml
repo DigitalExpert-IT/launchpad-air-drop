@@ -112,8 +112,8 @@ importers:
         specifier: ^18
         version: 18.3.0
       ai-airdrop-contract:
-        specifier: ^1.5.0
-        version: 1.5.0(@ethersproject/bignumber@5.7.0)
+        specifier: ^1.6.0
+        version: 1.8.0(@ethersproject/bignumber@5.7.0)
       eslint:
         specifier: ^8
         version: 8.57.0
@@ -2148,8 +2148,8 @@ packages:
     resolution: {integrity: sha512-4I7Td01quW/RpocfNayFdFVk1qSuoh0E7JrbRJ16nH01HhKFQ88INq9Sd+nd72zqRySlr9BmDA8xlEJ6vJMrYA==}
     engines: {node: '>=8'}
 
-  ai-airdrop-contract@1.5.0:
-    resolution: {integrity: sha512-BPRzG+OOKKGsO0bK9VGGyclSkl90zq6/l8qXKmteKNSrnl/7BtqrTDKbBEeDWKPy16fnbrbJnXCIC+HzA8jy0g==}
+  ai-airdrop-contract@1.8.0:
+    resolution: {integrity: sha512-o6uSNltPgXMq/EXirF9fm3VfCrrojbG4vme4cZg3ugYrv+lp9nVR+ZyGQdB7gP4/K6WZe/rcNBK2kQv9uCoatQ==}
 
   ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
@@ -8816,7 +8816,7 @@ snapshots:
       indent-string: 4.0.0
     optional: true
 
-  ai-airdrop-contract@1.5.0(@ethersproject/bignumber@5.7.0):
+  ai-airdrop-contract@1.8.0(@ethersproject/bignumber@5.7.0):
     dependencies:
       '@openzeppelin/contracts': 4.9.6
       '@openzeppelin/contracts-upgradeable': 4.9.6

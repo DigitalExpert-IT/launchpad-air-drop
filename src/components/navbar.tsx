@@ -15,7 +15,6 @@ import MenuDrawer from "./menuDrawer";
 import "@fontsource/poppins";
 import { useEffect, useState } from "react";
 import WalletButton from "@/components/WalletButton"
-import { useValidUser } from "@/hooks/contract/airdrop";
 
 interface INavbar {
   data: INavigation[];
@@ -51,24 +50,8 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
 };
 
 const NavbarButtons = () => {
-  const {data} = useValidUser()
   return (
-    <Flex flexDirection={{ base: "column", sm: "row" }} gap={{ base: 6, sm: 2 }} mt={{ base: 8, sm: "unset" }}>
-      { !data && 
-      <Button
-        width={{ base: "full", sm: "fit-content" }}
-        type="submit"
-        borderRadius={"50px"}
-        fontSize={"md"}
-        bg={"transparent"}
-        border={"1px solid #FFFFFF"}
-        fontWeight={"400"}
-        alignSelf={"center"}
-      >
-        <Link href="/kyc">
-          Authorize
-        </Link>
-      </Button> }
+    <Flex flexDirection={{ base: "column", sm: "row" }} gap={{ base: 6, sm: 2 }} mt={{ base: 8, sm: "unset" }}> 
       <WalletButton />
     </Flex>
   );
