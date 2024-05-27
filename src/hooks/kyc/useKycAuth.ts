@@ -73,7 +73,6 @@ const UseKycAuth = () => {
                   }
               })
               await register(referrer || '0x0', `user-${address}`);
-              console.log('Registration successful');
               setLoading(false);
               router.push('/');
               

@@ -54,8 +54,6 @@ const CreditAssets = () => {
     setRefInput(refParam || "")
   }, [refInput])
 
-  console.log("data", data)
-
   return (
     <Box
       background={"black"}
@@ -115,11 +113,11 @@ const CreditAssets = () => {
           h={"43px"}
           alt="usdt"
         />
-        <Text fontSize={"xl"}>AI</Text>
+        <Text fontSize={"xl"} pr={"1rem"}>AI</Text>
       </Flex>
       {data === false &&
       <Box flex={1}>
-        <Text fontSize={"xl"}>Referral</Text>
+        <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
         <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || ""}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
         <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
           {t("form.helperText.referrer")}

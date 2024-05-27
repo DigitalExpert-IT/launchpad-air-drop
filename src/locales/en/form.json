@@ -5,6 +5,7 @@
       "selectCurrency": "Select Currency"
     },
     "label": {
+      "referrerTitle": "Referrer",
       "referrer": "Add Your Referrer",
       "swap": "Swap To",
       "from": "From",
