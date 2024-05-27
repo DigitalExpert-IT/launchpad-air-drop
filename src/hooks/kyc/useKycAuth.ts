@@ -3,6 +3,9 @@ import faceIO, { FaceIOErrorCode } from '@faceio/fiojs';
 import { useAddress } from '@thirdweb-dev/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useRegisterMutation } from '../contract/airdrop/useRegisterMutation';
+import { useSelector } from "react-redux";
+import { RootState } from '@/redux/store';
 
 if (typeof window !== 'undefined') {
   const faceIOId = process.env.NEXT_PUBLIC_FACEIO || "";
@@ -16,9 +19,11 @@ const UseKycAuth = () => {
     const local = localStorage.getItem("local");
     const email = localStorage.getItem("email");
     const phone = localStorage.getItem("phone");
+    const referrer = useSelector((state: RootState) => state.referrer.referrer);
     const [userInfo, setUserInfo] = useState<any[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
+    const {register, ...rest} = useRegisterMutation()
 
     const errorCodeHandler = (errorCode: FaceIOErrorCode) => {
         const fioErrs = faceioInstance.fetchAllErrorCodes();
@@ -56,33 +61,29 @@ const UseKycAuth = () => {
     useEffect(() => {
         const enrollNewUser = async () => {
         setLoading(true)
-        if(local && email && phone){
-        await faceioInstance.enroll({
-          "locale": local, // user country based on dial code on phone number
-          "payload": {
-              "whoami": address,
-              "email": email,
-              "phoneNumber": phone
-              }
-          }).then((userInfo: any) => {
-              toast({
-                title: 'Account created.',
-                description: "User Successfully Enrolled!",
-                status: 'success',
-                duration: 9000,
-                isClosable: true,
+        if (local && email && phone) {
+          try {
+            // userInfo can be sent to BE for email or phone validation
+              const userInfo = await faceioInstance.enroll({
+                  "locale": local, // user country based on dial code on phone number
+                  "payload": {
+                      "whoami": address,
+                      "email": email,
+                      "phoneNumber": phone
+                  }
               })
-              setUserInfo(userInfo)
-              setLoading(false) 
-              router.push("/register")
-          }).catch((errCode: any) => {
-             errorCodeHandler(errCode)
-             setLoading(false)
-          })
+              await register(referrer || '0x0', `user-${address}`);
+              setLoading(false);
+              router.push('/');
+              
+          } catch (errCode) {
+              errorCodeHandler(errCode as FaceIOErrorCode);
+              setLoading(false);
+          }
         }
       }
       enrollNewUser();
-    }, [])
+    }, [address, email, local, phone, referrer, register, router])
 
       return {
         userInfo,

@@ -12,7 +12,8 @@ import {
   InputGroup, 
   InputLeftAddon, 
   InputRightElement, 
-  Select } from "@chakra-ui/react"
+  Select, 
+  Tooltip} from "@chakra-ui/react"
 import React, { useState } from "react";
 import { IKycCard } from "@/constants/kyContent";
 import {NotAllowedIcon, CheckCircleIcon, CheckIcon} from "@chakra-ui/icons";
@@ -25,12 +26,15 @@ import {
   usePhoneInput,
 } from 'react-international-phone';
 import { IFormComponent } from "./emailForm";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 
 
 export const PhoneForm = ({handleNextStep}: IFormComponent) => {
   const [phone, setPhone] = useState("")
   const [error, setError] = useState(true)
+  const referrer = useSelector((state: RootState) => state.referrer.referrer);
   const { inputValue, handlePhoneValueChange, inputRef, country, setCountry } =
     usePhoneInput({
       defaultCountry: 'id',
@@ -86,7 +90,13 @@ export const PhoneForm = ({handleNextStep}: IFormComponent) => {
             </Stack>
           </CardBody>
           <CardFooter justifyContent={"flex-end"}>
-            <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={error ? true : false} onClick={handleSubmit}>Submit</Button>
+            {!referrer &&
+              <Tooltip label={"please insert your referral & phone number"}>
+                <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={!referrer || error ? true : false} onClick={handleSubmit}>Submit</Button>
+              </Tooltip> 
+              || 
+              <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={!referrer || error ? true : false} onClick={handleSubmit}>Submit</Button>
+            }
           </CardFooter>
         </Card>
     )

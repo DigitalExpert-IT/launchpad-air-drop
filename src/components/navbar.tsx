@@ -51,21 +51,7 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
 
 const NavbarButtons = () => {
   return (
-    <Flex flexDirection={{ base: "column", sm: "row" }} gap={{ base: 6, sm: 2 }} mt={{ base: 8, sm: "unset" }}>
-      <Button
-        width={{ base: "full", sm: "fit-content" }}
-        type="submit"
-        borderRadius={"50px"}
-        fontSize={"md"}
-        bg={"transparent"}
-        border={"1px solid #FFFFFF"}
-        fontWeight={"400"}
-        alignSelf={"center"}
-      >
-        <Link href="/kyc">
-          Authorize
-        </Link>
-      </Button>
+    <Flex flexDirection={{ base: "column", sm: "row" }} gap={{ base: 6, sm: 2 }} mt={{ base: 8, sm: "unset" }}> 
       <WalletButton />
     </Flex>
   );
@@ -140,18 +126,23 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
               </Stack>
             </Box>
             <MenuDrawer>
+              <Box bgColor={"black"} minW={"100%"} borderRadius={20}>
               <Heading
+                background={
+                  "linear-gradient(100.36deg, #FD92FD 2.4%, #9321DD 98.97%)"
+                }
                 fontFamily={"Rubik One"}
                 fontSize={"25px"}
                 mb={2}
                 flex={1}
-                color={"white"}
+                bgClip={"text"}
                 textAlign={"center"}
               >
                 <Link href="/">
                   SLEEPLESS AI
                 </Link>
               </Heading>
+              </Box>
               <MenuList data={data} />
               <NavbarButtons />
             </MenuDrawer>
