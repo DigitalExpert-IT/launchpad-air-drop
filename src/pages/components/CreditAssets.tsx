@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { setReferrer } from '@/redux/referrerSlice';
 import { useForm } from "react-hook-form";
 import { FormInput } from "@/lib/FormInput";
+import { useEffect, useState } from "react";
+
 
 interface FormType{
   referrer: string;
@@ -22,24 +24,37 @@ const CreditAssets = () => {
   const openModal = useSetIsWalletModalOpen();
   const router = useRouter();
   const address = useAddress();
+  const [refInput, setRefInput] = useState<string>("")
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
   const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
-  const { control, getValues, setValue, handleSubmit } = useForm<FormType>();
   const dispatch = useDispatch()
+
+
+  let refParam = null;
+  if (typeof window !== "undefined") {
+    const urlParams = new URLSearchParams(window.location.search)
+    refParam = urlParams.get("ref")
+  }
   
 
   const claimAi = async () => {
     await claim(100);
   };
 
-  const handleStart = (data:FormType) => {
-    dispatch(setReferrer(data.referrer || "0x0000000000000"))
+  const handleStart = (data: string) => {
+    dispatch(setReferrer(data || "0x0000000000000"))
     router.push("/kyc")
   }
 
   const { exec: execClaimAi } = useAsyncCall(claimAi,
     t("succes.claimAi"));
+
+  useEffect(() => {
+    setRefInput(refParam || "")
+  }, [refInput])
+
+  console.log("data", data)
 
   return (
     <Box
@@ -47,7 +62,6 @@ const CreditAssets = () => {
       borderRadius={"15px"}
       p={5}
       boxShadow={"2px 2px 25.8px 0px #9321dd4a"}
-      as="form" onSubmit={handleSubmit(handleStart)}
     >
       <Box
         display={"flex"}
@@ -83,13 +97,13 @@ const CreditAssets = () => {
           }
         </Box>
       </Box>
-      <HStack minW={"100%"}>
+      <HStack minW={"100%"} my={8} gap={5}>
       <Flex
         gap={10}
         backgroundColor={"#3C014A"}
         w={"fit-content"}
         px={5}
-        py={3}
+        py={7}
         mt={3}
         borderRadius={"12"}
         alignItems={"center"}
@@ -103,13 +117,26 @@ const CreditAssets = () => {
         />
         <Text fontSize={"xl"}>AI</Text>
       </Flex>
+      {data === false &&
       <Box flex={1}>
-        <FormInput control={control} name="referrer"  variant={"flushed"} placeholder="Enter Your Reference" size={"lg"} w={"100%"} mt={5}/>
+        <Text fontSize={"xl"}>Referral</Text>
+        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || ""}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
+        <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
+          {t("form.helperText.referrer")}
+      </Text>
       </Box>
+      }
       </HStack>
-      <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? "" : openModal(true)} type="submit">
-        {address ? t("creditAssets.button") : t("common.connectWallet")}
-      </Button>
+      {
+        data === false ?
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput) : openModal(true)} type="submit">
+          {address ? t("creditAssets.button") : t("common.connectWallet")}
+        </Button>
+        :
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? execClaimAi() : openModal(true)} type="submit">
+          {address ? t("creditAssets.button") : t("common.connectWallet")}
+        </Button>
+      }
     </Box>
   );
 };
