@@ -5,7 +5,8 @@
       "selectCurrency": "Select Currency"
     },
     "label": {
-      "referrer": "Referral Code",
+      "referrerTitle": "Referrer",
+      "referrer": "Add Your Referrer",
       "swap": "Swap To",
       "from": "From",
       "to": "To"
@@ -15,7 +16,7 @@
       "swapSucces": "Succes Swap"
     },
     "helperText": {
-      "referrer": "Please enter your referral address",
+      "referrer": "Enter referral address",
       "quantity": "please enter Quantity",
       "balance": "Balance {{balanceOf}} {{symbol}}",
       "afterFee": "After Fee {{value}} {{symbol}}"

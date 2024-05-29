@@ -1,26 +1,58 @@
 import { AI_DECMIAL, USDT_DECIMAL } from "@/constants/tokenDecimals";
-import { useAiCreditBalance, useUsdtCreditBalance } from "@/hooks/contract/airdrop";
+import { useAiCreditBalance, useUsdtCreditBalance, useValidUser } from "@/hooks/contract/airdrop";
 import { useClaimAiMutation } from "@/hooks/contract/airdrop/useClaimAiMutation";
 import { useAsyncCall } from "@/hooks/useAsyncCall";
-import { Box, Button, Flex, Image, Text, Spinner } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text, Spinner, Input, VStack, HStack, Heading } from "@chakra-ui/react";
 import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { fromBn } from "evm-bn";
+import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { setReferrer } from '@/redux/referrerSlice';
+import { useForm } from "react-hook-form";
+import { FormInput } from "@/lib/FormInput";
+import { useEffect, useState } from "react";
+
+
+interface FormType{
+  referrer: string;
+}
 
 const CreditAssets = () => {
   const { t } = useTranslation();
+  const {data} = useValidUser()
   const openModal = useSetIsWalletModalOpen();
+  const router = useRouter();
   const address = useAddress();
+  const [refInput, setRefInput] = useState<string>("")
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
   const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
+  const dispatch = useDispatch()
+
+
+  let refParam = null;
+  if (typeof window !== "undefined") {
+    const urlParams = new URLSearchParams(window.location.search)
+    refParam = urlParams.get("ref")
+  }
+  
 
   const claimAi = async () => {
     await claim(100);
   };
 
+  const handleStart = (data: string) => {
+    dispatch(setReferrer(data || "0xFE92B6d24Fe92b9EdBEE08240959682dFaAf63D7"))
+    router.push("/kyc")
+  }
+
   const { exec: execClaimAi } = useAsyncCall(claimAi,
     t("succes.claimAi"));
+
+  useEffect(() => {
+    setRefInput(refParam || "")
+  }, [refParam])
 
   return (
     <Box
@@ -45,7 +77,7 @@ const CreditAssets = () => {
           />
           {isLoadingUsdt ? <Spinner /> :
             <Text fontSize={{base: "16px", md: "20px"}}>
-              {fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
+              {data === false ? 100 : fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
             </Text>
           }
         </Box>
@@ -63,12 +95,13 @@ const CreditAssets = () => {
           }
         </Box>
       </Box>
+      <HStack minW={"100%"} my={8} gap={5}>
       <Flex
         gap={10}
         backgroundColor={"#3C014A"}
         w={"fit-content"}
         px={5}
-        py={3}
+        py={7}
         mt={3}
         borderRadius={"12"}
         alignItems={"center"}
@@ -80,11 +113,28 @@ const CreditAssets = () => {
           h={"43px"}
           alt="usdt"
         />
-        <Text fontSize={"xl"}>AI</Text>
+        <Text fontSize={"xl"} pr={"1rem"}>AI</Text>
       </Flex>
-      <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? execClaimAi() : openModal(true)}>
-        {address ? t("creditAssets.button") : t("common.connectWallet")}
-      </Button>
+      {data === false &&
+      <Box flex={1}>
+        <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
+        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || refInput}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
+        <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
+          {t("form.helperText.referrer")}
+      </Text>
+      </Box>
+      }
+      </HStack>
+      {
+        data === false ?
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput) : openModal(true)} type="submit">
+          {address ? t("creditAssets.unregister") : t("common.connectWallet")}
+        </Button>
+        :
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? execClaimAi() : openModal(true)} type="submit">
+          {address ? t("creditAssets.button") : t("common.connectWallet")}
+        </Button>
+      }
     </Box>
   );
 };

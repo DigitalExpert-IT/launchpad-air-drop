@@ -14,10 +14,14 @@ import {
 import { useTranslation } from "react-i18next";
 import launchpad from "@/locales/en/launchpad.json"
 import { useAddress } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
+import { useValidUser } from "@/hooks/contract/airdrop";
 
 export default function Launchpad() {
   const { t } = useTranslation();
+  const router = useRouter();
   const address = useAddress();
+  const {data} = useValidUser()
 
   return (
     <Box
@@ -66,7 +70,7 @@ export default function Launchpad() {
                 {t("launchpad.tokenDetails.name")}
               </Text>
               <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
-                BSCM
+                SLEEPLESS AI
               </Text>
             </Box>
             <Box>
@@ -74,7 +78,7 @@ export default function Launchpad() {
                 {t("launchpad.tokenDetails.contact")}
               </Text>
               <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
-                0x021931u2hedqwugd0182gduig3d1d1dvef2
+                0xBDA011D7F8EC00F66C1923B049B94c67d148d8b2
               </Text>
             </Box>
             <Box>
@@ -82,15 +86,7 @@ export default function Launchpad() {
                 {t("launchpad.tokenDetails.remainingAirdrops")}
               </Text>
               <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
-                70%
-              </Text>
-            </Box>
-            <Box>
-              <Text fontWeight={"700"} fontSize={{lg: "2xl", base: "xl"}}>
-                {t("launchpad.tokenDetails.slidingPoints")}
-              </Text>
-              <Text fontSize={{lg: "xl", base: "lg"}} color={"#A4A4BE"}>
-                72%
+                85%
               </Text>
             </Box>
           </Stack>
@@ -102,44 +98,14 @@ export default function Launchpad() {
             </Box>
             <Box>
               <Text fontWeight={"700"} fontSize={24}>
-                {t("launchpad.tokenDetails.lpLiquidity")}
-              </Text>
-              <Text fontSize={22} color={"#A4A4BE"}>
-                0x021931u2hedqwugd0182gduig3d1d1dvef2
-              </Text>
-            </Box>
-            <Box>
-              <Text fontWeight={"700"} fontSize={24}>
                 {t("launchpad.tokenDetails.aiRecognition.airdrop")}
               </Text>
               <Text fontSize={22} color={"#A4A4BE"}>
-                70%
-              </Text>
-            </Box>
-            <Box>
-              <Text fontWeight={"700"} fontSize={24}>
-                {t("launchpad.tokenDetails.aiRecognition.numberOfPeople")}
-              </Text>
-              <Text fontSize={22} color={"#A4A4BE"}>
-                72%
+                85%
               </Text>
             </Box>
           </Stack>
         </Stack>
-        <VStack
-          minW={"75%"}
-          flexDir={"row"}
-          justifyContent={"space-between"}
-          mb={5}
-        >
-          <Box>
-            <Button bgColor="#9321DD" fontSize={{ base: "md", sm: "2xl" }}>
-              {t("launchpad.aiRecognitionVerificationButton")}
-            </Button>
-          </Box>
-          <Box>
-          </Box>
-        </VStack>
         <Stack
         display={"flex"}
           maxW={"80%"}
