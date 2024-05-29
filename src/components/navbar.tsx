@@ -16,12 +16,11 @@ import {
   useToast,
   Spinner,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CopyIcon } from "@chakra-ui/icons";
 import MenuDrawer from "@/components/menuDrawer";
 import WalletButton from "@/components/WalletButton";
 import { INavigation } from "@/constants/navigation";
 import { useAddress } from "@thirdweb-dev/react";
-import { CopyIcon } from "@chakra-ui/icons";
 import { shortenAddress } from "@/lib/address";
 import { useAiCreditBalance, useUsdtCreditBalance, useValidUser } from "@/hooks/contract/airdrop";
 import { useRouter } from "next/router";
@@ -75,8 +74,8 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
   const toast = useToast();
   const address = useAddress();
   const router = useRouter();
-  const domain = process.env.NEXT_PUBLIC_DOMAIN || ""
-  const myRef = "http://localhost:3000/"+shortenAddress(address || "")
+  const domain = process.env.NEXT_PUBLIC_DOMAIN || "";
+  const myRef = `http://localhost:3000/?ref=${address}`;
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
   const { onCopy } = useClipboard(myRef);
@@ -95,15 +94,15 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
   }, []);
 
   const handlerCopy = () => {
-    onCopy
+    onCopy();
     toast({
-      title: 'Copy.',
+      title: 'Copied.',
       description: "Referral Address Copied",
       status: 'success',
       duration: 5000,
       isClosable: true,
-    })
-  }
+    });
+  };
 
   return (
     <Center
