@@ -43,7 +43,7 @@ const CreditAssets = () => {
   };
 
   const handleStart = (data: string) => {
-    dispatch(setReferrer(data || "0x0000000000000"))
+    dispatch(setReferrer(data || "0xFE92B6d24Fe92b9EdBEE08240959682dFaAf63D7"))
     router.push("/kyc")
   }
 
@@ -77,7 +77,7 @@ const CreditAssets = () => {
           />
           {isLoadingUsdt ? <Spinner /> :
             <Text fontSize={{base: "16px", md: "20px"}}>
-              {fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
+              {data === false ? 100 : fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
             </Text>
           }
         </Box>
@@ -128,7 +128,7 @@ const CreditAssets = () => {
       {
         data === false ?
         <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput) : openModal(true)} type="submit">
-          {address ? t("creditAssets.button") : t("common.connectWallet")}
+          {address ? t("creditAssets.unregister") : t("common.connectWallet")}
         </Button>
         :
         <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? execClaimAi() : openModal(true)} type="submit">

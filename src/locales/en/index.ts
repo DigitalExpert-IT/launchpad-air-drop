@@ -8,6 +8,7 @@ import footer from "./footer.json";
 import form from "./form.json";
 import register from "./register.json";
 import kyc from "./kyc.json";
+import navbar from "./navbar.json";
 
 const en = {
   common,
@@ -20,6 +21,7 @@ const en = {
   footer,
   register,
   kyc,
+  navbar,
 };
 
 export default en;

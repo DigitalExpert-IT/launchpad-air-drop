@@ -1,4 +1,6 @@
 {
     "register": "Register",
-    "connectWallet": "Connect Wallet"
+    "connectWallet": "Connect Wallet",
+    "authenticated": "Authenticated",
+    "unauthenticated": "Unauthenticated"
 }
