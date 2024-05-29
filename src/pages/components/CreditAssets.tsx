@@ -52,7 +52,7 @@ const CreditAssets = () => {
 
   useEffect(() => {
     setRefInput(refParam || "")
-  }, [refInput])
+  }, [refParam])
 
   return (
     <Box
@@ -118,7 +118,7 @@ const CreditAssets = () => {
       {data === false &&
       <Box flex={1}>
         <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
-        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || ""}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
+        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || refInput}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
         <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
           {t("form.helperText.referrer")}
       </Text>
