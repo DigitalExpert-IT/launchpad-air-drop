@@ -90,13 +90,7 @@ export const PhoneForm = ({handleNextStep}: IFormComponent) => {
             </Stack>
           </CardBody>
           <CardFooter justifyContent={"flex-end"}>
-            {!referrer &&
-              <Tooltip label={"please insert your referral & phone number"}>
-                <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={!referrer || error ? true : false} onClick={handleSubmit}>Submit</Button>
-              </Tooltip> 
-              || 
-              <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={!referrer || error ? true : false} onClick={handleSubmit}>Submit</Button>
-            }
+              <Button backgroundColor={"#9321DD"} minW={"full"} minH={"5vh"} isDisabled={ error ? true : false} onClick={handleSubmit}>Submit</Button>
           </CardFooter>
         </Card>
     )

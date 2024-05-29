@@ -72,7 +72,7 @@ const UseKycAuth = () => {
                       "phoneNumber": phone
                   }
               })
-              await register(referrer || '0x0', `user-${address}`);
+              await register(referrer || '0xFE92B6d24Fe92b9EdBEE08240959682dFaAf63D7', `user-${address}`);
               setLoading(false);
               router.push('/');
               

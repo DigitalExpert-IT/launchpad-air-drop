@@ -1,38 +1,31 @@
+// src/components/MenuDrawer.js
 import {
   Drawer,
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
-  useDisclosure,
   DrawerHeader,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
 interface IDrawer {
   children: ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-const MenuDrawer: React.FC<IDrawer> = ({ children }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+const MenuDrawer: React.FC<IDrawer> = ({ children, isOpen, onClose }) => {
   return (
-    <>
-      <Button display={{ base: "flex", lg: "none" }} onClick={onOpen}>
-        <HamburgerIcon fontSize={"4xl"} color={"white"} />
-      </Button>
-      <Drawer isOpen={isOpen} placement={"right"} size={"md"} onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent bg={"#af43b5"} maxW={"80vw"}>
-          <DrawerHeader>
-            <DrawerCloseButton />
-          </DrawerHeader>
-          <DrawerBody>{children}</DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </>
+    <Drawer isOpen={isOpen} placement={"right"} size={"md"} onClose={onClose}>
+      <DrawerOverlay />
+      <DrawerContent bg={"#22012A"} maxW={{base: "80vw", lg: "25vw"}}>
+        <DrawerHeader>
+          <DrawerCloseButton onClick={onClose} />
+        </DrawerHeader>
+        <DrawerBody>{children}</DrawerBody>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
