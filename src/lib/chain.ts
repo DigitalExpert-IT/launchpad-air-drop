@@ -1,4 +1,4 @@
-import { Mumbai, Polygon, BinanceTestnet } from "@thirdweb-dev/chains";
+import { Mumbai, Polygon, BinanceTestnet, Binance } from "@thirdweb-dev/chains";
 
 const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID || "0x89") as "0x89";
 
@@ -20,6 +20,7 @@ type TChain = {
 const chainMap = {
   "0x13881": Mumbai,
   "0x89": Polygon,
+  "0x38": Binance,
   "0x61": BinanceTestnet,
   "0x29a": {
     chainId: 666,
