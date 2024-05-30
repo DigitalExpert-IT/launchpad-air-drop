@@ -7,13 +7,14 @@ import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { fromBn } from "evm-bn";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setReferrer } from '@/redux/referrerSlice';
 import { useForm } from "react-hook-form";
 import { FormInput } from "@/lib/FormInput";
 import { useEffect, useState } from "react";
 import { register } from "module";
 import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
+import { RootState } from "@/redux/store";
 
 
 interface FormType{
@@ -40,6 +41,7 @@ const CreditAssets = () => {
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
   const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
+  const referrer = useSelector((state: RootState) => state.referrer.referrer);
   const dispatch = useDispatch();
   const {register, ...rest} = useRegisterMutation()
   const {data: isValidUser} = useValidUser();
@@ -48,6 +50,7 @@ const CreditAssets = () => {
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search)
     const session_userInfo = sessionStorage.getItem("userInfo") ?? "{}";
+    
     refParam = urlParams.get("ref")
   }
 
@@ -73,7 +76,7 @@ const CreditAssets = () => {
     if(!address) return openModal(true);
     if(userInfo?.facialId && !isValidUser) {
       try {
-        await register(refParam || refInput || '0x0000000000000000000000000000000000000000', `user-${address}`);
+        await register(refParam || referrer || '0x0000000000000000000000000000000000000000', `user-${address}`);
         sessionStorage.removeItem("userInfo");
       } catch(error: any) {
         toast({ status: "error", description: error?.reason });
@@ -153,10 +156,10 @@ const CreditAssets = () => {
         />
         <Text fontSize={"xl"} pr={"1rem"}>AI</Text>
       </Flex>
-      {!isValidUser &&
+      {!isValidUser && !userInfo &&
       <Box flex={1}>
         <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
-        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || refInput || ""}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
+        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || refInput || ""} variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
         <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
           {t("form.helperText.referrer")}
       </Text>
