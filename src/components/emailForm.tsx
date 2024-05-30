@@ -30,7 +30,7 @@ export const EmailForm = ({handleNextStep}: IFormComponent) => {
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault()
-      localStorage.setItem("email", email)
+      sessionStorage.setItem("email", email)
       handleNextStep()
     }
 

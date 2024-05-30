@@ -16,9 +16,9 @@ const UseKycAuth = () => {
     const toast = useToast()
     const router = useRouter()
     const address = useAddress()
-    const local = localStorage.getItem("local");
-    const email = localStorage.getItem("email");
-    const phone = localStorage.getItem("phone");
+    const local = sessionStorage.getItem("local");
+    const email = sessionStorage.getItem("email");
+    const phone = sessionStorage.getItem("phone");
     const referrer = useSelector((state: RootState) => state.referrer.referrer);
     const [userInfo, setUserInfo] = useState<any[]>([])
     const [loading, setLoading] = useState<boolean>(false)

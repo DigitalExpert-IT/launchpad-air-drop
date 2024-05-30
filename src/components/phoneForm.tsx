@@ -7,16 +7,11 @@ import {
   Text, 
   Button, 
   CardFooter, 
-  HStack, 
   Input, 
   InputGroup, 
   InputLeftAddon, 
-  InputRightElement, 
-  Select, 
-  Tooltip} from "@chakra-ui/react"
+  Select, } from "@chakra-ui/react"
 import React, { useState } from "react";
-import { IKycCard } from "@/constants/kyContent";
-import {NotAllowedIcon, CheckCircleIcon, CheckIcon} from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
 import {
   CountrySelector,
@@ -58,8 +53,8 @@ export const PhoneForm = ({handleNextStep}: IFormComponent) => {
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault()
-      localStorage.setItem("local", country.dialCode)
-      localStorage.setItem("phone", phone)
+      sessionStorage.setItem("local", country.dialCode)
+      sessionStorage.setItem("phone", phone)
       handleNextStep()
     }
 
