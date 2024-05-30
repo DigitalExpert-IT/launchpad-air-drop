@@ -12,8 +12,6 @@ export const PhotoForm = ({handleErrorKyc}: IPhotoForm) => {
     const { t } = useTranslation()
     const {loading, error, userInfo} = useKycAuth()
 
-    console.log("err", error)
-
     useEffect(() => {
       if(error !== ""){
         handleErrorKyc()

@@ -20,15 +20,11 @@ export const useRegisterMutation = () => {
 
   const register = async (_referral: string, _uri: string,) => {
 
-    console.log("last price regis", toBn(lastPrice.toString(), 18));
-
     try {
       const { receipt } = await mutateAsyncRegister({
         args: [_referral, _uri, toBn(lastPrice.toString(), 18)],
         overrides: { value: toBn("5", 18).div(BigInt("1000")) }
       })
-
-      console.log("receipt", receipt);
 
       return receipt;
     } catch (error) {

@@ -69,8 +69,6 @@ const CreditAssets = () => {
   }
 
   const handleClaimAi = async () => {
-    console.log("userInfo", userInfo);
-    console.log("isValidUSer", isValidUser);
 
     if(!address) return openModal(true);
     if(userInfo?.facialId && !isValidUser) {
@@ -78,7 +76,6 @@ const CreditAssets = () => {
         await register(refParam || refInput || '0x0000000000000000000000000000000000000000', `user-${address}`);
         sessionStorage.removeItem("userInfo");
       } catch(error: any) {
-        console.error(error);
         toast({ status: "error", description: error?.reason });
       }
 
@@ -87,8 +84,6 @@ const CreditAssets = () => {
     await execClaimAi();
   }
 
-  console.log("param", refInput);
-  console.log("isValidUser", isValidUser);
 
   const { exec: execClaimAi } = useAsyncCall(claimAi,
     t("succes.claimAi"));

@@ -27,6 +27,7 @@ import { useRouter } from "next/router";
 import { AI_DECMIAL, USDT_DECIMAL } from "@/constants/tokenDecimals";
 import { fromBn } from "evm-bn";
 import { t } from "i18next";
+import { usePathname } from "next/navigation";
 
 interface INavbar {
   data: INavigation[];
@@ -75,8 +76,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
   const toast = useToast();
   const address = useAddress();
   const router = useRouter();
-  const domain = process.env.NEXT_PUBLIC_DOMAIN || "";
-  const myRef = `http://localhost:3000/?ref=${address}`;
+  const myRef = `https://sleeplessailabs.org/?ref=${address}`;
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
   const { onCopy } = useClipboard(myRef);
