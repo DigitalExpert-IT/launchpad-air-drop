@@ -106,20 +106,6 @@ export default function Launchpad() {
             </Box>
           </Stack>
         </Stack>
-        <VStack
-          minW={"75%"}
-          flexDir={"row"}
-          justifyContent={"space-between"}
-          mb={5}
-        >
-          <Box>
-            <Button bgColor="#9321DD" fontSize={{ base: "md", sm: "2xl" }} onClick={() => router.push(data ? "/kyc" : "/")}>
-              {t("launchpad.aiRecognitionVerificationButton")}
-            </Button>
-          </Box>
-          <Box>
-          </Box>
-        </VStack>
         <Stack
         display={"flex"}
           maxW={"80%"}
