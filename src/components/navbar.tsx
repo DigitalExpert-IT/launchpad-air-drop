@@ -45,8 +45,9 @@ const MenuList: React.FC<INavbar> = ({ data }) => {
       {data.map((item, idx) => (
         <Link key={idx} href={item.link} _hover={{ textDecoration: "none" }}>
           <Text
-            textAlign={{ base: "left", sm: "start" }}
-            fontSize="md"
+            textAlign={"center"}
+            fontSize="xl"
+            py={2}
             _hover={{ 
               color: "yellow" 
             }}
@@ -179,12 +180,12 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 </Heading>
               </Box>
               <MenuList data={data} />
-              <Stack gap={10} mt={10} px={{base: 5, lg: 0}}>
+              <Stack gap={10} mt={10} textAlign={"center"} >
                 <Box alignSelf={"center"}>
                   <NavbarButtons />
                 </Box>
                 <Box>
-                  <HStack gap={3} >
+                  <HStack gap={3} justifyContent={"center"}>
                     <Text fontWeight={"bold"} fontSize={"md"} gap={10}>{t("navbar.titleInvitationTitle")}</Text>
                     <CopyIcon onClick={() => userValid ? handlerCopy() : router.push("/kyc")} cursor={"pointer"}/>
                   </HStack>
@@ -192,17 +193,17 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 </Box>
                 <Stack>
                   <Text fontWeight={"bold"} fontSize={"md"} gap={10}>{t("navbar.accountTitle")}</Text>
-                  <Flex direction={{base: "column", lg: "row"}} justifyContent={"space-between"} textColor={"#A4A4BE"}>
-                    <Text>{t("navbar.usdt")}</Text>
-                    {isLoadingUsdt ? <Spinner /> :
+                  <Flex direction={{base: "column", lg: "row"}} justifyContent={"space-between"} textColor={"#A4A4BE"} mb={2}>
+                    <Text py={1}>{t("navbar.usdt")}</Text>
+                    {isLoadingUsdt ? <Spinner mx={"auto"} /> :
                         <Text fontSize={{base: "16px", md: "20px"}}>
                           {userValid === false ? 100 : fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)} USDT
                         </Text>
                       }
                   </Flex>
                   <Flex direction={{base: "column", lg: "row"}} justifyContent={"space-between"} textColor={"#A4A4BE"}>
-                    <Text>{t("navbar.ai")}</Text>
-                    {isLoadingAi ? <Spinner /> :
+                    <Text py={1}>{t("navbar.ai")}</Text>
+                    {isLoadingAi ? <Spinner mx={"auto"} /> :
                       <Text fontSize={{base: "16px", md: "20px"}}>
                         {fromBn(aiCreditbalance?? "0", AI_DECMIAL)} AI
                       </Text>
