@@ -2,7 +2,7 @@ import { AI_DECMIAL, USDT_DECIMAL } from "@/constants/tokenDecimals";
 import { useAiCreditBalance, useUsdtCreditBalance, useValidUser } from "@/hooks/contract/airdrop";
 import { useClaimAiMutation } from "@/hooks/contract/airdrop/useClaimAiMutation";
 import { useAsyncCall } from "@/hooks/useAsyncCall";
-import { Box, Button, Flex, Image, Text, Spinner, Input, VStack, HStack, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text, Spinner, Input, VStack, HStack, Heading, useToast } from "@chakra-ui/react";
 import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { fromBn } from "evm-bn";
 import { useRouter } from "next/router";
@@ -12,30 +12,51 @@ import { setReferrer } from '@/redux/referrerSlice';
 import { useForm } from "react-hook-form";
 import { FormInput } from "@/lib/FormInput";
 import { useEffect, useState } from "react";
+import { register } from "module";
+import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
 
 
 interface FormType{
   referrer: string;
 }
 
+type TUserInfo = {
+  facialId: string;
+  timestamp: number;
+  details: {
+    age: number;
+    gender: string;
+  }
+}
+
 const CreditAssets = () => {
   const { t } = useTranslation();
-  const {data} = useValidUser()
   const openModal = useSetIsWalletModalOpen();
   const router = useRouter();
   const address = useAddress();
-  const [refInput, setRefInput] = useState<string>("")
+  const toast = useToast();
+  const [userInfo, setUserInfo] = useState<TUserInfo | null>(null);
+  const [refInput, setRefInput] = useState<string | null>(null);
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
   const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
-  const dispatch = useDispatch()
-
-
+  const dispatch = useDispatch();
+  const {register, ...rest} = useRegisterMutation()
+  const {data: isValidUser} = useValidUser();
   let refParam = null;
+
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search)
+    const session_userInfo = sessionStorage.getItem("userInfo") ?? "{}";
     refParam = urlParams.get("ref")
   }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const session_userInfo = sessionStorage.getItem("userInfo") ?? "{}";
+      setUserInfo(JSON.parse(session_userInfo) ?? null);
+    }
+  }, []);
   
 
   const claimAi = async () => {
@@ -43,9 +64,31 @@ const CreditAssets = () => {
   };
 
   const handleStart = (data: string) => {
-    dispatch(setReferrer(data || "0xFE92B6d24Fe92b9EdBEE08240959682dFaAf63D7"))
+    dispatch(setReferrer(data || "0x0000000000000000000000000000000000000000"))
     router.push("/kyc")
   }
+
+  const handleClaimAi = async () => {
+    console.log("userInfo", userInfo);
+    console.log("isValidUSer", isValidUser);
+
+    if(!address) return openModal(true);
+    if(userInfo?.facialId && !isValidUser) {
+      try {
+        await register(refParam || refInput || '0x0000000000000000000000000000000000000000', `user-${address}`);
+        sessionStorage.removeItem("userInfo");
+      } catch(error: any) {
+        console.error(error);
+        toast({ status: "error", description: error?.reason });
+      }
+
+      return;
+    }
+    await execClaimAi();
+  }
+
+  console.log("param", refInput);
+  console.log("isValidUser", isValidUser);
 
   const { exec: execClaimAi } = useAsyncCall(claimAi,
     t("succes.claimAi"));
@@ -77,7 +120,7 @@ const CreditAssets = () => {
           />
           {isLoadingUsdt ? <Spinner /> :
             <Text fontSize={{base: "16px", md: "20px"}}>
-              {data === false ? 100 : fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
+              {!isValidUser ? 100 : fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
             </Text>
           }
         </Box>
@@ -115,10 +158,10 @@ const CreditAssets = () => {
         />
         <Text fontSize={"xl"} pr={"1rem"}>AI</Text>
       </Flex>
-      {data === false &&
+      {!isValidUser &&
       <Box flex={1}>
         <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
-        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || refInput}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
+        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || refInput || ""}  variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
         <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
           {t("form.helperText.referrer")}
       </Text>
@@ -126,12 +169,12 @@ const CreditAssets = () => {
       }
       </HStack>
       {
-        data === false ?
-        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput) : openModal(true)} type="submit">
+        !isValidUser && !userInfo?.facialId ?
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput ?? "") : openModal(true)} type="submit">
           {address ? t("creditAssets.unregister") : t("common.connectWallet")}
         </Button>
         :
-        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? execClaimAi() : openModal(true)} type="submit">
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={handleClaimAi} type="submit">
           {address ? t("creditAssets.button") : t("common.connectWallet")}
         </Button>
       }

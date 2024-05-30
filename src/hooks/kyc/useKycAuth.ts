@@ -23,7 +23,7 @@ const UseKycAuth = () => {
     const [userInfo, setUserInfo] = useState<any[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState("")
-    const {register, ...rest} = useRegisterMutation()
+    
 
     const errorCodeHandler = (errorCode: FaceIOErrorCode) => {
         const fioErrs = faceioInstance.fetchAllErrorCodes();
@@ -72,10 +72,10 @@ const UseKycAuth = () => {
                       "phoneNumber": phone
                   }
               })
-              await register(referrer || '0xFE92B6d24Fe92b9EdBEE08240959682dFaAf63D7', `user-${address}`);
+              setUserInfo(userInfo)
               setLoading(false);
-              router.push('/');
-              
+              sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+              router.push(`/`);
           } catch (errCode) {
               errorCodeHandler(errCode as FaceIOErrorCode);
               setLoading(false);
@@ -83,7 +83,7 @@ const UseKycAuth = () => {
         }
       }
       enrollNewUser();
-    }, [address, email, local, phone, referrer, register, router])
+    }, [address, email, local, phone, referrer, router])
 
       return {
         userInfo,

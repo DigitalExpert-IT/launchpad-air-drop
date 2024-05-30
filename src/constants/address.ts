@@ -1,5 +1,5 @@
 export const AIRDROP_ADDRESS = {
-    "0x61": "0x1e91B74d6bCccd9F47C6Ff0A6CC6f276053B9Ac4"
+    "0x61": "0x7fF27F5a7e184344cbD807A51C2dA6FB47cea2b4"
 }
 
 export const AI_ADDRESS = {
