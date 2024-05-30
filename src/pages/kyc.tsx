@@ -6,19 +6,14 @@ import { KycCard } from "@/components/kycCard";
 import { kycContent } from "@/constants/kyContent";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { EmailForm } from "@/components/emailForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PhoneForm } from "@/components/phoneForm";
 import { backgroundImage } from "@/constants/backgroundImage";
 import { PhotoForm } from "@/components/PhotoForm";
 import React from "react";
-import RegisterForm from "./components/RegisterForm";
-import { FabModal } from "@/components/fabButton";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 
 export default function Kyc() {
   const [kycProgres, setKycProgres] = useState<number>(0)
-  const referrer = useSelector((state: RootState) => state.referrer.referrer);
 
   const handleNextStep = () => {
     setKycProgres((prev) => (prev < kycMenu.length - 1 ? prev + 1 : prev));
