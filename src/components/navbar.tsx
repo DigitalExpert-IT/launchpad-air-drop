@@ -142,7 +142,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 fontWeight={"300"}
               >
                 <MenuList data={data} />
-                <Button variant={"unstyled"} onClick={onOpen} fontWeight={"light"}>
+                <Button variant={"unstyled"} onClick={onOpen} fontWeight={"light"} fontSize={"xl"}>
                   PROFILE
                 </Button>
               </Stack>
