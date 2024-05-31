@@ -43,21 +43,21 @@ const CreditAssets = () => {
   const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
   const referrer = useSelector((state: RootState) => state.referrer.referrer);
   const dispatch = useDispatch();
-  const {register, ...rest} = useRegisterMutation()
+  const {register, isLoading: isRegisLoading, ...rest} = useRegisterMutation()
   const {data: isValidUser} = useValidUser();
   let refParam = null;
 
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search)
-    const session_userInfo = sessionStorage.getItem("userInfo") ?? "{}";
+    const session_userInfo = sessionStorage.getItem("userInfo");
     
     refParam = urlParams.get("ref")
   }
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const session_userInfo = sessionStorage.getItem("userInfo") ?? "{}";
-      setUserInfo(JSON.parse(session_userInfo) ?? null);
+      const session_userInfo = sessionStorage.getItem("userInfo");
+      setUserInfo(session_userInfo ? JSON.parse(session_userInfo) : null);
     }
   }, []);
   
@@ -72,12 +72,10 @@ const CreditAssets = () => {
   }
 
   const handleClaimAi = async () => {
-
     if(!address) return openModal(true);
     if(userInfo?.facialId && !isValidUser) {
       try {
         await register(refParam || referrer || '0x0000000000000000000000000000000000000000', `user-${address}`);
-        sessionStorage.removeItem("userInfo");
       } catch(error: any) {
         toast({ status: "error", description: error?.reason });
       }
@@ -172,7 +170,7 @@ const CreditAssets = () => {
           {address ? t("creditAssets.unregister") : t("common.connectWallet")}
         </Button>
         :
-        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={handleClaimAi} type="submit">
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading || isRegisLoading} onClick={handleClaimAi} type="submit">
           {address ? t("creditAssets.button") : t("common.connectWallet")}
         </Button>
       }

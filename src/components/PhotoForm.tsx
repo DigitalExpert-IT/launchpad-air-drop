@@ -16,7 +16,7 @@ export const PhotoForm = ({handleErrorKyc}: IPhotoForm) => {
       if(error !== ""){
         handleErrorKyc()
       }
-    }, [error])
+    }, [error, handleErrorKyc])
 
     return (
         <Card backgroundColor={"black"} p={5} borderRadius={20} mx={8}>

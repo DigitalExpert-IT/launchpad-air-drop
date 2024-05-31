@@ -9,5 +9,6 @@ export const AI_ADDRESS = {
 }
 
 export const BNB_ADDRESS = {
+    "0x38": "",
     "0x61": "0x4d5d87370b04BC7C3835c6642b6123038b43c18b"
 }
