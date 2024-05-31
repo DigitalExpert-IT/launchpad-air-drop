@@ -3,7 +3,6 @@ import faceIO, { FaceIOErrorCode } from '@faceio/fiojs';
 import { useAddress } from '@thirdweb-dev/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useRegisterMutation } from '../contract/airdrop/useRegisterMutation';
 import { useSelector } from "react-redux";
 import { RootState } from '@/redux/store';
 
@@ -73,13 +72,13 @@ const UseKycAuth = () => {
             }
           })
           setUserInfo(userInfo)
-          setLoading(false);
+          if(userInfo){
+            setLoading(false);
+          }
           sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
           router.push(`/`);
         } catch (errCode) {
           errorCodeHandler(errCode as FaceIOErrorCode);
-          router.push(`/`);
-          setLoading(false);
         }
       }
     }
