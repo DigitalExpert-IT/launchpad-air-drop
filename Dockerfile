@@ -27,12 +27,10 @@ COPY . .
 ARG CHAIN_ID
 ARG THIRDWEB_ID
 ARG FACEIO
-ARG DOMAIN
 
 ENV NEXT_PUBLIC_CHAIN_ID=${CHAIN_ID}
 ENV NEXT_PUBLIC_THIRDWEB=${THIRDWEB_ID}
 ENV NEXT_PUBLIC_FACEIO=${FACEIO}
-ENV NEXT_PUBLIC_DOMAIN=${DOMAIN}
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
