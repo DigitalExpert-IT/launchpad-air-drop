@@ -17,19 +17,19 @@ export interface IFooter {
 export const Navigation: Array<INavigation> = [
   {
     name: "Home",
-  link: "/#Home",
+    link: "/#Home",
   },
   {
     name: "Order Form",
-    link: "#OrderForm",
+    link: "/#OrderForm",
   },
   {
     name: "Launchpad",
-    link: "#Launchpad",
+    link: "/#Launchpad",
   },
   {
     name: "About",
-    link: "#About",
+    link: "/#About",
   },
 ];
 
