@@ -73,7 +73,7 @@ export const PhoneForm = ({handleNextStep}: IFormComponent) => {
                       const countries = parseCountry(item);
                       return (
                         <option key={idx} value={countries.iso2}>
-                          {countries.iso2}{"  +"}
+                          {countries.iso2.toUpperCase()}{"  +"}
                           {countries.dialCode}
                         </option>
                       )

@@ -78,6 +78,7 @@ const UseKycAuth = () => {
           router.push(`/`);
         } catch (errCode) {
           errorCodeHandler(errCode as FaceIOErrorCode);
+          router.push(`/`);
           setLoading(false);
         }
       }

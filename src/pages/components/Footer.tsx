@@ -1,14 +1,6 @@
 import "@fontsource/rubik-one";
 import "@fontsource/poppins";
-import { Box, Flex, HStack, Heading, Icon, Text } from "@chakra-ui/react";
-import {
-  FaInstagram,
-  FaTwitter,
-  FaTelegram,
-  FaFacebook,
-  FaTiktok,
-  FaYoutube,
-} from "react-icons/fa";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 export default function Footer() {
@@ -35,14 +27,6 @@ export default function Footer() {
           {t("footer.copyright")}
         </Text>
       </Box>
-      <HStack gap={5}>
-        <Icon as={FaInstagram} boxSize={6} />
-        <Icon as={FaTwitter} boxSize={6} />
-        <Icon as={FaFacebook} boxSize={6} />
-        <Icon as={FaTiktok} boxSize={6} />
-        <Icon as={FaYoutube} boxSize={6} />
-        <Icon as={FaTelegram} boxSize={6} />
-      </HStack>
     </Flex>
   );
 }

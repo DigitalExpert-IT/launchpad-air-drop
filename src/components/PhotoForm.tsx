@@ -1,7 +1,6 @@
 import useKycAuth from "@/hooks/kyc/useKycAuth";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { Card, CardHeader, Heading, CardBody, Stack, Button, CardFooter, HStack, Spinner } from "@chakra-ui/react"
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 interface IPhotoForm{
@@ -11,12 +10,6 @@ interface IPhotoForm{
 export const PhotoForm = ({handleErrorKyc}: IPhotoForm) => {
     const { t } = useTranslation()
     const {loading, error, userInfo} = useKycAuth()
-
-    useEffect(() => {
-      if(error !== ""){
-        handleErrorKyc()
-      }
-    }, [error, handleErrorKyc])
 
     return (
         <Card backgroundColor={"black"} p={5} borderRadius={20} mx={8}>
