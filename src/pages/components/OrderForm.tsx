@@ -25,7 +25,7 @@ export default function OrderForm() {
   );
 
   return (
-    <Box bgGradient={"linear(#370144, #3D004B, #000)"} mb={20}>
+    <Box bgGradient={"linear(#370144, #3D004B, #000)"} mb={20} id="OrderForm">
       <Stack align={"center"}>
         <Heading mb={10}>{t("orderForm.title")}</Heading>
         <HStack

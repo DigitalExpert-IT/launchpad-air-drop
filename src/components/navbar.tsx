@@ -6,7 +6,6 @@ import {
   Container,
   Flex,
   Heading,
-  Link,
   Stack,
   Text,
   IconButton,
@@ -15,7 +14,9 @@ import {
   HStack,
   useToast,
   Spinner,
+  UseDisclosureProps,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { HamburgerIcon, CopyIcon } from "@chakra-ui/icons";
 import MenuDrawer from "@/components/menuDrawer";
 import WalletButton from "@/components/WalletButton";
@@ -29,6 +30,8 @@ import { fromBn } from "evm-bn";
 import { t } from "i18next";
 import { usePathname } from "next/navigation";
 
+type IMenuList = React.FC<INavbar & Pick<UseDisclosureProps, "onClose">>;
+
 interface INavbar {
   data: INavigation[];
 }
@@ -40,11 +43,16 @@ function scrollFilter() {
   return winScroll ? 5 : 0;
 }
 
-const MenuList: React.FC<INavbar> = ({ data }) => {
+const MenuList: IMenuList = ({ data, onClose }) => {
+  const hanldeClickMenu = () => {
+    if(!onClose) return;
+    onClose();
+  };
+
   return (
     <>
       {data.map((item, idx) => (
-        <Link key={idx} href={item.link} _hover={{ textDecoration: "none" }}>
+        <Link key={idx} href={item.link} onClick={hanldeClickMenu}>
           <Text
             textAlign={"center"}
             fontSize="xl"
@@ -179,7 +187,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                   <Link href="/">SLEEPLESS AI</Link>
                 </Heading>
               </Box>
-              <MenuList data={data} />
+              <MenuList data={data} onClose={onClose} />
               <Stack gap={10} mt={10} textAlign={"center"} >
                 <Box alignSelf={"center"}>
                   <NavbarButtons />

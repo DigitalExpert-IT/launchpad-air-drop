@@ -30,6 +30,7 @@ export default function Launchpad() {
       backgroundSize={"cover"}
       position={"relative"}
       minH={"70vh"}
+      id="Launchpad"
     >
       <Stack
         alignItems={"center"}

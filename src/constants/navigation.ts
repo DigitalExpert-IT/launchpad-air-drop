@@ -5,7 +5,7 @@ interface INavChild {
 
 export interface INavigation {
   name: string;
-  link?: string;
+  link: string;
   children?: INavChild[];
 }
 
@@ -17,7 +17,7 @@ export interface IFooter {
 export const Navigation: Array<INavigation> = [
   {
     name: "Home",
-    link: "/",
+  link: "/#Home",
   },
   {
     name: "Order Form",

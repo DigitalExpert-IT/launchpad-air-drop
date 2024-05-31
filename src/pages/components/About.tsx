@@ -6,7 +6,7 @@ export default function About() {
   const { t } = useTranslation();
 
   return (
-    <Box bgGradient={"linear(0deg, transparent 5%, #3D004B 70%)"}>
+    <Box bgGradient={"linear(0deg, transparent 5%, #3D004B 70%)"} id="About">
       <Box
         backgroundImage={"https://ik.imagekit.io/msxxxaegj/alitaLaunchAir/alitaTown.png?updatedAt=1715060801897"}
         backgroundPosition={"center"}

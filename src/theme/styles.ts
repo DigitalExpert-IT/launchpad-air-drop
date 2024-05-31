@@ -16,6 +16,7 @@ export const styles: Styles = {
     },
     "*, *::before, &::after": {
       borderColor: "chakra-border-color",
+      scrollBehavior: "smooth"
     },
   },
 };
