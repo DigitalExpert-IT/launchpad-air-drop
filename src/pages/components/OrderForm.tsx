@@ -10,11 +10,14 @@ import {
   Image,
   Button,
   Tooltip,
+  OrderedList,
+  ListItem,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { usePair24h } from "@/hooks/useCrypto";
 import { formatPrice } from "@/utils/formatter";
+import orderForm from "@/locales/en/orderForm.json";
 
 export default function OrderForm() {
   const { t } = useTranslation();
@@ -115,16 +118,57 @@ export default function OrderForm() {
             maxW={"1077px"}
           >
             <Text fontSize={{lg: "3xl", base: "1xl"}} fontWeight={"600"}>
-              {t("orderForm.investmentRules.title")}
+              {t("orderForm.investmentRules.titleFirstDescription")}
             </Text>
-            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"}>
-              {t("orderForm.investmentRules.firstDescription")}
+            <Text fontSize={{lg: "xl", base: "md"}}>
+              {t("orderForm.investmentRules.subFirstDescription")}
             </Text>
-            <Text fontSize={{lg: "2xl", base: "xl"}} textAlign={"justify"} pt={"12vh"}>
-              {t("orderForm.investmentRules.secondDescription")}
+            <Text fontSize={{lg: "xl", base: "md"}}>
+              {t("orderForm.investmentRules.secSubFirstDescription")}
+            </Text>
+            <OrderedList>
+                {orderForm.investmentRules.contentFirstDescription.map((item:string, idx: number) => {
+                  const value = item
+                  return(
+                  <ListItem fontSize={{lg: "xl", base: "md"}}  key={idx}>
+                    {t(value)}
+                  </ListItem>
+                  )
+                })}
+            </OrderedList>
+            <Text fontSize={{lg: "xl", base: "md"}}>
+              {t("orderForm.investmentRules.finalFirstDescription")}
             </Text>
           </Box>
         </HStack>
+        <Stack
+        display={"flex"}
+          minW={"80%"}
+          flexWrap={"wrap"}
+          alignItems={{ lg: "left", base: "center" }}
+          bgColor={"black"}
+          borderRadius={{ base: 10, lg: 20 }}
+          p={{ base: 5, sm: 10 }}
+        >
+          <Stack gap={5}>
+          <Text fontSize={{lg: "3xl", base: "1xl"}} fontWeight={"600"}>
+              {t("orderForm.investmentRules.titleSecondDescription")}
+            </Text>
+            <OrderedList>
+                {orderForm.investmentRules.contetSecondDescription.map((item:string, idx: number) => {
+                  const value = item
+                  return(
+                  <ListItem fontSize={{lg: "xl", base: "md"}}  key={idx}>
+                    {t(value)}
+                  </ListItem>
+                  )
+                })}
+            </OrderedList>
+            <Text fontSize={{lg: "xl", base: "md"}}>
+              {t("orderForm.investmentRules.finalSecondDescription")}
+            </Text>
+          </Stack>
+        </Stack>
       </Stack>
     </Box>
   );
