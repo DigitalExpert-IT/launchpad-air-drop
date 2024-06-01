@@ -2,9 +2,12 @@ import { useContractWrite } from "@thirdweb-dev/react";
 import { useAirdropContract } from "./useAirdropContract"
 import { toBn } from "evm-bn";
 import { usePair24h } from "@/hooks/useCrypto";
+import { useAsyncCall } from "@/hooks/useAsyncCall";
+import { useTranslation } from "react-i18next";
 
 export const useRegisterMutation = () => {
   const { contract } = useAirdropContract();
+  const { t } = useTranslation();
   const { mutateAsync: mutateAsyncRegister, ...rest } = useContractWrite(contract, "register");
 
   const firstPair = "AI";
@@ -13,7 +16,7 @@ export const useRegisterMutation = () => {
     firstPair.concat(secondPair), 8000
   );
 
-  const register = async (_referral: string, _uri: string,) => {
+  const registerContract = async (_referral: string, _uri: string,) => {
     try {
       const { receipt } = await mutateAsyncRegister({
         args: [_referral, _uri, toBn(lastPrice.toString(), 18)],
@@ -29,7 +32,9 @@ export const useRegisterMutation = () => {
     } catch (error) {
       throw error;
     }
-  }
+  };
+
+  const { exec: register } = useAsyncCall(registerContract, t("success.register"));
 
   return { register, ...rest };
 }
