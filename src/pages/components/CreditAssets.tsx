@@ -1,26 +1,32 @@
 import { AI_DECMIAL, USDT_DECIMAL } from "@/constants/tokenDecimals";
-import { useAiCreditBalance, useUsdtCreditBalance, useValidUser } from "@/hooks/contract/airdrop";
+import {
+  useAiCreditBalance,
+  useUsdtCreditBalance,
+  useValidUser,
+} from "@/hooks/contract/airdrop";
 import { useClaimAiMutation } from "@/hooks/contract/airdrop/useClaimAiMutation";
 import { useAsyncCall } from "@/hooks/useAsyncCall";
-import { Box, Button, Flex, Image, Text, Spinner, Input, VStack, HStack, Heading, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Text,
+  Spinner,
+  Input,
+  HStack,
+  useToast,
+} from "@chakra-ui/react";
 import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { fromBn } from "evm-bn";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { setReferrer } from '@/redux/referrerSlice';
-import { useForm } from "react-hook-form";
-import { FormInput } from "@/lib/FormInput";
+import { setReferrer } from "@/redux/referrerSlice";
 import { useEffect, useState } from "react";
-import { register } from "module";
 import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
 import { RootState } from "@/redux/store";
 import { usePair24h } from "@/hooks/useCrypto";
-
-
-interface FormType{
-  referrer: string;
-}
 
 type TUserInfo = {
   facialId: string;
@@ -28,8 +34,8 @@ type TUserInfo = {
   details: {
     age: number;
     gender: string;
-  }
-}
+  };
+};
 
 const CreditAssets = () => {
   const { t } = useTranslation();
@@ -39,27 +45,24 @@ const CreditAssets = () => {
   const toast = useToast();
   const [userInfo, setUserInfo] = useState<TUserInfo | null>(null);
   const [refInput, setRefInput] = useState<string | null>(null);
-  const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
-  const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
+  const { data: usdtCreditbalance, isLoading: isLoadingUsdt } =
+    useUsdtCreditBalance();
+  const { data: aiCreditbalance, isLoading: isLoadingAi } =
+    useAiCreditBalance();
   const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
   const referrer = useSelector((state: RootState) => state.referrer.referrer);
   const dispatch = useDispatch();
-  const {register, isLoading: isRegisLoading, ...rest} = useRegisterMutation()
-  const {data: isValidUser} = useValidUser();
+  const { register, isLoading: isRegisLoading } = useRegisterMutation();
+  const { data: isValidUser } = useValidUser();
   let refParam = null;
   const firstPair = "AI";
   const secondPair = "USDT";
-  const { lastPrice } = usePair24h(
-    firstPair.concat(secondPair), 8000
-  );
-
-  console.log("lastprice", lastPrice)
+  const { lastPrice } = usePair24h(firstPair.concat(secondPair), 8000);
 
   if (typeof window !== "undefined") {
-    const urlParams = new URLSearchParams(window.location.search)
-    const session_userInfo = sessionStorage.getItem("userInfo");
-    
-    refParam = urlParams.get("ref")
+    const urlParams = new URLSearchParams(window.location.search);
+
+    refParam = urlParams.get("ref");
   }
 
   useEffect(() => {
@@ -68,38 +71,38 @@ const CreditAssets = () => {
       setUserInfo(session_userInfo ? JSON.parse(session_userInfo) : null);
     }
   }, []);
-  
 
   const claimAi = async () => {
     await claim(100);
   };
 
   const handleStart = (data: string) => {
-    dispatch(setReferrer(data || "0x0000000000000000000000000000000000000000"))
-    router.push("/kyc")
-  }
+    dispatch(setReferrer(data || "0x0000000000000000000000000000000000000000"));
+    router.push("/kyc");
+  };
 
   const handleClaimAi = async () => {
-    if(!address) return openModal(true);
-    if(userInfo?.facialId && !isValidUser) {
+    if (!address) return openModal(true);
+    if (userInfo?.facialId && !isValidUser) {
       try {
-        await register(refParam || referrer || '0x0000000000000000000000000000000000000000', `user-${address}`);
-      } catch(error: any) {
+        await register(
+          refParam || referrer || "0x0000000000000000000000000000000000000000",
+          `user-${address}`
+        );
+      } catch (error: any) {
         toast({ status: "error", description: error?.reason });
       }
 
       return;
     }
     await execClaimAi();
-  }
+  };
 
-
-  const { exec: execClaimAi } = useAsyncCall(claimAi,
-    t("succes.claimAi"));
+  const { exec: execClaimAi } = useAsyncCall(claimAi, t("succes.claimAi"));
 
   useEffect(() => {
-    setRefInput(refParam || "")
-  }, [refParam])
+    setRefInput(refParam || "");
+  }, [refParam]);
 
   return (
     <Box
@@ -114,74 +117,119 @@ const CreditAssets = () => {
         w={{ base: "90%", sm: "400px" }}
         gap={2}
       >
-        <Text fontSize={{base: "14px", md: "18px"}} minW={{base: 40, md: 52}}>{t("creditAssets.title")}</Text>
-        <Box display={"flex"} gap={{base: 1, md: 3}} alignItems={"center"} minW="fit-content">
+        <Text
+          fontSize={{ base: "14px", md: "18px" }}
+          minW={{ base: 40, md: 52 }}
+        >
+          {t("creditAssets.title")}
+        </Text>
+        <Box
+          display={"flex"}
+          gap={{ base: 1, md: 3 }}
+          alignItems={"center"}
+          minW="fit-content"
+        >
           <Image
             src="/assets/usdt-with-bg.png"
-            w={{base: "22px", md: "29px"}}
-            h={{base: "22px", md: "29px"}}
+            w={{ base: "22px", md: "29px" }}
+            h={{ base: "22px", md: "29px" }}
             alt="usdt"
           />
-          {isLoadingUsdt ? <Spinner /> :
-            <Text fontSize={{base: "16px", md: "20px"}}>
-              {!isValidUser ? 100 : fromBn(usdtCreditbalance?? "0", USDT_DECIMAL)}
+          {isLoadingUsdt ? (
+            <Spinner />
+          ) : (
+            <Text fontSize={{ base: "16px", md: "20px" }}>
+              {!isValidUser
+                ? 100
+                : fromBn(usdtCreditbalance ?? "0", USDT_DECIMAL)}
             </Text>
-          }
+          )}
         </Box>
-        <Box display={"flex"} gap={{base: 1, md: 3}} alignItems={"center"}  minW="fit-content">
+        <Box
+          display={"flex"}
+          gap={{ base: 1, md: 3 }}
+          alignItems={"center"}
+          minW="fit-content"
+        >
           <Image
             src="/assets/ai-token.png"
-            w={{base: "24px", md: "32px"}}
-            h={{base: "24px", md: "32px"}}
+            w={{ base: "24px", md: "32px" }}
+            h={{ base: "24px", md: "32px" }}
             alt="usdt"
           />
-          {isLoadingAi ? <Spinner /> :
-            <Text fontSize={{base: "16px", md: "20px"}}>
-              {fromBn(aiCreditbalance?? "0", AI_DECMIAL)}
+          {isLoadingAi ? (
+            <Spinner />
+          ) : (
+            <Text fontSize={{ base: "16px", md: "20px" }}>
+              {fromBn(aiCreditbalance ?? "0", AI_DECMIAL)}
             </Text>
-          }
+          )}
         </Box>
       </Box>
       <HStack minW={"100%"} my={8} gap={5}>
-      <Flex
-        gap={10}
-        backgroundColor={"#3C014A"}
-        w={"fit-content"}
-        px={5}
-        py={7}
-        mt={3}
-        borderRadius={"12"}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        <Image
-          src="/assets/ai-token.png"
-          w={"43px"}
-          h={"43px"}
-          alt="usdt"
-        />
-        <Text fontSize={"xl"} pr={"1rem"}>AI</Text>
-      </Flex>
-      {!isValidUser && !userInfo &&
-      <Box flex={1}>
-        <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
-        <Input onChange={(e) => setRefInput(e.target.value)} name="referrer" value={refParam || refInput || ""} variant={"flushed"} size={"md"} w={"100%"} mt={2}/>
-        <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
-          {t("form.helperText.referrer")}
-      </Text>
-      </Box>
-      }
+        <Flex
+          gap={10}
+          backgroundColor={"#3C014A"}
+          w={"fit-content"}
+          px={5}
+          py={7}
+          mt={3}
+          borderRadius={"12"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Image src="/assets/ai-token.png" w={"43px"} h={"43px"} alt="usdt" />
+          <Text fontSize={"xl"} pr={"1rem"}>
+            AI
+          </Text>
+        </Flex>
+        {!isValidUser && !userInfo && (
+          <Box flex={1}>
+            <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
+            <Input
+              onChange={(e) => setRefInput(e.target.value)}
+              name="referrer"
+              value={refParam || refInput || ""}
+              variant={"flushed"}
+              size={"md"}
+              w={"100%"}
+              mt={2}
+            />
+            <Text fontSize={{ base: "sm", lg: "sm" }} color={"white"}>
+              {t("form.helperText.referrer")}
+            </Text>
+          </Box>
+        )}
       </HStack>
-      {
-        !isValidUser && !userInfo?.facialId ?
-        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} disabled={lastPrice ? true : false} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput ?? "") : openModal(true)} type="submit">
+      {!isValidUser && !userInfo?.facialId ? (
+        <Button
+          bgColor={"#9321DD"}
+          w={"100%"}
+          borderRadius={"10px"}
+          mt={8}
+          isDisabled={!lastPrice}
+          isLoading={isClaimLoading}
+          onClick={() =>
+            address ? handleStart(refInput ?? "") : openModal(true)
+          }
+          type="submit"
+        >
           {address ? t("creditAssets.unregister") : t("common.connectWallet")}
         </Button>
-        :
-        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} disabled={lastPrice ? true : false} isLoading={isClaimLoading || isRegisLoading} onClick={handleClaimAi} type="submit">
+      ) : (
+        <Button
+          bgColor={"#9321DD"}
+          w={"100%"}
+          borderRadius={"10px"}
+          mt={8}
+          isDisabled={!lastPrice}
+          isLoading={isClaimLoading || isRegisLoading}
+          onClick={handleClaimAi}
+          type="submit"
+        >
           {address ? t("creditAssets.button") : t("common.connectWallet")}
         </Button>
-      }
+      )}
     </Box>
   );
 };

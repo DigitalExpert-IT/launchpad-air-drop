@@ -1,16 +1,10 @@
-import { Badge, Box, Button, Center, FormLabel, Heading, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import CreditAssets from "./CreditAssets";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
 import { backgroundImage } from "@/constants/backgroundImage";
-
-type FormType = {
-  referrer: string;
-};
 
 const Header = () => {
   const { t } = useTranslation();
-  const { control, setValue, handleSubmit } = useForm<FormType>();
 
   return (
     <Box
@@ -45,7 +39,6 @@ const Header = () => {
         </Text>
         <CreditAssets />
       </VStack>
-      
     </Box>
   );
 };
