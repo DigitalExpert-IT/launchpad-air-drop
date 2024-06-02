@@ -141,14 +141,13 @@ export default function OrderForm() {
             </Text>
           </Box>
         </HStack>
-        <Stack
-        display={"flex"}
-          minW={"80%"}
-          flexWrap={"wrap"}
-          alignItems={{ lg: "left", base: "center" }}
-          bgColor={"black"}
-          borderRadius={{ base: 10, lg: 20 }}
-          p={{ base: 5, sm: 10 }}
+        <Box
+            background={"#1E1E1E"}
+            borderRadius={"30px"}
+            p={{ base: 5, sm: 10 }}
+            border={"1px solid #A4A4BE"}
+            minW={"80%"}
+            mx={10}
         >
           <Stack gap={5}>
           <Text fontSize={{lg: "3xl", base: "1xl"}} fontWeight={"600"}>
@@ -168,7 +167,7 @@ export default function OrderForm() {
               {t("orderForm.investmentRules.finalSecondDescription")}
             </Text>
           </Stack>
-        </Stack>
+        </Box>
       </Stack>
     </Box>
   );
