@@ -77,15 +77,16 @@ const usePair24h = (pair: string, interval: number = 10000) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // TODO: Change the url once the BE is hosted.
         const response = await fetch(
-          `https://api.binance.com/api/v3/ticker/24hr?symbol=${pair}`
+          `https://localhost:5005/24-hours-pair?pair=${pair}`
         );
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data: BinanceTickerData = await response.json();
+        const data: BinanceTickerData = response;
 
         setPairData({
           ...data,
