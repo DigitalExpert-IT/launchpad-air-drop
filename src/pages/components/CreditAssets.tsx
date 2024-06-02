@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { register } from "module";
 import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
 import { RootState } from "@/redux/store";
+import { usePair24h } from "@/hooks/useCrypto";
 
 
 interface FormType{
@@ -46,6 +47,13 @@ const CreditAssets = () => {
   const {register, isLoading: isRegisLoading, ...rest} = useRegisterMutation()
   const {data: isValidUser} = useValidUser();
   let refParam = null;
+  const firstPair = "AI";
+  const secondPair = "USDT";
+  const { lastPrice } = usePair24h(
+    firstPair.concat(secondPair), 8000
+  );
+
+  console.log("lastprice", lastPrice)
 
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search)
@@ -166,11 +174,11 @@ const CreditAssets = () => {
       </HStack>
       {
         !isValidUser && !userInfo?.facialId ?
-        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput ?? "") : openModal(true)} type="submit">
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} disabled={lastPrice ? true : false} isLoading={isClaimLoading} onClick={() => address ? handleStart(refInput ?? "") : openModal(true)} type="submit">
           {address ? t("creditAssets.unregister") : t("common.connectWallet")}
         </Button>
         :
-        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} isLoading={isClaimLoading || isRegisLoading} onClick={handleClaimAi} type="submit">
+        <Button bgColor={"#9321DD"} w={"100%"} borderRadius={"10px"} mt={8} disabled={lastPrice ? true : false} isLoading={isClaimLoading || isRegisLoading} onClick={handleClaimAi} type="submit">
           {address ? t("creditAssets.button") : t("common.connectWallet")}
         </Button>
       }

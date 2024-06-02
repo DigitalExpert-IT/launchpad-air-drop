@@ -1,4 +1,8 @@
 {
+    "banner": {
+        "invalidChainMessage": "You are connected through Invalid chain!",
+        "switchChain": "Switch to {{name}}"
+      },
     "register": "Register",
     "connectWallet": "Connect Wallet",
     "authenticated": "Authenticated",
