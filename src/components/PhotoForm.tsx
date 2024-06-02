@@ -29,7 +29,6 @@ export const PhotoForm = ({handleErrorKyc}: IPhotoForm) => {
     useEffect(() => {
       if(error !== ""){
         handleError()
-        
       }
     }, [error])
 
