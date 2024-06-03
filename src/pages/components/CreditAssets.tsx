@@ -73,6 +73,16 @@ const CreditAssets = () => {
     }
   }, []);
 
+  const handle0AiToast = () => {
+    toast({
+      title: 'Warning',
+      description: t("creditAssets.0aiPrice"),
+      status: 'warning',
+      duration: 5000,
+      isClosable: true,
+    })
+  }
+
   const claimAi = async () => {
     await claim(100);
   };
@@ -204,27 +214,7 @@ const CreditAssets = () => {
       </HStack>
       {!isValidUser && !userInfo?.facialId ? (
         <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
-          <Button
-            bgColor={"#9321DD"}
-            w={"100%"}
-            borderRadius={"10px"}
-            mt={8}
-            isDisabled={lastPrice === 0}
-            _disabled={{
-              cursor: "not-allowed",
-              bgColo: "#1E1E1E"
-            }}
-            isLoading={isClaimLoading}
-            onClick={() =>
-              address ? handleStart(refInput ?? "") : openModal(true)
-            }
-            type="submit"
-          >
-            {address ? t("creditAssets.unregister") : t("common.connectWallet")}
-          </Button>
-        </Tooltip>
-      ) : (
-        <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
+          <Box onClick={lastPrice === 0 ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
           <Button
             bgColor={"#9321DD"}
             w={"100%"}
@@ -235,12 +225,36 @@ const CreditAssets = () => {
               cursor: "not-allowed",
               bgColor: "#1E1E1E"
             }}
+            isLoading={isClaimLoading}
+            onClick={() =>
+              address ? handleStart(refInput ?? "") : openModal(true)
+            }
+            type="submit"
+          >
+            {address ? t("creditAssets.unregister") : t("common.connectWallet")}
+          </Button>
+          </Box>
+        </Tooltip>
+      ) : (
+        <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
+          <Box onClick={lastPrice === 0 ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
+          <Button
+            bgColor={"#9321DD"}
+            w={"100%"}
+            borderRadius={"10px"}
+            mt={8}
+            isDisabled={lastPrice === 0}
+            _disabled={{
+              cursor: "not-allowed",
+              bgColor: "#1E1E1E",
+            }}
             isLoading={isClaimLoading || isRegisLoading}
             onClick={handleClaimAi}
             type="submit"
           >
             {address ? t("creditAssets.button") : t("common.connectWallet")}
           </Button>
+          </Box>
         </Tooltip>
       )}
     </Box>
