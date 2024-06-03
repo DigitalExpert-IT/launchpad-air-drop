@@ -16,6 +16,7 @@ import {
   Input,
   HStack,
   useToast,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { fromBn } from "evm-bn";
@@ -202,33 +203,45 @@ const CreditAssets = () => {
         )}
       </HStack>
       {!isValidUser && !userInfo?.facialId ? (
-        <Button
-          bgColor={"#9321DD"}
-          w={"100%"}
-          borderRadius={"10px"}
-          mt={8}
-          isDisabled={!lastPrice}
-          isLoading={isClaimLoading}
-          onClick={() =>
-            address ? handleStart(refInput ?? "") : openModal(true)
-          }
-          type="submit"
-        >
-          {address ? t("creditAssets.unregister") : t("common.connectWallet")}
-        </Button>
+        <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
+          <Button
+            bgColor={"#9321DD"}
+            w={"100%"}
+            borderRadius={"10px"}
+            mt={8}
+            isDisabled={lastPrice === 0}
+            _disabled={{
+              cursor: "not-allowed",
+              bgColo: "#1E1E1E"
+            }}
+            isLoading={isClaimLoading}
+            onClick={() =>
+              address ? handleStart(refInput ?? "") : openModal(true)
+            }
+            type="submit"
+          >
+            {address ? t("creditAssets.unregister") : t("common.connectWallet")}
+          </Button>
+        </Tooltip>
       ) : (
-        <Button
-          bgColor={"#9321DD"}
-          w={"100%"}
-          borderRadius={"10px"}
-          mt={8}
-          isDisabled={!lastPrice}
-          isLoading={isClaimLoading || isRegisLoading}
-          onClick={handleClaimAi}
-          type="submit"
-        >
-          {address ? t("creditAssets.button") : t("common.connectWallet")}
-        </Button>
+        <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
+          <Button
+            bgColor={"#9321DD"}
+            w={"100%"}
+            borderRadius={"10px"}
+            mt={8}
+            isDisabled={lastPrice === 0}
+            _disabled={{
+              cursor: "not-allowed",
+              bgColor: "#1E1E1E"
+            }}
+            isLoading={isClaimLoading || isRegisLoading}
+            onClick={handleClaimAi}
+            type="submit"
+          >
+            {address ? t("creditAssets.button") : t("common.connectWallet")}
+          </Button>
+        </Tooltip>
       )}
     </Box>
   );
