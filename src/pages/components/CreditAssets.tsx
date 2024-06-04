@@ -119,7 +119,7 @@ const CreditAssets = () => {
 
   useEffect(() => {
     setRefInput(refParam || "");
-  }, [refParam]);z
+  }, [refParam]);
 
   return (
     <Box
