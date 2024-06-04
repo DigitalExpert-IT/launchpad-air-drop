@@ -21,7 +21,7 @@ import { HamburgerIcon, CopyIcon } from "@chakra-ui/icons";
 import MenuDrawer from "@/components/menuDrawer";
 import WalletButton from "@/components/WalletButton";
 import { INavigation } from "@/constants/navigation";
-import { useAddress } from "@thirdweb-dev/react";
+import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { shortenAddress } from "@/lib/address";
 import { useAiCreditBalance, useUsdtCreditBalance, useValidUser } from "@/hooks/contract/airdrop";
 import { useRouter } from "next/router";
@@ -80,6 +80,7 @@ const NavbarButtons = () => {
 const Navbar: React.FC<INavbar> = ({ data }) => {
   const [filter, setFilter] = useState(0);
   const {data: userValid} = useValidUser();
+  const openModal = useSetIsWalletModalOpen();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const address = useAddress();
@@ -101,6 +102,11 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
       document.body.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  const handleToKyc = () => {
+    if (!address) return openModal(true); 
+    router.push("kyc")
+  }
 
   const handlerCopy = () => {
     onCopy();
@@ -195,9 +201,9 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                 <Box>
                   <HStack gap={3} justifyContent={"center"}>
                     <Text fontWeight={"bold"} fontSize={"md"} gap={10}>{t("navbar.titleInvitationTitle")}</Text>
-                    <CopyIcon onClick={() => userValid ? handlerCopy() : router.push("/kyc")} cursor={"pointer"}/>
+                    <CopyIcon onClick={() => userValid ? handlerCopy() : handleToKyc()} cursor={"pointer"}/>
                   </HStack>
-                    <Button variant={"link"} onClick={() => userValid ? handlerCopy() : router.push("/kyc")} fontSize={{base: "xs", lg: "sm"}} pl={{base: 0, lg: 0}} textColor={"#A4A4BE"}>{userValid ? address : t("navbar.pleaseConnectWallet")}</Button>
+                    <Button variant={"link"} onClick={() => userValid ? handlerCopy() : handleToKyc()} fontSize={{base: "xs", lg: "sm"}} pl={{base: 0, lg: 0}} textColor={"#A4A4BE"}>{userValid ? address : t("navbar.pleaseConnectWallet")}</Button>
                 </Box>
                 <Stack>
                   <Text fontWeight={"bold"} fontSize={"md"} gap={10}>{t("navbar.accountTitle")}</Text>
