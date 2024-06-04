@@ -1,20 +1,13 @@
 import { useContractWrite } from "@thirdweb-dev/react";
 import { useAirdropContract } from "./useAirdropContract"
 import { toBn } from "evm-bn";
-import { usePair24h } from "@/hooks/useCrypto";
 import { useAsyncCall } from "@/hooks/useAsyncCall";
 import { useTranslation } from "react-i18next";
 
-export const useRegisterMutation = () => {
+export const useRegisterMutation = (lastPrice: number) => {
   const { contract } = useAirdropContract();
   const { t } = useTranslation();
   const { mutateAsync: mutateAsyncRegister, ...rest } = useContractWrite(contract, "register");
-
-  const firstPair = "AI";
-  const secondPair = "USDT";
-  const { lastPrice } = usePair24h(
-    firstPair.concat(secondPair), 8000
-  );
 
   const registerContract = async (_referral: string, _uri: string,) => {
     try {

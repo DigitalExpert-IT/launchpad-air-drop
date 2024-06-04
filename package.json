@@ -28,6 +28,7 @@
     "@thirdweb-dev/sdk": "3.10.21",
     "@thirdweb-dev/wallets": "^0.2.26",
     "@types/react-redux": "^7.1.33",
+    "ccxt": "^4.3.39",
     "ethers": "^5.7.2",
     "evm-bn": "^1.1.2",
     "framer-motion": "^11.1.7",

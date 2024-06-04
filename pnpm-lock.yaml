@@ -59,6 +59,9 @@ dependencies:
   '@types/react-redux':
     specifier: ^7.1.33
     version: 7.1.33
+  ccxt:
+    specifier: ^4.3.39
+    version: 4.3.39
   ethers:
     specifier: ^5.7.2
     version: 5.7.2
@@ -6532,6 +6535,18 @@ packages:
     engines: {node: '>= 10'}
     dependencies:
       lodash: 4.17.21
+    dev: false
+
+  /ccxt@4.3.39:
+    resolution: {integrity: sha512-pNH0ZAMovxtBImDteb9f+BIr1r0EYB9XUMqA900CJzJjNjyIa0zDSOykFSRCzTTBad/dwt4X506sCk+TZutSKQ==}
+    engines: {node: '>=15.0.0'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      ws: 8.9.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
     dev: false
 
   /chai@4.4.1:

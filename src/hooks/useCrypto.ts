@@ -15,6 +15,11 @@ interface BinanceTickerData {
   lastPrice: number;
 }
 
+type T24HResponse = {
+  info: BinanceTickerData;
+}
+
+
 const useCrypto = () => {
   const [cryptocurrencies, setCryptocurrencies] =
     useState<ICryptoCurrencies[]>(CryptoCurrencies);
@@ -67,7 +72,7 @@ const useCrypto = () => {
   return cryptocurrencies;
 };
 
-const usePair24h = (pair: string, interval: number = 10000) => {
+const usePair24h = (first_currency: string, second_currency: string, interval: number = 10000) => {
   const [pairData, setPairData] = useState({
     priceChangePercent: 0,
     volume: 0,
@@ -78,20 +83,20 @@ const usePair24h = (pair: string, interval: number = 10000) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://api.binance.com/api/v3/ticker/24hr?symbol=${pair}`
+          `/api/tokocrypto?pair=${first_currency}/${second_currency}`
         );
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data: BinanceTickerData = await response.json();
+        const data: T24HResponse = await response.json();
 
         setPairData({
           ...data,
-          priceChangePercent: data.priceChangePercent,
-          volume: data.volume,
-          lastPrice: data.lastPrice,
+          priceChangePercent: data.info.priceChangePercent,
+          volume: data.info.volume,
+          lastPrice: data.info.lastPrice,
         });
       } catch (error) {
         console.error(error);
@@ -103,7 +108,7 @@ const usePair24h = (pair: string, interval: number = 10000) => {
     setInterval(() => {
       fetchData();
     }, interval);
-  }, [pair, interval]);
+  }, [first_currency, second_currency, interval]);
 
   return pairData;
 };
