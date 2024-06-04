@@ -23,7 +23,9 @@ export default function OrderForm() {
   const { t } = useTranslation();
   const firstPair = "AI";
   const secondPair = "USDT";
-  const { priceChangePercent, volume, lastPrice } = usePair24h(`${firstPair}_${secondPair}`, 8000);
+  const { priceChangePercent, volume, lastPrice } = usePair24h(
+    firstPair.concat(secondPair), 8000
+  );
 
   return (
     <Box bgGradient={"linear(#370144, #3D004B, #000)"} mb={20} id="OrderForm">

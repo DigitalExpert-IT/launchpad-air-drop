@@ -78,7 +78,7 @@ const usePair24h = (pair: string, interval: number = 10000) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://www.tokocrypto.com/bapi/asset/v2/public/asset-service/product/get-product-by-symbol?symbol=${pair}`
+          `https://api.binance.com/api/v3/ticker/24hr?symbol=${pair}`
         );
 
         if (!response.ok) {
