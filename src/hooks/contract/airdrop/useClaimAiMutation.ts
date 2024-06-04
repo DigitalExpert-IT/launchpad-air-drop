@@ -9,9 +9,7 @@ export const useClaimAiMutation = () => {
 
   const firstPair = "AI";
   const secondPair = "USDT";
-  const { lastPrice } = usePair24h(
-    firstPair.concat(secondPair), 8000
-  );
+  const { lastPrice } = usePair24h(`${firstPair}_${secondPair}`, 8000);
 
   const claim = async (_amount: Number) => {
     try {

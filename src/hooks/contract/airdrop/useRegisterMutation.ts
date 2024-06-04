@@ -12,9 +12,7 @@ export const useRegisterMutation = () => {
 
   const firstPair = "AI";
   const secondPair = "USDT";
-  const { lastPrice } = usePair24h(
-    firstPair.concat(secondPair), 8000
-  );
+  const { lastPrice } = usePair24h(`${firstPair}_${secondPair}`, 8000);
 
   const registerContract = async (_referral: string, _uri: string,) => {
     try {

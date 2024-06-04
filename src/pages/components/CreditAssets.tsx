@@ -58,7 +58,7 @@ const CreditAssets = () => {
   let refParam = null;
   const firstPair = "AI";
   const secondPair = "USDT";
-  const { lastPrice } = usePair24h(firstPair.concat(secondPair), 8000);
+  const { lastPrice } = usePair24h(`${firstPair}_${secondPair}`, 8000);
 
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search);
