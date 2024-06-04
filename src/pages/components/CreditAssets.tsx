@@ -220,7 +220,7 @@ const CreditAssets = () => {
             w={"100%"}
             borderRadius={"10px"}
             mt={8}
-            isDisabled={lastPrice === 0}
+            isDisabled={lastPrice === 0 && address !== undefined}
             _disabled={{
               cursor: "not-allowed",
               bgColor: "#1E1E1E"
@@ -243,7 +243,7 @@ const CreditAssets = () => {
             w={"100%"}
             borderRadius={"10px"}
             mt={8}
-            isDisabled={lastPrice === 0}
+            isDisabled={lastPrice === 0 && address !== undefined }
             _disabled={{
               cursor: "not-allowed",
               bgColor: "#1E1E1E",
