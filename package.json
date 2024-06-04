@@ -19,7 +19,6 @@
     "@chakra-ui/theme-tools": "^2.0.14",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@faceio/fiojs": "^1.1.0",
     "@fontsource/poppins": "^5.0.14",
     "@fontsource/rubik-one": "^5.0.1",
     "@reduxjs/toolkit": "^2.2.5",

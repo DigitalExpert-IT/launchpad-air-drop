@@ -23,12 +23,14 @@ import {
 import { IFormComponent } from "./emailForm";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { useRouter } from "next/router";
 
 
 
 export const PhoneForm = ({handleNextStep}: IFormComponent) => {
   const [phone, setPhone] = useState("")
   const [error, setError] = useState(true)
+  const route = useRouter();
   const referrer = useSelector((state: RootState) => state.referrer.referrer);
   const { inputValue, handlePhoneValueChange, inputRef, country, setCountry } =
     usePhoneInput({
@@ -55,7 +57,7 @@ export const PhoneForm = ({handleNextStep}: IFormComponent) => {
       e.preventDefault()
       sessionStorage.setItem("local", country.dialCode)
       sessionStorage.setItem("phone", phone)
-      handleNextStep()
+      route.push("/")
     }
 
     return (

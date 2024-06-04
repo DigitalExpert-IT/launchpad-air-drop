@@ -45,6 +45,8 @@ const CreditAssets = () => {
   const address = useAddress();
   const toast = useToast();
   const [userInfo, setUserInfo] = useState<TUserInfo | null>(null);
+  const [userPhone, setUserPhone] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
   const [refInput, setRefInput] = useState<string | null>(null);
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } =
     useUsdtCreditBalance();
@@ -69,7 +71,11 @@ const CreditAssets = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const session_userInfo = sessionStorage.getItem("userInfo");
+      const userPhone = sessionStorage.getItem("phone");
+      const userEmail = sessionStorage.getItem("email");
       setUserInfo(session_userInfo ? JSON.parse(session_userInfo) : null);
+      setUserPhone(userPhone || "")
+      setUserEmail(userEmail || "")
     }
   }, []);
 
@@ -94,7 +100,7 @@ const CreditAssets = () => {
 
   const handleClaimAi = async () => {
     if (!address) return openModal(true);
-    if (userInfo?.facialId && !isValidUser) {
+    if (userPhone !== "" && userEmail !== "" && !isValidUser) {
       try {
         await register(
           refParam || referrer || "0x0000000000000000000000000000000000000000",
@@ -113,7 +119,7 @@ const CreditAssets = () => {
 
   useEffect(() => {
     setRefInput(refParam || "");
-  }, [refParam]);
+  }, [refParam]);z
 
   return (
     <Box
@@ -194,7 +200,7 @@ const CreditAssets = () => {
             AI
           </Text>
         </Flex>
-        {!isValidUser && !userInfo && (
+        {!isValidUser && userPhone !== "" && userEmail !== "" && (
           <Box flex={1}>
             <Text fontSize={"xl"}>{t("form.label.referrerTitle")}</Text>
             <Input
@@ -212,7 +218,7 @@ const CreditAssets = () => {
           </Box>
         )}
       </HStack>
-      {!isValidUser && !userInfo?.facialId ? (
+      {!isValidUser && userPhone == "" && userEmail == "" ? (
         <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
           <Box onClick={lastPrice === 0 ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
           <Button

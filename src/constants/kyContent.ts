@@ -17,10 +17,5 @@ export const kycContent: Array<IKycCard>  = [
         title: "kyc.phoneNumber.title",
         description: "kyc.phoneNumber.description",
         validity: false,
-    },
-    {
-        title: "kyc.face.title",
-        description: "kyc.face.description",
-        validity: false,
-    },
+    }
 ]
