@@ -76,7 +76,7 @@ const UseKycAuth = () => {
             setLoading(false);
           }
           sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
-          router.push(`/`);
+          router.push(`/#Home`);
         } catch (errCode) {
           errorCodeHandler(errCode as FaceIOErrorCode);
         }

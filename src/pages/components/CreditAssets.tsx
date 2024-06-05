@@ -213,14 +213,14 @@ const CreditAssets = () => {
         )}
       </HStack>
       {!isValidUser && !userInfo?.facialId ? (
-        <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
-          <Box onClick={lastPrice === 0 ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
+        <Tooltip label={lastPrice === 0 && address !== undefined ? t("creditAssets.0aiPrice") : ""}>
+          <Box onClick={lastPrice === 0 && address !== undefined ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
           <Button
             bgColor={"#9321DD"}
             w={"100%"}
             borderRadius={"10px"}
             mt={8}
-            isDisabled={lastPrice === 0}
+            isDisabled={lastPrice === 0 && address !== undefined}
             _disabled={{
               cursor: "not-allowed",
               bgColor: "#1E1E1E"
@@ -243,7 +243,7 @@ const CreditAssets = () => {
             w={"100%"}
             borderRadius={"10px"}
             mt={8}
-            isDisabled={lastPrice === 0}
+            isDisabled={lastPrice === 0 || !lastPrice }
             _disabled={{
               cursor: "not-allowed",
               bgColor: "#1E1E1E",
