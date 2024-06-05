@@ -213,8 +213,8 @@ const CreditAssets = () => {
         )}
       </HStack>
       {!isValidUser && !userInfo?.facialId ? (
-        <Tooltip label={lastPrice === 0 ? t("creditAssets.0aiPrice") : ""}>
-          <Box onClick={lastPrice === 0 ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
+        <Tooltip label={lastPrice === 0 && address !== undefined ? t("creditAssets.0aiPrice") : ""}>
+          <Box onClick={lastPrice === 0 && address !== undefined ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
           <Button
             bgColor={"#9321DD"}
             w={"100%"}
