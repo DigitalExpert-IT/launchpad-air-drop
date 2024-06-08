@@ -50,15 +50,13 @@ const CreditAssets = () => {
     useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } =
     useAiCreditBalance();
-  const { claim, isLoading: isClaimLoading } = useClaimAiMutation();
+    const { lastPrice } = usePair24h("AI", "USDT", 8000);  
+  const { claim, isLoading: isClaimLoading } = useClaimAiMutation(lastPrice);
   const referrer = useSelector((state: RootState) => state.referrer.referrer);
   const dispatch = useDispatch();
-  const { register, isLoading: isRegisLoading } = useRegisterMutation();
+  const { register, isLoading: isRegisLoading } = useRegisterMutation(lastPrice);
   const { data: isValidUser } = useValidUser();
   let refParam = null;
-  const firstPair = "AI";
-  const secondPair = "USDT";
-  const { lastPrice } = usePair24h(firstPair.concat(secondPair), 8000);
 
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search);

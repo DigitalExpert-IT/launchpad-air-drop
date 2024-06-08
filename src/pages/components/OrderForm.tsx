@@ -24,7 +24,7 @@ export default function OrderForm() {
   const firstPair = "AI";
   const secondPair = "USDT";
   const { priceChangePercent, volume, lastPrice } = usePair24h(
-    firstPair.concat(secondPair), 8000
+    firstPair, secondPair, 8000
   );
 
   return (
