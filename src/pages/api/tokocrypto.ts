@@ -21,12 +21,12 @@ type ResponseError = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData | ResponseError>
 ) {
-  const { query } = req;
+  const { pair } = req.query;
 
   try {
-    const tokocrypto = new ccxt.tokocrypto();
+    const tokocrypto = new ccxt.binance();
     // tokocrypto.proxyUrl = "http://103.178.42.102:8181/";
-    const markets = await tokocrypto.fetchTicker("AI/USDT");
+    const markets = await tokocrypto.fetchTicker(pair);
     res.status(200).json(markets);
   } catch (e) {
     if (e instanceof ccxt.NetworkError) {
