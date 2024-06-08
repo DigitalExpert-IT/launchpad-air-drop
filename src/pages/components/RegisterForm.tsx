@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useAddress } from "@thirdweb-dev/react";
 import { shortenAddress } from "../../lib/address";
 import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
+import { usePair24h } from "@/hooks/useCrypto";
 
 type FormType = {
   referrer: string;
@@ -18,7 +19,8 @@ const RegisterForm = () => {
   const toast = useToast()
   const address = useAddress() ?? "0x0000000000000000000000000000000000000000";
   const { control, getValues, setValue, handleSubmit } = useForm<FormType>();
-  const {register, ...rest} = useRegisterMutation()
+  const { lastPrice } = usePair24h("AI", "USDT", 8000);  
+  const {register, ...rest} = useRegisterMutation(lastPrice)
 
   const handleRegister = (data: FormType) => {
     const registerPromise = new Promise((resolve, reject) => {

@@ -26,9 +26,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   try {
     const tokocrypto = new ccxt.binance();
     // tokocrypto.proxyUrl = "http://103.178.42.102:8181/";
-    const markets = await tokocrypto.fetchTicker(pair);
+    const markets = await tokocrypto.fetchTicker(pair?.toString() ?? "AIUSDT");
     res.status(200).json(markets);
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof ccxt.NetworkError) {
       res.status(500).json({ error: `fetchTicker failed due to a network error: ${e.message}` });
     } else if (e instanceof ccxt.ExchangeError) {
