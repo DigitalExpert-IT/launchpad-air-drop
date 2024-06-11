@@ -29,6 +29,7 @@ import { AI_DECMIAL, USDT_DECIMAL } from "@/constants/tokenDecimals";
 import { fromBn } from "evm-bn";
 import { t } from "i18next";
 import { usePathname } from "next/navigation";
+import { useActiveAccount } from "thirdweb/react";
 
 type IMenuList = React.FC<INavbar & Pick<UseDisclosureProps, "onClose">>;
 
@@ -83,9 +84,9 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
   const openModal = useSetIsWalletModalOpen();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const address = useAddress();
+  const address = useActiveAccount();
   const router = useRouter();
-  const myRef = `https://sleeplessailabs.org/?ref=${address}`;
+  const myRef = `https://sleeplessailabs.org/?ref=${address?.address}`;
   const { data: usdtCreditbalance, isLoading: isLoadingUsdt } = useUsdtCreditBalance();
   const { data: aiCreditbalance, isLoading: isLoadingAi } = useAiCreditBalance();
   const { onCopy } = useClipboard(myRef);
@@ -203,7 +204,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
                     <Text fontWeight={"bold"} fontSize={"md"} gap={10}>{t("navbar.titleInvitationTitle")}</Text>
                     <CopyIcon onClick={() => userValid ? handlerCopy() : handleToKyc()} cursor={"pointer"}/>
                   </HStack>
-                    <Button variant={"link"} onClick={() => userValid ? handlerCopy() : handleToKyc()} fontSize={{base: "xs", lg: "sm"}} pl={{base: 0, lg: 0}} textColor={"#A4A4BE"}>{userValid ? address : t("navbar.pleaseConnectWallet")}</Button>
+                    <Button variant={"link"} onClick={() => userValid ? handlerCopy() : handleToKyc()} fontSize={{base: "xs", lg: "sm"}} pl={{base: 0, lg: 0}} textColor={"#A4A4BE"}>{userValid ? address?.address : t("navbar.pleaseConnectWallet")}</Button>
                 </Box>
                 <Stack>
                   <Text fontWeight={"bold"} fontSize={"md"} gap={10}>{t("navbar.accountTitle")}</Text>

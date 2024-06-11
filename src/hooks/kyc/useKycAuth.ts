@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from "react-redux";
 import { RootState } from '@/redux/store';
+import { useActiveAccount } from 'thirdweb/react';
 
 if (typeof window !== 'undefined') {
   const faceIOId = process.env.NEXT_PUBLIC_FACEIO || "";
@@ -14,7 +15,7 @@ if (typeof window !== 'undefined') {
 const UseKycAuth = () => {
   const toast = useToast()
   const router = useRouter()
-  const address = useAddress()
+  const address = useActiveAccount()
   const local = sessionStorage.getItem("local");
   const email = sessionStorage.getItem("email");
   const phone = sessionStorage.getItem("phone");
@@ -66,7 +67,7 @@ const UseKycAuth = () => {
           const userInfo = await faceioInstance.enroll({
             "locale": local, // user country based on dial code on phone number
             "payload": {
-              "whoami": address,
+              "whoami": address?.address,
               "email": email,
               "phoneNumber": phone
             }
@@ -83,7 +84,7 @@ const UseKycAuth = () => {
       }
     }
     enrollNewUser();
-  }, [address, email, local, phone, referrer, router])
+  }, [address?.address, email, local, phone, referrer, router])
 
   return {
     userInfo,

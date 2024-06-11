@@ -18,7 +18,7 @@ import {
   useToast,
   Tooltip,
 } from "@chakra-ui/react";
-import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
+import { useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { fromBn } from "evm-bn";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -28,6 +28,8 @@ import { useEffect, useState } from "react";
 import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
 import { RootState } from "@/redux/store";
 import { usePair24h } from "@/hooks/useCrypto";
+import { useActiveAccount, useConnectModal } from "thirdweb/react";
+import { clientId } from "@/constants/clientId";
 
 type TUserInfo = {
   facialId: string;
@@ -40,9 +42,10 @@ type TUserInfo = {
 
 const CreditAssets = () => {
   const { t } = useTranslation();
-  const openModal = useSetIsWalletModalOpen();
+  const { connect, isConnecting } = useConnectModal();
+  const client = clientId;
   const router = useRouter();
-  const address = useAddress();
+  const address = useActiveAccount();
   const toast = useToast();
   const [userInfo, setUserInfo] = useState<TUserInfo | null>(null);
   const [refInput, setRefInput] = useState<string | null>(null);
@@ -58,7 +61,12 @@ const CreditAssets = () => {
   const { data: isValidUser } = useValidUser();
   let refParam = null;
 
-  console.log("validity", isValidUser)
+
+
+  const handleConnect = () => {
+    const wallet = connect({ client }); // opens the connect modal
+    console.log("connected to", wallet);
+  }
 
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search);
@@ -93,12 +101,12 @@ const CreditAssets = () => {
   };
 
   const handleClaimAi = async () => {
-    if (!address) return openModal(true);
+    if (!address?.address) return handleConnect();
     if (userInfo?.facialId && !isValidUser) {
       try {
         await register(
           refParam || referrer || "0x0000000000000000000000000000000000000000",
-          `user-${address}`
+          `user-${address?.address}`
         );
       } catch (error: any) {
         toast({ status: "error", description: error?.reason });
@@ -213,25 +221,25 @@ const CreditAssets = () => {
         )}
       </HStack>
       {!isValidUser && !userInfo?.facialId ? (
-        <Tooltip label={lastPrice === 0 && address !== undefined ? t("creditAssets.0aiPrice") : ""}>
-          <Box onClick={lastPrice === 0 && address !== undefined ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
+        <Tooltip label={lastPrice === 0 && address?.address !== undefined ? t("creditAssets.0aiPrice") : ""}>
+          <Box onClick={lastPrice === 0 && address?.address !== undefined ? () => handle0AiToast() : () => undefined} style={{ position: 'relative' }}>
           <Button
             bgColor={"#9321DD"}
             w={"100%"}
             borderRadius={"10px"}
             mt={8}
-            isDisabled={lastPrice === 0 && address !== undefined}
+            isDisabled={lastPrice === 0 && address?.address !== undefined}
             _disabled={{
               cursor: "not-allowed",
               bgColor: "#1E1E1E"
             }}
             isLoading={isClaimLoading}
             onClick={() =>
-              address ? handleStart(refInput ?? "") : openModal(true)
+              address?.address ? handleStart(refInput ?? "") : handleConnect()
             }
             type="submit"
           >
-            {address ? t("creditAssets.unregister") : t("common.connectWallet")}
+            {address?.address ? t("creditAssets.unregister") : t("common.connectWallet")}
           </Button>
           </Box>
         </Tooltip>
@@ -252,7 +260,7 @@ const CreditAssets = () => {
             onClick={handleClaimAi}
             type="submit"
           >
-            {address ? t("creditAssets.button") : t("common.connectWallet")}
+            {address?.address ? t("creditAssets.button") : t("common.connectWallet")}
           </Button>
           </Box>
         </Tooltip>

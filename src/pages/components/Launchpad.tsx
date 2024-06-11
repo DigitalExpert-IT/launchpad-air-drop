@@ -16,11 +16,12 @@ import launchpad from "@/locales/en/launchpad.json"
 import { useAddress } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { useValidUser } from "@/hooks/contract/airdrop";
+import { useActiveAccount } from "thirdweb/react";
 
 export default function Launchpad() {
   const { t } = useTranslation();
   const router = useRouter();
-  const address = useAddress();
+  const address = useActiveAccount();
   const {data} = useValidUser()
 
   return (
@@ -53,7 +54,7 @@ export default function Launchpad() {
             <Text fontSize={{lg: "1xl", base: "xl"}}>{t("launchpad.walletAddress")}</Text>
           </Stack>
           <Stack>
-            <Text fontSize={{lg: "xl", base: "lg"}}>{address}</Text>
+            <Text fontSize={{lg: "xl", base: "lg"}}>{address?.address}</Text>
           </Stack>
         </HStack>
         <Stack

@@ -9,6 +9,7 @@ import {
 import {ConnectButton} from "thirdweb/react"
 import { createThirdwebClient } from "thirdweb";
 import { createWallet } from "thirdweb/wallets";
+import { clientId as client } from "@/constants/clientId";
 
 const wallets = [
   createWallet("io.metamask"),
@@ -20,12 +21,7 @@ const wallets = [
 
 const WalletButton = () => {
   const { t } = useTranslation();
-  const client = process.env.NEXT_PUBLIC_THIRDWEB || "0";
-  const clientId = createThirdwebClient({clientId: client})
-  const address = useAddress();
-
-
-  if(address) return <ConnectWallet />;
+  const clientId = client
 
   return (
     <ConnectButton client={clientId} wallets={wallets} connectButton={{

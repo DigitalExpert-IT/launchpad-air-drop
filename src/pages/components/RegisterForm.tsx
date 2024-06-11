@@ -9,6 +9,7 @@ import { useAddress } from "@thirdweb-dev/react";
 import { shortenAddress } from "../../lib/address";
 import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
 import { usePair24h } from "@/hooks/useCrypto";
+import { useActiveAccount } from "thirdweb/react";
 
 type FormType = {
   referrer: string;
@@ -17,14 +18,14 @@ type FormType = {
 const RegisterForm = () => {
   const { t } = useTranslation();
   const toast = useToast()
-  const address = useAddress() ?? "0x0000000000000000000000000000000000000000";
+  const address = useActiveAccount();
   const { control, getValues, setValue, handleSubmit } = useForm<FormType>();
   const { lastPrice } = usePair24h("AI", "USDT", 8000);  
   const {register, ...rest} = useRegisterMutation(lastPrice)
 
   const handleRegister = (data: FormType) => {
     const registerPromise = new Promise((resolve, reject) => {
-      resolve(register(data.referrer, `user-${address}`))
+      resolve(register(data.referrer, `user-${address?.address || "0x0000000000000000000000000000000000000000"}`))
     })
 
     toast.promise(registerPromise, {
@@ -48,7 +49,7 @@ const RegisterForm = () => {
           roundedRight={"50px"}
           roundedLeft={"0"}
         >
-          {shortenAddress(address)}
+          {shortenAddress(address?.address || "0x0000000000000000000000000000000000000000")}
         </Badge>
       </Box>
       <FormLabel

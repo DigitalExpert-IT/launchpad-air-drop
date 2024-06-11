@@ -13,6 +13,7 @@ import { t } from "i18next";
 const targetChain = getActiveChain();
 
 
+
 const ChainBanner = () => {
   const chain = useChain();
   const switchChain = useSwitchChain();
@@ -57,18 +58,18 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 
   return (
+    <ThirdwebProvider>
     <GlobalProvider supportedChains={[targetChain]}
       activeChain={targetChain}
       clientId={CLIENT_ID}>
-    <ThirdwebProvider>
     <ChakraProvider theme={theme}>
       <Provider store={store}>
         <Component {...pageProps} />
         <ChainBanner/>
       </Provider>
     </ChakraProvider>
-    </ThirdwebProvider>
     </GlobalProvider>
+    </ThirdwebProvider>
   );
 };
 
