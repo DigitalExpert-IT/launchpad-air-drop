@@ -58,6 +58,8 @@ const CreditAssets = () => {
   const { data: isValidUser } = useValidUser();
   let refParam = null;
 
+  console.log("validity", isValidUser)
+
   if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search);
 

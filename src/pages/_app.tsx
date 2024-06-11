@@ -5,7 +5,8 @@ import { Box, Button, ChakraProvider, Text } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import "../locales"
 import store from "@/redux/store";
-import { ThirdwebProvider, coinbaseWallet, localWallet, metamaskWallet, safeWallet, trustWallet, useChain, useSwitchChain, useWallet, walletConnect } from "@thirdweb-dev/react";
+import { ThirdwebProvider as GlobalProvider, coinbaseWallet, localWallet, metamaskWallet, safeWallet, trustWallet, useChain, useSwitchChain, useWallet, walletConnect } from "@thirdweb-dev/react";
+import { ThirdwebProvider } from "thirdweb/react";
 import { getActiveChain } from "../lib/chain";
 import { t } from "i18next";
 
@@ -56,18 +57,10 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 
   return (
-    <ThirdwebProvider
-      supportedChains={[targetChain]}
-      supportedWallets={[
-        metamaskWallet(),
-        trustWallet(),
-        walletConnect(),
-        coinbaseWallet(),
-        safeWallet(),
-        localWallet(),
-      ]}
+    <GlobalProvider supportedChains={[targetChain]}
       activeChain={targetChain}
       clientId={CLIENT_ID}>
+    <ThirdwebProvider>
     <ChakraProvider theme={theme}>
       <Provider store={store}>
         <Component {...pageProps} />
@@ -75,6 +68,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Provider>
     </ChakraProvider>
     </ThirdwebProvider>
+    </GlobalProvider>
   );
 };
 
