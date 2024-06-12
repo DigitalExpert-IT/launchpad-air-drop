@@ -5,8 +5,8 @@ import { Box, Button, ChakraProvider, Text } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import "../locales"
 import store from "@/redux/store";
-import { ThirdwebProvider as GlobalProvider, coinbaseWallet, localWallet, metamaskWallet, safeWallet, trustWallet, useChain, useSwitchChain, useWallet, walletConnect } from "@thirdweb-dev/react";
-import { ThirdwebProvider } from "thirdweb/react";
+import { ThirdwebProvider as GlobalProvider } from "@thirdweb-dev/react";
+import { ThirdwebProvider, useSwitchActiveWalletChain, useActiveWalletChain, useActiveWallet } from "thirdweb/react";
 import { getActiveChain } from "../lib/chain";
 import { t } from "i18next";
 
@@ -15,15 +15,19 @@ const targetChain = getActiveChain();
 
 
 const ChainBanner = () => {
-  const chain = useChain();
-  const switchChain = useSwitchChain();
-  const wallet = useWallet();
+  const chains = useActiveWalletChain();
+  const wallets = useActiveWallet();
   const isConnectThroughIncorrectChain =
-    wallet && chain && chain.chainId && chain.chainId !== targetChain?.chainId;
+    wallets && chains && chains.id && chains.id !== targetChain?.chainId;
+
+    const handleSwitch = useSwitchActiveWalletChain()
 
     const handleSwitchChain = () => {
       try {
-        switchChain(targetChain?.chainId);
+        handleSwitch({
+          id: targetChain?.chainId,
+          rpc: ""
+        });
       } catch (error) {}
     };
 
@@ -48,7 +52,7 @@ const ChainBanner = () => {
           {t("common.banner.switchChain", { name: targetChain?.name })}
         </Button>
       </Box>
-    ) : null}
+    ) : <Text>Kontrol</Text>}
     </>
   )
 }
