@@ -1,6 +1,7 @@
 import { AI_DECMIAL, USDT_DECIMAL } from "@/constants/tokenDecimals";
 import {
   useAiCreditBalance,
+  useAirdropContract,
   useUsdtCreditBalance,
   useValidUser,
 } from "@/hooks/contract/airdrop";
@@ -28,8 +29,9 @@ import { useEffect, useState } from "react";
 import { useRegisterMutation } from "@/hooks/contract/airdrop/useRegisterMutation";
 import { RootState } from "@/redux/store";
 import { usePair24h } from "@/hooks/useCrypto";
-import { useActiveAccount, useConnectModal } from "thirdweb/react";
+import { TransactionButton, useActiveAccount, useConnectModal } from "thirdweb/react";
 import { clientId } from "@/constants/clientId";
+import { prepareContractCall } from "thirdweb";
 
 type TUserInfo = {
   facialId: string;
@@ -42,6 +44,7 @@ type TUserInfo = {
 
 const CreditAssets = () => {
   const { t } = useTranslation();
+  const contract  = useAirdropContract();
   const { connect, isConnecting } = useConnectModal();
   const client = clientId;
   const router = useRouter();
@@ -54,18 +57,18 @@ const CreditAssets = () => {
   const { data: aiCreditbalance, isLoading: isLoadingAi } =
     useAiCreditBalance();
     const { lastPrice } = usePair24h("AI", "USDT", 8000);  
-  const { claim, isLoading: isClaimLoading } = useClaimAiMutation(lastPrice);
+  const { claim } = useClaimAiMutation(lastPrice);
   const referrer = useSelector((state: RootState) => state.referrer.referrer);
   const dispatch = useDispatch();
-  const { register, isLoading: isRegisLoading } = useRegisterMutation(lastPrice);
+  const { register } = useRegisterMutation(lastPrice);
   const { data: isValidUser } = useValidUser();
+  console.log("valid", isValidUser)
   let refParam = null;
 
 
 
   const handleConnect = () => {
     const wallet = connect({ client }); // opens the connect modal
-    console.log("connected to", wallet);
   }
 
   if (typeof window !== "undefined") {
@@ -228,12 +231,11 @@ const CreditAssets = () => {
             w={"100%"}
             borderRadius={"10px"}
             mt={8}
-            isDisabled={lastPrice === 0 && address?.address !== undefined}
+            // isDisabled={lastPrice === 0 && address?.address !== undefined}
             _disabled={{
               cursor: "not-allowed",
               bgColor: "#1E1E1E"
             }}
-            isLoading={isClaimLoading}
             onClick={() =>
               address?.address ? handleStart(refInput ?? "") : handleConnect()
             }
@@ -251,12 +253,11 @@ const CreditAssets = () => {
             w={"100%"}
             borderRadius={"10px"}
             mt={8}
-            isDisabled={lastPrice === 0 || !lastPrice }
+            // isDisabled={lastPrice === 0 || !lastPrice }
             _disabled={{
               cursor: "not-allowed",
               bgColor: "#1E1E1E",
             }}
-            isLoading={isClaimLoading || isRegisLoading}
             onClick={handleClaimAi}
             type="submit"
           >

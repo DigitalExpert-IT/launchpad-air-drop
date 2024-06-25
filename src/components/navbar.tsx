@@ -22,6 +22,8 @@ import MenuDrawer from "@/components/menuDrawer";
 import WalletButton from "@/components/WalletButton";
 import { INavigation } from "@/constants/navigation";
 import { useAddress, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
+import { clientId as client } from "@/constants/clientId";
+import { useConnectModal } from "thirdweb/react";
 import { shortenAddress } from "@/lib/address";
 import { useAiCreditBalance, useUsdtCreditBalance, useValidUser } from "@/hooks/contract/airdrop";
 import { useRouter } from "next/router";
@@ -81,7 +83,7 @@ const NavbarButtons = () => {
 const Navbar: React.FC<INavbar> = ({ data }) => {
   const [filter, setFilter] = useState(0);
   const {data: userValid} = useValidUser();
-  const openModal = useSetIsWalletModalOpen();
+  const { connect: openModal, isConnecting } = useConnectModal();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const address = useActiveAccount();
@@ -105,7 +107,7 @@ const Navbar: React.FC<INavbar> = ({ data }) => {
   }, []);
 
   const handleToKyc = () => {
-    if (!address) return openModal(true); 
+    if (!address) return openModal({client}); 
     router.push("kyc")
   }
 

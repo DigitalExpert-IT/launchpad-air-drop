@@ -52,7 +52,7 @@ const ChainBanner = () => {
           {t("common.banner.switchChain", { name: targetChain?.name })}
         </Button>
       </Box>
-    ) : <Text>Kontrol</Text>}
+    ) : null}
     </>
   )
 }
@@ -60,20 +60,17 @@ const ChainBanner = () => {
 const App = ({ Component, pageProps }: AppProps) => {
   const CLIENT_ID = process.env.NEXT_PUBLIC_THIRDWEB || "0";
 
-
   return (
+    <GlobalProvider activeChain={targetChain} clientId={CLIENT_ID}>
     <ThirdwebProvider>
-    <GlobalProvider supportedChains={[targetChain]}
-      activeChain={targetChain}
-      clientId={CLIENT_ID}>
     <ChakraProvider theme={theme}>
       <Provider store={store}>
         <Component {...pageProps} />
         <ChainBanner/>
       </Provider>
     </ChakraProvider>
-    </GlobalProvider>
     </ThirdwebProvider>
+    </GlobalProvider>
   );
 };
 
