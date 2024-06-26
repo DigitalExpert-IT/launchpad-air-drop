@@ -5,6 +5,7 @@ import About from "./components/About";
 import Launchpad from "./components/Launchpad";
 import Header from "./components/Header";
 import OrderForm from "./components/OrderForm";
+import AssetProfit from "./components/AssetProfit";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Stack fontSize={30} gap={0}>
         <Header />
         <OrderForm />
+        <AssetProfit/>
         <Launchpad />
         <About />
       </Stack>

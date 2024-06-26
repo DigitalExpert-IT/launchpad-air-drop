@@ -9,6 +9,7 @@ import form from "./form.json";
 import register from "./register.json";
 import kyc from "./kyc.json";
 import navbar from "./navbar.json";
+import userAsset from "./userAsset.json";
 
 const en = {
   common,
@@ -22,6 +23,7 @@ const en = {
   register,
   kyc,
   navbar,
+  userAsset,
 };
 
 export default en;
