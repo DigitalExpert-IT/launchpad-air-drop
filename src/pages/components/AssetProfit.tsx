@@ -106,7 +106,7 @@ export default function AssetProfit() {
                                   h={{ base: "22px", md: "20px" }}
                                   alt="owned sleepless value"
                                 />
-                                <Text>{profitLoss || 0}</Text>
+                                <Text>{profitLoss | 0}</Text>
                               </HStack>
                             </Box>
                             <Box>
@@ -159,7 +159,7 @@ export default function AssetProfit() {
                             h={{ base: "22px", md: "20px" }}
                             alt="owned sleepless value"
                           />
-                          <Text>{profitLoss || 0}</Text>
+                          <Text>{profitLoss | 0}</Text>
                         </HStack>
                       </Td>
                       <Td>
