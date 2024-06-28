@@ -16,16 +16,39 @@ import {
   Th,
   Tr,
   VStack,
+  useClipboard,
+  useToast,
+  Divider,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useUserAsset } from "@/hooks/contract/airdrop/useUserAsset";
 import { formatPrice } from "@/utils/formatter";
 import { useMobileScreen } from "@/hooks/useMobileScreen";
+import { useAddress } from "@thirdweb-dev/react";
 
 export default function AssetProfit() {
   const { t } = useTranslation();
-  const { profitLoss, currentAssetValue, lastPrice, volume } = useUserAsset();
+  const toast = useToast();
+  const address = useAddress();
+  const myRef = `https://sleeplessailabs.org/?ref=${address}`;
+  const { profitLoss, currentAssetValue, lastPrice, volume, dummyReward } = useUserAsset();
   const isMobileScreen = useMobileScreen();
+  const { onCopy } = useClipboard(myRef);
+  
+  const handlerCopy = () => {
+    onCopy();
+    toast({
+      title: 'Copied.',
+      description: "Referral Address Copied",
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+
+  console.log("logs", dummyReward)
+  
 
   return (
     <Box>
@@ -69,7 +92,7 @@ export default function AssetProfit() {
                   borderLeftRadius={"30px"}
                   background={"#1E1E1E"}
                   borderRight={"2px"}
-                  width={"40%"}
+                  minW={"40%"}
                   borderColor={"#A4A4BE"}
                   overflow={"hidden"}
                 >
@@ -95,7 +118,7 @@ export default function AssetProfit() {
                   <Table>
                     <Tbody>
                       <Tr>
-                        <Td background={"black"} overflowX={"auto"}>
+                        <Td background={"black"}>
                           <Box display="flex" flexDirection="column" gap={9}>
                             <Box>Sleepless/USDT</Box>
                             <Box>
@@ -131,6 +154,49 @@ export default function AssetProfit() {
                             </Box>
                           </Box>
                         </Td>
+                        <Td textAlign="center">
+                          <Box display="flex" alignItems="center" justifyContent="center" >
+                            <Text color={"gray"} transform={"rotate(-90deg)"}>{t("userAsset.marketingTitle")}</Text>
+                          </Box>
+                        </Td>
+                        {dummyReward.splice(0).reverse().map((item, key) => (
+                        <Td key={key} background={"black"}>
+                          <Box display="flex" flexDirection="column" gap={9}>
+                            <Box>{item.referrer + " " + "Referrer"}</Box>
+                            <Box>
+                              <HStack>
+                                <Image
+                                  src="/assets/usdt-with-bg.png"
+                                  w={{ base: "22px", md: "20px" }}
+                                  h={{ base: "22px", md: "20px" }}
+                                  alt="owned sleepless value"
+                                />
+                                <Text>{item.expectProfLos | 0}</Text>
+                              </HStack>
+                            </Box>
+                            <Box>
+                              <HStack>
+                                <Text>{formatPrice(volume)}</Text>
+                              </HStack>
+                            </Box>
+                            <Box>
+                              <HStack>
+                                <Text>{formatPrice(lastPrice)}</Text>
+                              </HStack>
+                            </Box>
+                            <Box>
+                              <Button
+                                size={"sm"}
+                                borderRadius={"8"}
+                                backgroundColor={"#9321DD"}
+                                onClick={handlerCopy}
+                              >
+                                <Box>{t("userAsset.invite")}</Box>
+                              </Button>
+                            </Box>
+                          </Box>
+                        </Td>
+                          ))}
                       </Tr>
                     </Tbody>
                   </Table>
@@ -138,54 +204,99 @@ export default function AssetProfit() {
               </HStack>
             ) : (
               <TableContainer borderRadius={"30px"}>
-                <Table>
-                  <Thead background={"#1E1E1E"}>
-                    <Tr>
-                      <Th></Th>
-                      <Th>{t("userAsset.tableTitle2")}</Th>
-                      <Th>{t("userAsset.tableTitle3")}</Th>
-                      <Th>{t("userAsset.tableTitle4")}</Th>
-                      <Th>{t("userAsset.tableTitle5")}</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>Sleepless/USDT</Td>
-                      <Td>
-                        <HStack>
-                          <Image
-                            src="/assets/usdt-with-bg.png"
-                            w={{ base: "22px", md: "20px" }}
-                            h={{ base: "22px", md: "20px" }}
-                            alt="owned sleepless value"
-                          />
-                          <Text>{profitLoss | 0}</Text>
-                        </HStack>
-                      </Td>
-                      <Td>
-                        <HStack>
-                          <Text>{formatPrice(volume)}</Text>
-                        </HStack>
-                      </Td>
-                      <Td>
-                        <HStack>
-                          <Text>{formatPrice(lastPrice)}</Text>
-                        </HStack>
-                      </Td>
-                      <Td>
-                        <Button
-                          size={"sm"}
-                          borderRadius={"8"}
-                          backgroundColor={"#9321DD"}
-                          disabled
-                        >
-                          {t("userAsset.sell")}
-                        </Button>
-                      </Td>
-                    </Tr>
-                  </Tbody>
-                </Table>
-              </TableContainer>
+      <Table>
+        <Thead background={"#1E1E1E"}>
+          <Tr>
+            <Th></Th>
+            <Th>{t("userAsset.tableTitle2")}</Th>
+            <Th>{t("userAsset.tableTitle3")}</Th>
+            <Th>{t("userAsset.tableTitle4")}</Th>
+            <Th>{t("userAsset.tableTitle5")}</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr>
+            <Td>Sleepless/USDT</Td>
+            <Td>
+              <HStack>
+                <Image
+                  src="/assets/usdt-with-bg.png"
+                  w={{ base: "22px", md: "20px" }}
+                  h={{ base: "22px", md: "20px" }}
+                  alt="owned sleepless value"
+                />
+                <Text>{profitLoss | 0}</Text>
+              </HStack>
+            </Td>
+            <Td>
+              <HStack>
+                <Text>{formatPrice(volume)}</Text>
+              </HStack>
+            </Td>
+            <Td>
+              <HStack>
+                <Text>{formatPrice(lastPrice)}</Text>
+              </HStack>
+            </Td>
+            <Td>
+              <Button
+                size={"sm"}
+                borderRadius={"8"}
+                backgroundColor={"#9321DD"}
+                disabled
+              >
+                {t("userAsset.sell")}
+              </Button>
+            </Td>
+          </Tr>
+          <Tr>
+            <Td colSpan={5} textAlign="center">
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Divider flex="1" borderColor="gray.300" opacity={"20%"}/>
+                <Text mx={4} color={"gray"}>{t("userAsset.marketingTitle")}</Text>
+                <Divider flex="1" borderColor="gray.300" opacity={"20%"}/>
+              </Box>
+            </Td>
+          </Tr>
+          {dummyReward.toReversed().map((item, idx) => (
+            <Tr key={idx}>
+              <Td>{item.referrer + " " + "Referrer"}</Td>
+              <Td>
+                <HStack>
+                  <Image
+                    src="/assets/usdt-with-bg.png"
+                    w={{ base: "22px", md: "20px" }}
+                    h={{ base: "22px", md: "20px" }}
+                    alt="owned sleepless value"
+                  />
+                  <Text>{item.expectProfLos | 0}</Text>
+                </HStack>
+              </Td>
+              <Td>
+                <HStack>
+                  <Text>{formatPrice(volume)}</Text>
+                </HStack>
+              </Td>
+              <Td>
+                <HStack>
+                  <Text>{formatPrice(lastPrice)}</Text>
+                </HStack>
+              </Td>
+              <Td>
+                <Button
+                  size={"sm"}
+                  borderRadius={"8"}
+                  backgroundColor={"#9321DD"}
+                  onClick={handlerCopy}
+                >
+                  {t("userAsset.invite")}
+                </Button>
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </TableContainer>
             )}
           </Box>
         </Stack>
