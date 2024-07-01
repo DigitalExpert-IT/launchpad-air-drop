@@ -14,7 +14,7 @@ export interface marketingScheme {
 
 export const useUserAsset = () => {
     const address = useAddress();
-    let defaulUSDTtValue = 100
+    let defaulUSDTtValue = 100;
     let dummyUser = 15;
     
 
@@ -45,26 +45,21 @@ export const useUserAsset = () => {
     const profitLossPercentage = (profitLoss/defaulUSDTtValue) * 100
 
 
-    //marketcap = lastPrice * circulatingSupply
-
-
-
-
-
     const countDummyReward = (value: number) => {
-        const marketingObject: marketingScheme[] = [] 
-        
-        while (value % 5 === 0 && value !== 0) {
-            const mul5 = value/5
-            const usdtVal = (mul5*defaulUSDTtValue) + defaulUSDTtValue
+        const marketingObjectTest: marketingScheme[] = [] 
+        value = Math.floor((dummyUser - totalDownline)/5)
+
+        while(value > 0){
+            const usdtVal = (value*defaulUSDTtValue) + defaulUSDTtValue
             const newObject: marketingScheme = {
-                referrer: value,
+                referrer: value*5,
                 expectProfLos: usdtVal*lastPrice
             }
-            marketingObject.push(newObject)
-            value = value - 5;
+            marketingObjectTest.push(newObject)
+
+            value -= 1
         }
-        return marketingObject;
+        return marketingObjectTest;
     }
 
    

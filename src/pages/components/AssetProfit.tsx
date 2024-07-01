@@ -45,9 +45,6 @@ export default function AssetProfit() {
       isClosable: true,
     });
   };
-
-
-  console.log("logs", dummyReward)
   
 
   return (
@@ -156,7 +153,7 @@ export default function AssetProfit() {
                         </Td>
                         <Td textAlign="center">
                           <Box display="flex" alignItems="center" justifyContent="center" >
-                            <Text color={"gray"} transform={"rotate(-90deg)"}>{t("userAsset.marketingTitle")}</Text>
+                            <Text color={"#FD92FD"} fontWeight={"bold"} transform={"rotate(-90deg)"} fontSize={"2xl"}>{t("userAsset.marketingTitle")}</Text>
                           </Box>
                         </Td>
                         {dummyReward.splice(0).reverse().map((item, key) => (
@@ -253,7 +250,7 @@ export default function AssetProfit() {
             <Td colSpan={5} textAlign="center">
               <Box display="flex" alignItems="center" justifyContent="center">
                 <Divider flex="1" borderColor="gray.300" opacity={"20%"}/>
-                <Text mx={4} color={"gray"}>{t("userAsset.marketingTitle")}</Text>
+                <Text mx={4} color={"#FD92FD"} fontWeight={"bold"} fontSize={"2xl"}>{t("userAsset.marketingTitle")}</Text>
                 <Divider flex="1" borderColor="gray.300" opacity={"20%"}/>
               </Box>
             </Td>
