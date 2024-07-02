@@ -69,7 +69,6 @@ export const useUserAsset = () => {
         const marketingObject: marketingScheme[] = []
         value = Math.floor((value-totalDownline)/5)
         if(value === 0){
-            console.log("atau here ")
             const usdtVal = (1 * defaulUSDTtValue)+defaulUSDTtValue;
             const newObject: marketingScheme = {
                 referrer: dummyUser-totalDownline,
@@ -77,9 +76,7 @@ export const useUserAsset = () => {
             }
             marketingObject.push(newObject);
         } else {
-            console.log("here")
             const usdtVal = (value * defaulUSDTtValue)+defaulUSDTtValue;
-            console.log("value", usdtVal, lastPrice)
             const newObject: marketingScheme = {
                 referrer: dummyUser-totalDownline,
                 expectProfLos: usdtVal*lastPrice
