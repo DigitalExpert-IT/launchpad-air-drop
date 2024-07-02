@@ -159,7 +159,7 @@ export default function AssetProfit() {
                             </Box>
                           </Td><Td key={key} background={"black"}>
                               <Box display="flex" flexDirection="column" gap={9}>
-                                <Box>{item.referrer >= 0 ? item.referrer + " " + "Referrer More" : 0}</Box>
+                                <Box>{item.referrer >= 0 ? item.referrer + " " + t("userAsset.referrer") : 0}</Box>
                                 <Box>
                                   <HStack>
                                     <Image
@@ -259,7 +259,7 @@ export default function AssetProfit() {
                   </Box>
                 </Td>
               </Tr><Tr key={idx}>
-                  <Td>{item.referrer >= 0 ? item.referrer + " " + "Referrer More" : 0}</Td>
+                  <Td>{item.referrer >= 0 ? item.referrer + " " + t("userAsset.referrer") : 0}</Td>
                   <Td>
                     <HStack>
                       <Image
